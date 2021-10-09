@@ -1,0 +1,213 @@
+* {
+    text-align: left;
+    transition: all 0.7s ease;
+}
+
+.left_content {
+    margin: 10px;
+    float: left;
+    width: 70%;
+}
+
+.tittle {
+    margin: 10px;
+}
+
+.tittle h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    background-color: coral;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.tittle p {
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-style: italic;
+}
+
+.left_content h2 {
+    margin: 50px 0 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.whatLearning {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.562);
+}
+
+.learning {
+    display: flex;
+    padding: 10px;
+}
+
+.learning i {
+    margin: 0 10px 0 0;
+    color: coral;
+}
+
+.ds_hoc h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.total {
+    display: flex;
+    margin: 0 0 30px 0;
+}
+
+.total p {
+    margin: 0 10px 0 0;
+}
+
+.baihoc {
+    display: flex;
+    background-color: rgb(204, 204, 204);
+    color: rgb(56, 56, 56);
+    margin: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    padding: 15px;
+}
+
+.baihoc #name {
+    line-height: 30px;
+}
+
+.baihoc i {
+    margin: 0 10px 0 20px;
+    color: coral;
+    font-size: 30px;
+}
+
+.baihoc #number {
+    position: absolute;
+    right: 0;
+    z-index: 99;
+    font-family: cursive;
+    line-height: 30px;
+}
+
+.baihoc .bx-lock-open {
+    color: cadetblue;
+}
+
+.baihoc .bx-lock {
+    color: rgb(221, 132, 132);
+}
+
+.baihoc:hover {
+    background-color: rgb(180, 180, 180);
+}
+
+.baihoc::after {
+    content: '';
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    right: 5px;
+    top: 10px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.right_content {
+    width: 25%;
+    float: right;
+    margin: 70px 0 0 0;
+}
+
+.gioithieu {
+    background-color: #11101d;
+    margin: 10px 10px 0 0;
+    border-radius: 20px;
+    text-align: center;
+    height: 300px;
+    /* width: 300px; */
+    /* position: fixed;
+    display: inline-block; */
+}
+
+.gioithieu img {
+    width: 200px;
+}
+
+.dangky {
+    color: white
+}
+
+.dangky p {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    background-color: rgb(255, 158, 40);
+    text-align: center;
+    cursor: pointer;
+}
+
+.dangky p:hover {
+    background-color: rgb(255, 140, 0);
+}
+
+.themvaogio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.themvaogio p {
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+    background-color: rgb(50, 152, 255);
+    position: relative;
+}
+
+.themvaogio i {
+    position: absolute;
+    font-size: 20px;
+}
+
+.themvaogio p:hover {
+    background-color: rgb(0, 128, 255);
+}
+
+.danghoctoi {
+    text-align: center;
+}
+
+.danghoctoi b {
+    color: white;
+    font-style: italic;
+}
+
+.danghoctoi p {
+    background-color: coral;
+    padding: 10px;
+    margin: 20px 10px 10px 10px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .right_content {
+        display: block;
+        width: 100%;
+    }
+    .gioithieu {
+        margin: 10px;
+    }
+    .left_content {
+        width: 100%;
+    }
+}

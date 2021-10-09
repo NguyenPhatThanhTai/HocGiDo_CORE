@@ -1,0 +1,130 @@
+    html,
+    body {
+        scroll-behavior: smooth;
+        background-color: rgb(78, 85, 67);
+    }
+    
+    .navigation {
+        background-color: coral;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .left {
+        cursor: pointer;
+    }
+    
+    .left img {
+        width: 100px;
+    }
+    
+    .right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .right div {
+        margin: 10px;
+    }
+    
+    .back {
+        background-color: #282a36;
+        color: #fff;
+        border-radius: 12px;
+        padding: 0 10px 0 10px;
+        cursor: pointer;
+    }
+    
+    .back p {
+        padding: 0 0 0 30px;
+        font-weight: bold;
+    }
+    
+    .back i {
+        font-size: 20px;
+        position: absolute;
+        line-height: 50px;
+    }
+    
+    .save {
+        background-color: red;
+        color: #fff;
+        border-radius: 12px;
+        padding: 0 10px 0 10px;
+        cursor: pointer;
+    }
+    
+    .save p {
+        padding: 0 0 0 30px;
+        font-weight: bold;
+    }
+    
+    .save i {
+        font-size: 20px;
+        position: absolute;
+        line-height: 50px;
+    }
+    
+    .play {
+        background-color: green;
+        color: #fff;
+        border-radius: 12px;
+        padding: 0 10px 0 10px;
+        cursor: pointer;
+    }
+    
+    .play p {
+        padding: 0 0 0 30px;
+        font-weight: bold;
+    }
+    
+    .play i {
+        font-size: 30px;
+        position: absolute;
+        line-height: 50px;
+    }
+    
+    .code_side {
+        width: 50%;
+        height: 100%;
+        float: left;
+    }
+    
+    .CodeMirror {
+        font-size: 15px;
+        margin: 10px;
+        padding: 10px;
+        height: 330px;
+        border-radius: 10px;
+    }
+    
+    .tittle {
+        background-color: darksalmon;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .result iframe {
+        width: 100%;
+        height: 500px;
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .left {
+            display: none
+        }
+        .code_side {
+            width: 100%;
+        }
+    }

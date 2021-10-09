@@ -1,0 +1,591 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+     ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Track */
+    
+     ::-webkit-scrollbar-track {
+        background: #ffffff;
+        margin: 10px;
+    }
+    /* Handle */
+    
+     ::-webkit-scrollbar-thumb {
+        background: coral;
+        border-radius: 12px;
+    }
+    /* Handle on hover */
+    
+     ::-webkit-scrollbar-thumb:hover {
+        background: rgb(255, 170, 139);
+    }
+    
+    .loading {
+        position: fixed;
+        z-index: 99;
+        background-color: rgba(128, 128, 128, 0.164);
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    
+    .loading .imgLoad {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .loading img {
+        width: 300px;
+    }
+    
+    .navigation {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 0 8px 0 #888888;
+        border-radius: 12px;
+        margin: 10px;
+        background-color: #11101d;
+    }
+    
+    .navigation #logo {
+        display: flex;
+    }
+    
+    .navigation #logo img {
+        width: 100px;
+        height: auto;
+    }
+    
+    .navigation #logo p {
+        font-size: 20px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.753);
+        margin: 0 0 0 3px;
+        line-height: 60px;
+        word-spacing: 0;
+    }
+    
+    .navigation #search input {
+        padding: 10px 10px 10px 40px;
+        border: 1px solid gray;
+        border-radius: 20px;
+        width: 500px;
+    }
+    
+    .navigation #search input:focus {
+        outline: none;
+    }
+    
+    .navigation #search i {
+        position: absolute;
+        line-height: 40px;
+        margin: 0 0 0 10px;
+        font-size: 20px;
+        color: #888888;
+    }
+    
+    .navigation #login {
+        margin: 0 10px 0 0;
+    }
+    
+    .navigation #login p {
+        cursor: pointer;
+        padding: 13px;
+        border-radius: 12px;
+        background-color: coral;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .navigation #login p:hover {
+        background-color: rgb(247, 86, 33);
+    }
+    
+    .navigation #User {
+        float: right;
+        width: 5%;
+    }
+    
+    .navigation #User img {
+        width: 40px;
+        background-color: white;
+        border-radius: 50%;
+        float: right;
+        margin: 0 20px 0 0;
+        cursor: pointer;
+    }
+    
+    .navigation #User.active>img+.popup {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: visible;
+    }
+    
+    .popup {
+        color: #fff;
+        position: absolute;
+        background-color: #11101d;
+        right: 10px;
+        top: 80px;
+        border-radius: 12px;
+        box-shadow: 2px 5px 10px black;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+        pointer-events: none;
+        z-index: 99;
+    }
+    
+    .popup a {
+        display: block;
+        margin: 10px;
+        padding: 5px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+    
+    .popup a:hover {
+        background-color: #fff;
+        color: #1d1b32;
+    }
+    
+    .popup p {
+        margin: 20px;
+        font-weight: bold;
+    }
+    
+    .popup i {
+        margin: 10px;
+    }
+    
+    .popup .bx-log-out {
+        color: rgb(226, 70, 70);
+    }
+    
+    .popup .bxs-user-circle {
+        color: rgb(54, 114, 153);
+    }
+    
+    .sideBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 85px;
+        background: #11101d;
+        padding: 6px 15px;
+        transition: all 0.5s ease;
+        z-index: 99;
+    }
+    
+    .sideBar.active {
+        width: 240px;
+    }
+    
+    .sideBar .logo_content .logo {
+        align-items: center;
+        pointer-events: none;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .sideBar .logo_content .logo img {
+        max-height: 120px;
+    }
+    
+    .sideBar.active .logo {
+        opacity: 1;
+    }
+    
+    .sideBar #btn {
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        margin-right: 10px;
+        color: #fff;
+        font-size: 20px;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        line-height: 50px;
+        transform: translateX(-50%);
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+    
+    .sideBar.active #btn {
+        left: 90%;
+    }
+    
+    .sideBar ul {
+        margin-top: 20px;
+    }
+    
+    .sideBar ul li {
+        list-style: none;
+        position: relative;
+        height: 50px;
+        width: 100%;
+        list-style: none;
+        line-height: 50px;
+        margin: 0 5px;
+    }
+    
+    .sideBar ul li .tooltip {
+        position: absolute;
+        color: #fff;
+        background-color: #11101d;
+        padding: 6px;
+        border-radius: 6px;
+        left: 70px;
+        top: 70px;
+        width: 122px;
+        font-size: 10px;
+        transform: translateY(-50%);
+        line-height: 35px;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        opacity: 0;
+    }
+    
+    .sideBar ul li:hover .tooltip {
+        top: 50%;
+        opacity: 1;
+    }
+    
+    .sideBar.active ul li:hover .tooltip {
+        top: 50%;
+        opacity: 0;
+    }
+    
+    .sideBar ul li input {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        border-radius: 12px;
+        outline: none;
+        border: none;
+        background: #1d1b32;
+        padding-left: 50px;
+        font-size: 18px;
+        color: #fff;
+        transition: all 0.5s ease;
+    }
+    
+    .sideBar.active ul li input {
+        width: 100%;
+    }
+    
+    .sideBar ul li .bx-search:hover {
+        background: #fff;
+        color: black;
+    }
+    
+    .sideBar.active ul li .bx-search:hover {
+        background: none;
+        color: #fff;
+    }
+    
+    .sideBar ul li .bx-search {
+        position: absolute;
+        z-index: 99;
+        color: #fff;
+        font-size: 22px;
+    }
+    
+    .sideBar ul li a {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        border-radius: 12px;
+        white-space: nowrap;
+        width: 100%;
+    }
+    
+    .sideBar ul li a:hover {
+        color: #11101d;
+        background: #fff;
+    }
+    
+    .sideBar ul li i {
+        height: 50px;
+        min-width: 50px;
+        border-radius: 12px;
+        line-height: 50px;
+        text-align: center;
+    }
+    
+    .sideBar .links_name {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .sideBar.active .links_name {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .sideBar .profile_content {
+        position: absolute;
+        color: #fff;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    
+    .sideBar .profile_content .profile {
+        position: relative;
+        padding: 10px 6px;
+        height: 60px;
+    }
+    
+    .profile_content .profile .profile_details {
+        display: flex;
+        align-items: center;
+    }
+    
+    .profile_content .profile .profile_details img {
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    
+    .profile_content .profile .profile_details .name_job {
+        margin-left: 10px;
+    }
+    
+    .profile_content .profile .profile_details .name {
+        font-size: 15px;
+        font-weight: 400;
+    }
+    
+    .profile_content .profile .profile_details .job {
+        font-size: 12px;
+        color: darkgoldenrod;
+    }
+    
+    .profile_details {
+        opacity: 0;
+    }
+    
+    .sideBar.active .profile_details {
+        opacity: 1;
+    }
+    
+    .profile_content .profile #logout {
+        position: absolute;
+        right: 25%;
+        top: 20px;
+        font-size: 25px;
+        transform: translateX(-50%);
+        cursor: pointer;
+    }
+    
+    .sideBar.active .profile #logout {
+        right: 0;
+    }
+    
+    .home_content {
+        left: 85px;
+        height: 100%;
+        width: calc(100% - 85px);
+        transition: all 0.5s ease;
+        overflow: auto;
+        position: absolute;
+    }
+    
+    .home_content .text {
+        font-size: 30px;
+        font-weight: 400;
+        color: #fff;
+        background: chocolate;
+        border-radius: 30px;
+        padding: 5px;
+        text-align: center;
+        margin: 20px 30% 0px 30%;
+    }
+    
+    .home_image_top img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .sideBar.active~.home_content {
+        left: 240px;
+        width: calc(100% - 240px);
+        text-align: center;
+    }
+    
+    .list_customer {
+        z-index: -99;
+        margin: 0 10% 20% 10%;
+    }
+    
+    .list_customer .customer_contain {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .customer {
+        background-color: #11101d;
+        width: 100%;
+        height: 20%;
+        margin: 10px 10px 30px 10px;
+        border-radius: 30px;
+        box-shadow: 0 5px 10px rgba(255, 255, 255, 0.2);
+    }
+    
+    .customer .ava {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        background-attachment: fixed;
+        border-radius: 30px;
+        background-size: cover;
+        position: relative;
+    }
+    
+    .customer .ava img {
+        max-height: 150px;
+        border-radius: 50%;
+        margin: 20px;
+        border: 3px solid chocolate;
+    }
+    
+    .ava #content {
+        width: 70%;
+        text-align: right;
+    }
+    
+    .customer .ava a {
+        color: #fff;
+        background-color: chocolate;
+        padding: 10px;
+        border-radius: 12px;
+        margin: 20px;
+        text-decoration: none;
+    }
+    
+    .customer .ava p {
+        color: rgb(255, 255, 255);
+        padding: 10px;
+        margin: 20px 20px 10px 20px;
+        border-radius: 12px;
+        background-color: darkcyan;
+    }
+    /*  */
+    
+    .navigation #openSide {
+        font-size: 30px;
+        color: white;
+        margin: 5px;
+        display: none;
+    }
+    
+    .Side.active {
+        width: 80%;
+    }
+    
+    .Side.active li {
+        opacity: 1;
+    }
+    
+    .Side {
+        position: fixed;
+        background-color: #11101d;
+        text-align: left;
+        height: 100%;
+        width: 0;
+        top: 0;
+        left: 0;
+        z-index: 99;
+        list-style: none;
+    }
+    
+    .Side .bx-x {
+        color: white;
+        position: absolute;
+        right: 0;
+    }
+    
+    .Side li {
+        margin: 30px;
+        padding: 10px;
+        opacity: 0;
+        border-bottom: 1px solid gray;
+    }
+    
+    .Side li a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+    }
+    
+    .footer {
+        background-color: #11101d;
+        color: white;
+        margin: 10px;
+        border-radius: 12px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .ava #img {
+            width: 100%;
+            float: none;
+        }
+        .sideBar {
+            display: none;
+        }
+        .home_content {
+            width: 100%;
+            left: 0;
+        }
+        .ava #content {
+            text-align: center;
+            width: 100%;
+        }
+        .navigation #logo {
+            display: none;
+            margin: 10px;
+        }
+        .navigation #search input {
+            width: 80%;
+            margin: 10px;
+        }
+        .navigation #search i {
+            position: absolute;
+            line-height: 40px;
+            margin: 10px 0 0 20px;
+            font-size: 20px;
+            color: #888888;
+        }
+        .navigation #login p {
+            padding: 9px;
+        }
+        .navigation #openSide {
+            display: block;
+        }
+    }

@@ -1,0 +1,269 @@
+* {
+    text-align: left;
+    transition: all 0.5s ease;
+}
+
+.main_content {
+    margin: 10px;
+}
+
+.left_content {
+    width: 70%;
+    float: left;
+}
+
+.videoPlayer {
+    border-radius: 12px;
+    border: 3px solid coral;
+}
+
+.video {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: 20px;
+    /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Style the tab */
+
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    background-color: inherit;
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px 14px 50px;
+    transition: 0.3s;
+    font-size: 17px;
+    position: relative;
+}
+
+.tab i {
+    font-size: 20px;
+    position: absolute;
+    left: 20px;
+}
+
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+
+/* Create an active/current tablink class */
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    margin: 20px 0 0 0;
+    border-top: none;
+}
+
+.tabcontent p {
+    margin: 10px 0 10px 0;
+    text-indent: 50px;
+}
+
+.CodeMirror {
+    font-size: 15px;
+    margin: 10px;
+    padding: 10px;
+    height: 330px;
+    border-radius: 10px;
+}
+
+.detail {
+    margin: 30px 0 0 0;
+}
+
+.right_content {
+    float: right;
+    width: 29%;
+}
+
+.right_content h3 {
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: coral;
+    margin: 0 0 30px 0;
+}
+
+.ds {
+    height: 420px;
+    overflow-y: auto;
+}
+
+
+/* width */
+
+.ds::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+/* Track */
+
+.ds::-webkit-scrollbar-track {
+    background: rgb(255, 201, 182);
+    margin: 30px 0 30px 0;
+}
+
+
+/* Handle */
+
+.ds::-webkit-scrollbar-thumb {
+    background: coral;
+    border-radius: 10px;
+}
+
+
+/* Handle on hover */
+
+.ds::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.baihoc {
+    display: flex;
+    background-color: rgb(204, 204, 204);
+    color: rgb(56, 56, 56);
+    margin: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    padding: 15px;
+}
+
+.baihoc #name {
+    line-height: 30px;
+}
+
+.baihoc i {
+    margin: 0 10px 0 20px;
+    color: coral;
+    font-size: 30px;
+}
+
+.baihoc #number {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    font-family: cursive;
+    line-height: 30px;
+}
+
+.baihoc .bx-lock-open {
+    color: cadetblue;
+}
+
+.baihoc .bx-lock {
+    color: rgb(221, 132, 132);
+}
+
+.baihoc:hover {
+    background-color: rgb(180, 180, 180);
+}
+
+.baihoc::after {
+    content: '';
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    right: 5px;
+    top: 10px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.exam {
+    background-color: rgb(204, 204, 204);
+    margin: 10px;
+    border-radius: 12px;
+}
+
+.exam p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.exam .answer label {
+    margin: 0 0 0 10px;
+    display: inline-block;
+    width: 90%;
+    cursor: pointer;
+}
+
+.exam .answer div {
+    padding: 10px;
+    margin: 0 10px 0 10px;
+    background-color: coral;
+    border-radius: 12px;
+}
+
+.submit {
+    padding: 10px;
+    border-radius: 12px;
+    background-color: rgb(255, 106, 80);
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    margin: 10px 0 10px 0;
+}
+
+.submit:hover {
+    background-color: rgb(245, 86, 86);
+}
+
+#exam_list {
+    border-bottom: 1px solid gray;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .left_content {
+        width: 100%;
+        float: none;
+    }
+    .right_content {
+        float: none;
+        width: 100%;
+        height: 100%;
+    }
+}

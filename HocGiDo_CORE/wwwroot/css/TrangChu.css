@@ -1,0 +1,172 @@
+* {
+    transition: all 0.5s ease;
+    text-align: left;
+}
+
+.slide_show {
+    margin: 10px;
+}
+
+.mySlides {
+    background-color: #0297fe;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mySlides #text {
+    width: 40%;
+    padding: 30px;
+    float: left;
+}
+
+.mySlides #text #p1 {
+    text-align: left;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.mySlides #text #p2 {
+    text-align: left;
+    font-size: 15px;
+    color: white;
+    margin: 0 0 20px 0;
+}
+
+.mySlides #text #p3 {
+    padding: 10px;
+    background-color: coral;
+    color: white;
+    width: 50%;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.mySlides #text #p3:hover {
+    background-color: rgb(247, 86, 33);
+}
+
+.mySlides img {
+    width: 150px;
+    float: right;
+    margin: 20px;
+}
+
+.count {
+    display: flex;
+}
+
+.count p {
+    padding: 5px;
+    background-color: #0297fe;
+    margin: 10px;
+    border-radius: 20px;
+    width: 70px;
+    transition: all 0.5s ease;
+}
+
+.count p.active {
+    background-color: #888888a1;
+    width: 30px;
+}
+
+.content {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.course {
+    width: 300px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.course:hover #p1 img {
+    width: 120px;
+    top: 10px;
+}
+
+.course:hover #p1 {
+    font-size: 25px;
+}
+
+.course:hover #p1::after {
+    transition: all 0.5s ease;
+    height: 170px;
+    width: 170px;
+    right: -40px;
+    top: -10px;
+}
+
+.course #p1::after {
+    content: '';
+    height: 170px;
+    width: 170px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 100%;
+    right: -40px;
+    top: -10px;
+    z-index: 0;
+}
+
+.course #p1 {
+    padding: 30px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: darkorange;
+    border-radius: 12px;
+    height: 150px;
+    text-align: left;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.course #p1 img {
+    position: absolute;
+    width: 100px;
+    top: 25px;
+    z-index: 2;
+    right: 0;
+}
+
+.course .discrip {
+    text-align: left;
+    margin: 10px;
+    font-size: 15px;
+}
+
+.discrip #p2 {
+    font-weight: bold;
+}
+
+.discrip #view {
+    font-size: 10px;
+    margin: 10px 0 0 0;
+    color: rgba(128, 128, 128, 0.719);
+}
+
+@media only screen and (max-width: 600px) {
+    .mySlides {
+        height: 250px;
+    }
+    .mySlides #text {
+        width: 100%;
+        padding: 30px;
+        float: left;
+    }
+    .mySlides img {
+        display: none;
+    }
+    .course {
+        width: 350px;
+        cursor: pointer;
+        z-index: 1;
+    }
+}

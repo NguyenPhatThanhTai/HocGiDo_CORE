@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/css/index.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @RenderSection("header", false)
+    <title>@ViewData["Title"]</title>
+</head>
+
+<body>
+    <div class="loading" id="load">
+        <div class="imgLoad">
+            <img src="https://i.pinimg.com/originals/ac/44/71/ac4471291c620d8dd47697a1d8da4975.gif">
+        </div>
+    </div>
+    <div class="sideBar">
+        <div class="logo_content">
+            <div class="logo">
+                <img src="~/Img/logo.png">
+            </div>
+        </div>
+        <i class='bx bx-menu' id="btn"></i>
+        <ul class="nav_list">
+            <li>
+                <a href="#">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Tìm kiếm">
+                </a>
+                <span class="tooltip">Tìm kiếm</span>
+            </li>
+            <li>
+                <a href="#" id="bx-home">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Trang chủ</span>
+                </a>
+                <span class="tooltip">Trang chủ</span>
+            </li>
+            <li>
+                <a href="#" id="bxs-book-content">
+                    <i class='bx bxs-book-content'></i>
+                    <span class="links_name">Bài học</span>
+                </a>
+                <span class="tooltip">Bài học</span>
+            </li>
+            <li>
+                <a href="#" id="bx-laptop">
+                    <i class='bx bx-laptop'></i>
+                    <span class="links_name">Không gian code</span>
+                </a>
+                <span class="tooltip">Không gian code</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-bookmarks'></i>
+                    <span class="links_name">Đã lưu</span>
+                </a>
+                <span class="tooltip">Đã lưu</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Người dùng</span>
+                </a>
+                <span class="tooltip">Người dùng</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-wrench'></i>
+                    <span class="links_name">Cài đặt</span>
+                </a>
+                <span class="tooltip">Cài đặt</span>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="~/Img/avatarZL.jpg">
+                    <div class="name_job">
+                        <div class="name">Thành Tài</div>
+                        <div class="job">Sinh Viên</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="logout"></i>
+            </div>
+        </div>
+    </div>
+    <div class="home_content" id="home_content">
+        <div class="navigation">
+            <div id="openSide">
+                <i class='bx bx-menu-alt-left' id="openMenu"></i>
+                <div class="Side" id="Side">
+                    <i class='bx bx-x' id="closeMenu"></i>
+                    <li>
+                        <a href="#" id="bx-home">
+                            <i class='bx bx-home'></i>
+                            <span class="links_name">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="bxs-book-content">
+                            <i class='bx bxs-book-content'></i>
+                            <span class="links_name">Bài học</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-laptop'></i>
+                            <span class="links_name">Luyện tập</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-bookmarks'></i>
+                            <span class="links_name">Đã lưu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-user'></i>
+                            <span class="links_name">Người dùng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-wrench'></i>
+                            <span class="links_name">Cài đặt</span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+            <div id="logo">
+                <img src="~/Img/logo.png">
+                <p>Học gì đó!</p>
+            </div>
+            <div id="search">
+                <i class='bx bx-search-alt'></i>
+                <input type="text" placeholder="Tìm bài học...">
+            </div>
+            <!-- <div id="login">
+                <p>Đăng nhập</p>
+            </div> -->
+            <div id="User" data-dropdown>
+                <img src="~/Img/avatarZL.jpg" data-dropdown-user>
+                <div class="popup">
+                    <p>Nguyễn Phát Thành Tài</p>
+                    <a><i class='bx bxs-user-circle'></i>Thông tin tài khoản</a>
+                    <a><i class='bx bx-log-out'></i>Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+        @RenderBody()
+        <div class="loadHere"></div>
+        <div class="footer">Footer thôi</div>
+    </div>
+
+</body>
+
+</html>
+<script type="text/javascript" src="~/js/index.js"></script>
+
+@RenderSection("footer", false)
