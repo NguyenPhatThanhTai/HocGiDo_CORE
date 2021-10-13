@@ -94,7 +94,11 @@
         font-size: 20px;
         color: #888888;
     }
-    
+
+    .loginA{
+        text-decoration: none;
+    }
+
     .navigation #login {
         margin: 0 10px 0 0;
     }
@@ -107,7 +111,13 @@
         color: white;
         font-weight: bold;
     }
-    
+
+    .logoutA {
+        text-decoration: none;
+        font-weight: bold;
+        color: #f78568;
+    }
+
     .navigation #login p:hover {
         background-color: rgb(247, 86, 33);
     }

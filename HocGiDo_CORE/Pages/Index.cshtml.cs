@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using HocGiDo_CORE.ExcuteJson;
+using Microsoft.AspNetCore.Http;
 
 namespace HocGiDo_CORE.Pages
 {

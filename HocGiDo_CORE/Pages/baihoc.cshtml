@@ -1,0 +1,88 @@
+﻿@page
+@model HocGiDo_CORE.Pages.baihocModel
+@{
+    ViewData["Title"] = "Danh sách bài học";
+}
+
+@section header{
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/css/ds_baihoc.css">
+    <script src="~/js/ds_baihoc.js"></script>
+}
+
+<div class="tittle">
+    <h1>Khóa học Html cơ bản</h1>
+    <p>Trong khóa này chúng ta sẽ cùng nhau xây dựng giao diện html đơn giản!</p>
+</div>
+<div class="left_content">
+    <h2>Bạn sẽ học được gì</h2>
+    <div class="whatLearning">
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+        <div class="learning">
+            <i class='bx bx-check-circle'></i>
+            <p>Biết cách xây dựng giao diện web với HTML</p>
+        </div>
+    </div>
+    <div class="ds_hoc">
+        <h2>Nội dung khóa học</h2>
+        <div class="total">
+            <p>13 phần</p>
+            <p>113 bài học</p>
+        </div>
+        <div class="ds">
+            @foreach (var items in Model.listLesson.BaiHoc)
+            {
+                <div class="baihoc" id="bai1">
+                    <i class='bx bx-play-circle'></i>
+                    <p id="name">@items.TenBaiHoc</p>
+                    <i id="number" class='bx bx-lock-open'></i>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="right_content" id="gioithieu">
+    <div class="gioithieu" id="myHeader">
+        <img src="~/Img/logo.png">
+        <!-- <div class="dangky">
+            <p>Đăng ký ngay! - 10.000 đồng</p>
+            <div class="themvaogio">
+                <p>Thêm vào giỏ</i>
+                </p>
+                <p>Dự kiến mua</p>
+            </div>
+        </div> -->
+        <div class="danghoctoi">
+            <b>Bạn đang học đến bài <span style="color: red;">1</span> phút thứ  <span style="color: red;">3:45!</span></b>
+            <p>Tiếp tục</p>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>

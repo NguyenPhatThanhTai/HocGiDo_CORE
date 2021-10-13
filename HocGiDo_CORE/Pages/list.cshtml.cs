@@ -13,9 +13,10 @@ namespace HocGiDo_CORE.Pages
     public class listModel : PageModel
     {
         public String testParam { get; set; }
+
         public IActionResult OnGet([FromQuery(Name = "id")] string id)
         {
-            //testParam = id;
+            testParam = id;
             return Page();
             //return RedirectToPage("./test");
         }

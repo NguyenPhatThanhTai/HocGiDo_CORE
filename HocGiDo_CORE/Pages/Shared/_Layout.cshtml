@@ -141,17 +141,32 @@
                 <i class='bx bx-search-alt'></i>
                 <input type="text" placeholder="Tìm bài học...">
             </div>
-            <!-- <div id="login">
-                <p>Đăng nhập</p>
-            </div> -->
-            <div id="User" data-dropdown>
-                <img src="~/Img/avatarZL.jpg" data-dropdown-user>
-                <div class="popup">
-                    <p>Nguyễn Phát Thành Tài</p>
-                    <a><i class='bx bxs-user-circle'></i>Thông tin tài khoản</a>
-                    <a><i class='bx bx-log-out'></i>Đăng xuất</a>
-                </div>
-            </div>
+            @using Microsoft.AspNetCore.Http;
+            @using Newtonsoft.Json;
+            @using HocGiDo_CORE.ModelsJson;
+            @{
+                var logined = Context.Session.GetString("Logined");
+                if (logined != null)
+                {
+                    UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                    <div id="User" data-dropdown>
+                        <img src="~/Img/avatarZL.jpg" data-dropdown-user>
+                        <div class="popup">
+                            <p>@userInf.user.HoTen</p>
+                            <a><i class='bx bxs-user-circle'></i>Thông tin tài khoản</a>
+                            <a class="logoutA" href="/dangnhap"><i class='bx bx-log-out'></i>Đăng xuất</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <a href="/dangnhap" class="loginA">
+                        <div id="login">
+                            <p>Đăng nhập</p>
+                        </div>
+                    </a>
+                }
+            }
         </div>
         @RenderBody()
         <div class="loadHere"></div>

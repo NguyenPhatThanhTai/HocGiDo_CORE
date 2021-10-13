@@ -10,44 +10,46 @@
 }
 
 <div class="container">
-    <div class="slide_show">
-        <div class="mySlides" style="background-color: darkslategray;">
-            <div id="text">
-                <p id="p1">Chào mừng đến với Học gì đó #1</p>
-                <p id="p2">Nơi học tập cũng như giúp bạn trao dồi kiến thức về kĩ năng lập trình của bạn!</p>
-                <p id="p3">Tham gia ngay</p>
+    <div class="containSlide">
+        <div class="slide_show">
+            <div class="mySlides slide1" style="background-color: darkslategray;">
+                <div id="text">
+                    <p id="p1">Chào mừng đến với Học gì đó #1</p>
+                    <p id="p2">Nơi học tập cũng như giúp bạn trao dồi kiến thức về kĩ năng lập trình của bạn!</p>
+                    <p id="p3">Tham gia ngay</p>
+                </div>
+                <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
+                <div id="pic"></div>
             </div>
-            <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
-            <div id="pic"></div>
-        </div>
-        <div class="mySlides" style="background-color: darkgoldenrod;">
-            <div id="text">
-                <p id="p1">Chào mừng đến với Học gì đó #2</p>
-                <p id="p2">Nơi giúp bạn tự tin hơn với kĩ năng lập trình!</p>
-                <p id="p3">Tham gia ngay</p>
+            <div class="mySlides slide2" style="background-color: darkgoldenrod;">
+                <div id="text">
+                    <p id="p1">Chào mừng đến với Học gì đó #2</p>
+                    <p id="p2">Nơi giúp bạn tự tin hơn với kĩ năng lập trình!</p>
+                    <p id="p3">Tham gia ngay</p>
+                </div>
+                <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
+                <div id="pic"></div>
             </div>
-            <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
-            <div id="pic"></div>
-        </div>
-        <div class="mySlides" style="background-color: darkgreen;">
-            <div id="text">
-                <p id="p1">Chào mừng đến với Học gì đó #3</p>
-                <p id="p2">Nơi học tập cũng như giúp bạn trao dồi kiến thức về kĩ năng lập trình của bạn!</p>
-                <p id="p3">Tham gia ngay</p>
+            <div class="mySlides slide3" style="background-color: darkgreen;">
+                <div id="text">
+                    <p id="p1">Chào mừng đến với Học gì đó #3</p>
+                    <p id="p2">Nơi học tập cũng như giúp bạn trao dồi kiến thức về kĩ năng lập trình của bạn!</p>
+                    <p id="p3">Tham gia ngay</p>
+                </div>
+                <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
+                <div id="pic"></div>
             </div>
-            <img src="https://www.pinclipart.com/picdir/big/36-367168_editor-and-writer-chibi-girl-reading-clipart.png">
-            <div id="pic"></div>
         </div>
-        <div class="count">
-            <p class="nextCount"></p>
-            <p class="nextCount"></p>
-            <p class="nextCount"></p>
-        </div>
+    </div>
+    <div class="count">
+        <p class="nextCount count1"></p>
+        <p class="nextCount count2"></p>
+        <p class="nextCount count3"></p>
     </div>
     <div class="content">
         @foreach (var items in Model.courses.KhoaHoc)
         {
-            <a href="/list?id=@items.TenKH">
+            <a href="/baihoc?id=@items.MaKH">
                 <div class="course">
                     <p id="p1" style="background-color: #e44d26;">
                         @items.TenKH

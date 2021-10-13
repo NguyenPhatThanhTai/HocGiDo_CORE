@@ -21,6 +21,13 @@ namespace HocGiDo_CORE.ExcuteJson
             return resp;
         }
 
+        public async Task<UserInf> getUser(string MaTK)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("user") + MaTK);
+            var resp = JsonConvert.DeserializeObject<UserInf>(responseString);
+            return resp;
+        }
+
         public async Task<ResultReturn> Login(LoginVM login)
         {
             var data = new Dictionary<string, string>
@@ -44,6 +51,13 @@ namespace HocGiDo_CORE.ExcuteJson
             {
                 return null;
             }
+        }
+
+        public async Task<ListLesson> getLessonOfCourse(string MaKH)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("lesson") + MaKH);
+            var resp = JsonConvert.DeserializeObject<ListLesson>(responseString);
+            return resp;
         }
     }
 }
