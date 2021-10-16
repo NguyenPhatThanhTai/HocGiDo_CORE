@@ -49,7 +49,7 @@
     <div class="content">
         @foreach (var items in Model.courses.KhoaHoc)
         {
-            <a href="/baihoc?id=@items.MaKH">
+            <a href="/baihoc?id=@items.MaKH" class="clickCourse">
                 <div class="course">
                     <p id="p1" style="background-color: #e44d26;">
                         @items.TenKH

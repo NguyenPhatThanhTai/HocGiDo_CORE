@@ -21,6 +21,9 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "login":
                     api = "https://hocgido-api.gq/api/dangnhap";
                     break;
+                case "register":
+                    api = "https://hocgido-api.gq/api/dangki";
+                    break;
                 case "lesson":
                     api = "https://hocgido-api.gq/api/baihoc?MaKH=";
                     break;

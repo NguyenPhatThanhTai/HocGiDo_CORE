@@ -53,6 +53,36 @@ namespace HocGiDo_CORE.ExcuteJson
             }
         }
 
+        public async Task<ResultReturn> Register(RegisterVM register)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"tenTK",""+register.User+""},
+                    {"matKhau",""+register.Passworld+""},
+                    {"hoTen",""+register.UserName+""},
+                    {"ngaySinh",""+register.Birth.ToString("yyyy-MM-dd")+""},
+                    {"sdt",""+register.PhoneNum+""},
+                    {"diaChi",""+register.Address+""},
+                    {"email",""+register.Email+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("register"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<ListLesson> getLessonOfCourse(string MaKH)
         {
             var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("lesson") + MaKH);

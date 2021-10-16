@@ -1,0 +1,67 @@
+﻿@page
+@model HocGiDo_CORE.Pages.dangkyModel
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/css/dangki.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <title>Đăng ký</title>
+</head>
+
+<body>
+    <div class="contain">
+        <div class="login">
+            <div class="left">
+                <img src="~/Img/logo.png">
+            </div>
+            <div class="form">
+                <form method="post">
+                    <p class="alert">@ViewData["RegisterResult"]</p>
+                    <div>
+                        <i class='bx bx-user-pin'></i>
+                        <input type="text" placeholder="Tên tài khoản" asp-for="resgister.User">
+                    </div>
+                    <div>
+                        <i class='bx bx-lock-alt'></i>
+                        <input type="text" placeholder="Mật khẩu" asp-for="resgister.Passworld">
+                    </div>
+                    <div>
+                        <i class='bx bx-user-circle'></i>
+                        <input type="text" placeholder="Họ và tên" asp-for="resgister.UserName">
+                    </div>
+                    <div>
+                        <i class='bx bx-calendar'></i>
+                        <input type="date" asp-for="resgister.Birth">
+                    </div>
+                    <div>
+                        <i class='bx bx-phone'></i>
+                        <input type="text" placeholder="Số điện thoại" asp-for="resgister.PhoneNum">
+                    </div>
+                    <div>
+                        <i class='bx bx-home-heart'></i>
+                        <input type="text" placeholder="Địa chỉ" asp-for="resgister.Address">
+                    </div>
+                    <div>
+                        <i class='bx bx-mail-send'></i>
+                        <input type="text" placeholder="Email" asp-for="resgister.Email">
+                    </div>
+                    <div class="login_area">
+                        <input type="button" onclick="location.href='/dangnhap';" id="submit" value="Đăng nhập">
+                        <input type="submit" id="register" value="Đăng kí">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

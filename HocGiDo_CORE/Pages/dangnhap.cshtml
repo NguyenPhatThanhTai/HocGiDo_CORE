@@ -18,7 +18,6 @@
     </head>
 
     <div class="contain">
-        <p>@ViewData["LoginResult"]</p>
         <div class="box">
             <img src="~/Img/logo.png">
             <img src="~/Img/logo.png">
@@ -36,6 +35,7 @@
             <div class="form">
                 <form method="post">
                     <img src="~/Img/logo.png">
+                    <p class="alert">@ViewData["LoginResult"]</p>
                     <div>
                         <i class='bx bx-user-circle'></i>
                         <input type="text" placeholder="Tài khoản của bạn" asp-for="login.UserName">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="login_area">
                         <input type="submit" id="submit" value="Đăng nhập">
-                        <input type="button" id="register" value="Đăng kí">
+                        <input type="button" onclick="location.href='/dangky';" id="register" value="Đăng kí">
                     </div>
                 </form>
             </div>

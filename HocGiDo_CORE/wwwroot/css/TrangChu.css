@@ -129,22 +129,26 @@
     z-index: 1;
 }
 
-    .course:hover #p1 img {
-        width: 120px;
-        top: 10px;
+    .clickCourse {
+        text-decoration: none;
     }
 
-    .course:hover #p1 {
-        font-size: 25px;
-    }
+.course:hover #p1 img {
+    width: 120px;
+    top: 10px;
+}
 
-        .course:hover #p1::after {
-            transition: all 0.5s ease;
-            height: 170px;
-            width: 170px;
-            right: -40px;
-            top: -10px;
-        }
+.course:hover #p1 {
+    font-size: 25px;
+}
+
+    .course:hover #p1::after {
+        transition: all 0.5s ease;
+        height: 170px;
+        width: 170px;
+        right: -40px;
+        top: -10px;
+    }
 
     .course #p1::after {
         content: '';
