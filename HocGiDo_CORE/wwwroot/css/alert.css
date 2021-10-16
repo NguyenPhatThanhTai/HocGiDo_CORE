@@ -1,0 +1,39 @@
+.alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: showAlert 1s;
+}
+
+.content_alert {
+    position: absolute;
+    top: 0;
+    background-color: rgb(243, 94, 94);
+    color: #fff;
+    width: 100%;
+    line-height: 50px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn_close {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.btn_close .bx-x {
+    margin: 10px;
+    font-size: 30px;
+}
+
+@keyframes showAlert {
+    from {
+        top: -50px;
+    }
+
+    to {
+        top: 0;
+    }
+}

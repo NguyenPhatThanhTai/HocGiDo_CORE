@@ -13,11 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="~/css/dangki.css">
+    <link rel="stylesheet" type="text/css" href="~/css/alert.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <title>Đăng ký</title>
 </head>
 
 <body>
+    @if (ViewData["RegisterResult"] != null)
+    {
+        <div class="alert" id="alert">
+            <div class="content_alert">
+                <b>Thông báo: </b>@ViewData["RegisterResult"]
+                <a class="btn_close" onclick="document.getElementById('alert').style.display = 'none'"><i class='bx bx-x'></i></a>
+            </div>
+        </div>
+    }
     <div class="contain">
         <div class="login">
             <div class="left">
@@ -25,7 +35,6 @@
             </div>
             <div class="form">
                 <form method="post">
-                    <p class="alert">@ViewData["RegisterResult"]</p>
                     <div>
                         <i class='bx bx-user-pin'></i>
                         <input type="text" placeholder="Tên tài khoản" asp-for="resgister.User">

@@ -174,12 +174,6 @@ body {
     animation: animate 5s linear infinite;
 }
 
-.alert {
-    font-weight: bold;
-    color: #e85a5a;
-    font-style: italic;
-}
-
 @keyframes animate {
     0% {
         transform: scale(0) translateY(0) rotate(0);

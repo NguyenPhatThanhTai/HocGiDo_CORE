@@ -29,7 +29,7 @@ namespace HocGiDo_CORE.Pages
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Có lỗi rồi");
+                ViewData["LoginResult"] = "Vui lòng điền đầy đủ thông tin!";
                 return Page();
             }
 
