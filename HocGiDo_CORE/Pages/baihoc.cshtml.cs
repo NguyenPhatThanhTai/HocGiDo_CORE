@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +12,11 @@ namespace HocGiDo_CORE.Pages
     public class baihocModel : PageModel
     {
         public ListLesson listLesson { get; set; }
-        public async Task<IActionResult> OnGet([FromQuery(Name = "id")] string id)
+        public async Task<IActionResult> OnGet(string id)
         {
             if(id == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Index", new { id = 3 }); // truyền parameter qua
             }
             else
             {
