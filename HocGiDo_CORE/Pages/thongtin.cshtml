@@ -1,0 +1,75 @@
+﻿@page
+@model HocGiDo_CORE.Pages.thongtinModel
+@section header{
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/css/thongtin.css">
+}
+
+<div class="contain">
+    <div class="left_contain">
+        <h3>
+            Thông tin cá nhân</h2>
+            <div class="list_items">
+                <div class="items" id="detail">
+                    <i class='bx bx-user'></i>
+                    <p>Thông tin</p>
+                </div>
+                <div class="items" id="save">
+                    <i class='bx bx-heart'></i>
+                    <p>Lưu bài học</p>
+                </div>
+                <div class="items" id="checked">
+                    <i class='bx bx-check'></i>
+                    <p>Khóa học đã đăng ký</p>
+                </div>
+                <div class="items" id="setting">
+                    <i class='bx bx-wrench'></i>
+                    <p>Cài đặt</p>
+                </div>
+            </div>
+    </div>
+    <div class="right_contain">
+        <div class="detail view">
+            <div class="picture">
+                <img src="~/Img/avatarZL.jpg">
+                <p>Nguyễn Phát Thành Tài</p>
+            </div>
+            <div class="information">
+                <div class="box_inf">
+                    <p class="tittle">Họ và tên:</p>
+                    <input class="inf" type="text" value="@Model.userInf.user.HoTen" asp-for="userInf.user.HoTen" disabled>
+                </div>
+                <div class="box_inf ">
+                    <p class="tittle ">Mật khẩu:</p>
+                    <input class="inf" type="password" value="" placeholder="Mật khẩu mới" asp-for="userInf.user.matKhau" disabled required>
+                </div>
+                <div class="box_inf">
+                    <p class="tittle ">Ngày sinh:</p>
+                    <input class="inf" id="date" type="text" value="@Model.userInf.user.NgaySinh" asp-for="userInf.user.NgaySinh" asp-format="{0:yyyy/MM/dd}" disabled>
+                </div>
+                <div class="box_inf ">
+                    <p class="tittle ">Số điện thoại:</p>
+                    <input class="inf" type="text" value="@Model.userInf.user.Sdt" asp-for="userInf.user.Sdt" disabled>
+                </div>
+                <div class="box_inf ">
+                    <p class="tittle ">Thành Phố</p>
+                    <input class="inf" type="text" value="@Model.userInf.user.DiaChi" asp-for="userInf.user.DiaChi" disabled>
+                </div>
+                <div class="box_inf ">
+                    <p class="tittle ">Email</p>
+                    <input class="inf" type="text" value="@Model.userInf.user.Email" asp-for="userInf.user.Email" disabled>
+                </div>
+            </div>
+            <div class="Chance">
+                <p id="chance_inf">Thay đổi thông tin cá nhân</p>
+            </div>
+        </div>
+        <div class="save view">
+            <p>Comming Soon</p>
+        </div>
+    </div>
+</div>
+<div style="clear: both; "></div>
+@section footer{
+    <script src="~/js/thongtin.js"></script>
+}

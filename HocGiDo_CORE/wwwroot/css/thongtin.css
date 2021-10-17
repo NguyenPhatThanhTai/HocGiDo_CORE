@@ -1,0 +1,157 @@
+.left_contain {
+    float: left;
+    width: 20%;
+    height: 100%;
+    margin: 10px;
+    border-right: 1px solid rgba(128, 128, 128, 0.589);
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.left_contain h3 {
+    text-align: center;
+}
+
+.list_items {
+    margin: 50px 0 10px 10px;
+}
+
+.list_items .items.active {
+    border-right: 3px solid coral;
+    background-color: rgba(231, 231, 231, 0.425);
+    color: rgb(99, 99, 99);
+    border-radius: 5px;
+}
+
+.list_items .items {
+    padding: 10px;
+    line-height: 30px;
+    cursor: pointer;
+    color: rgba(207, 207, 207, 0.829);
+}
+
+.list_items .items:hover {
+    background-color: rgba(231, 231, 231, 0.425);
+    color: rgb(99, 99, 99);
+    border-radius: 5px;
+}
+
+.list_items .items p {
+    margin: 0 0 0 30px;
+}
+
+.list_items .items i {
+    position: absolute;
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.right_contain {
+    width: 70%;
+    float: left;
+    overflow: hidden;
+}
+
+.right_contain .detail {
+    margin: 10px;
+    width: 100%;
+    display: none;
+}
+
+.right_contain .detail .picture {
+    display: flex;
+    align-items: center;
+}
+
+.picture img {
+    width: 100px;
+    border-radius: 50px;
+    background-color: black;
+}
+
+.picture p {
+    margin: 10px;
+    font-size: 20px;
+    color: gray;
+}
+
+.information {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.box_inf {
+    margin: 50px 10px 10px 10px;
+}
+
+.box_inf input{
+    color: black;
+}
+
+.box_inf .tittle {
+    margin: 0 0 5px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    color: grey;
+}
+
+.box_inf .inf {
+    background-color: rgba(238, 238, 238, 0.788);
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.Chance p {
+    background-color: coral;
+    color: #fff;
+    padding: 10px;
+    margin: 30px 10px 10px 10px;
+    border-radius: 7px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.Chance p:hover {
+    background-color: rgb(255, 104, 49);
+}
+
+.save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .left_contain {
+        float: none;
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+    }
+    .list_items {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .right_contain {
+        float: none;
+        width: 100%;
+    }
+    .right_contain .detail {
+        width: 100%;
+        margin: 0;
+    }
+    .information {
+        display: block;
+    }
+    .box_inf .inf {
+        width: 100%;
+    }
+    .right_contain .detail .picture {
+        margin: 10px;
+    }
+}

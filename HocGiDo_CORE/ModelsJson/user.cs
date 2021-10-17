@@ -7,11 +7,12 @@ namespace HocGiDo_CORE.ModelsJson
 {
     public class user
     {
-        public String MaND { get; set; }
-        public String HoTen { get; set; }
-        public String NgaySinh { get; set; }
-        public String Sdt { get; set; }
-        public String DiaChi { get; set; }
-        public String Email { get; set; }
+        public string MaND { get; set; }
+        public string matKhau { get; set; }
+        public string HoTen { get; set; }
+        public string NgaySinh { get; set; }
+        public string Sdt { get; set; }
+        public string DiaChi { get; set; }
+        public string Email { get; set; }
     }
 }
