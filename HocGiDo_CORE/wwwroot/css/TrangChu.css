@@ -22,7 +22,7 @@
 .mySlides {
     background-color: #0297fe;
     border-radius: 12px;
-    height: 250px;
+    height: fit-content;
     width: 100%;
     flex-shrink: 0;
 }
@@ -40,7 +40,7 @@
 }
 
 .mySlides #text {
-    width: 40%;
+    width: 70%;
     padding: 30px;
     float: left;
 }
@@ -70,9 +70,9 @@
         text-align: center;
     }
 
-        .mySlides #text #p3:hover {
-            background-color: rgb(247, 86, 33);
-        }
+    .mySlides #text #p3:hover {
+        background-color: rgb(247, 86, 33);
+    }
 
 .mySlides img {
     width: 150px;
