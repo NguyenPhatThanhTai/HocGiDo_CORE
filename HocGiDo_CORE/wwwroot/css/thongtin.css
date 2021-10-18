@@ -1,67 +1,68 @@
 .left_contain {
     float: left;
-    width: 20%;
+    min-width: 20%;
     height: 100%;
     margin: 10px;
     border-right: 1px solid rgba(128, 128, 128, 0.589);
-    overflow: auto;
-    white-space: nowrap;
+    min-height: 500px;
 }
 
-.left_contain h3 {
-    text-align: center;
-}
+    .left_contain h3 {
+        text-align: center;
+    }
 
 .list_items {
     margin: 50px 0 10px 10px;
 }
 
-.list_items .items.active {
-    border-right: 3px solid coral;
-    background-color: rgba(231, 231, 231, 0.425);
-    color: rgb(99, 99, 99);
-    border-radius: 5px;
-}
+    .list_items .items.active {
+        border-right: 3px solid coral;
+        background-color: rgba(231, 231, 231, 0.425);
+        color: rgb(99, 99, 99);
+        border-radius: 10px 0 0 10px;
+    }
 
-.list_items .items {
-    padding: 10px;
-    line-height: 30px;
-    cursor: pointer;
-    color: rgba(207, 207, 207, 0.829);
-}
+    .list_items .items {
+        padding: 10px;
+        line-height: 30px;
+        cursor: pointer;
+        color: rgba(207, 207, 207, 0.829);
+        margin: 10px 0 10px 0;
+    }
 
-.list_items .items:hover {
-    background-color: rgba(231, 231, 231, 0.425);
-    color: rgb(99, 99, 99);
-    border-radius: 5px;
-}
+        .list_items .items:hover {
+            background-color: rgba(231, 231, 231, 0.425);
+            color: rgb(99, 99, 99);
+            border-radius: 10px 0 0 10px;
+        }
 
-.list_items .items p {
-    margin: 0 0 0 30px;
-}
+        .list_items .items p {
+            margin: 0 0 0 30px;
+        }
 
-.list_items .items i {
-    position: absolute;
-    line-height: 30px;
-    font-size: 20px;
-}
+        .list_items .items i {
+            position: absolute;
+            line-height: 30px;
+            font-size: 20px;
+        }
 
 .right_contain {
     width: 70%;
     float: left;
+    min-height: 500px;
     overflow: hidden;
 }
 
-.right_contain .detail {
-    margin: 10px;
-    width: 100%;
-    display: none;
-}
+    .right_contain .detail {
+        margin: 10px;
+        width: 100%;
+        display: none;
+    }
 
-.right_contain .detail .picture {
-    display: flex;
-    align-items: center;
-}
+        .right_contain .detail .picture {
+            display: flex;
+            align-items: center;
+        }
 
 .picture img {
     width: 100px;
@@ -78,6 +79,7 @@
 .information {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -85,25 +87,22 @@
     margin: 50px 10px 10px 10px;
 }
 
-.box_inf input{
-    color: black;
-}
+    .box_inf .tittle {
+        margin: 0 0 5px 5px;
+        font-size: 10px;
+        font-weight: bold;
+        color: grey;
+    }
 
-.box_inf .tittle {
-    margin: 0 0 5px 5px;
-    font-size: 10px;
-    font-weight: bold;
-    color: grey;
-}
-
-.box_inf .inf {
-    background-color: rgba(238, 238, 238, 0.788);
-    border: 1px solid rgb(218, 218, 218);
-    border-radius: 5px;
-    padding: 10px;
-    width: 300px;
-    text-align: center;
-}
+    .box_inf .inf {
+        background-color: rgba(238, 238, 238, 0.788);
+        border: 1px solid rgb(218, 218, 218);
+        border-radius: 5px;
+        padding: 10px;
+        width: 250px;
+        text-align: center;
+        color: black;
+    }
 
 .Chance p {
     background-color: coral;
@@ -115,9 +114,9 @@
     cursor: pointer;
 }
 
-.Chance p:hover {
-    background-color: rgb(255, 104, 49);
-}
+    .Chance p:hover {
+        background-color: rgb(255, 104, 49);
+    }
 
 .save {
     display: flex;
@@ -126,32 +125,46 @@
     display: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1023px) {
     .left_contain {
         float: none;
         width: 100%;
         height: fit-content;
         margin: 0;
+        min-height: 0;
     }
+
     .list_items {
         display: flex;
         flex-wrap: wrap;
     }
+
     .right_contain {
         float: none;
         width: 100%;
     }
-    .right_contain .detail {
-        width: 100%;
-        margin: 0;
-    }
+
+        .right_contain .detail {
+            width: 100%;
+            margin: 0;
+        }
+
     .information {
         display: block;
     }
+
     .box_inf .inf {
         width: 100%;
     }
+
     .right_contain .detail .picture {
         margin: 10px;
+    }
+
+    .list_items .items.active {
+        border-right: 0;
+        border-bottom: 3px solid coral;
+        background-color: rgba(231, 231, 231, 0.425);
+        color: rgb(99, 99, 99);
     }
 }
