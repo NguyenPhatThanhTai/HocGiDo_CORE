@@ -1,4 +1,4 @@
-﻿@page "{id?}"
+﻿@page "{kh?}"
 @model HocGiDo_CORE.Pages.baihocModel
 @{
     ViewData["Title"] = "Danh sách bài học";
@@ -59,11 +59,13 @@
         <div class="ds">
             @foreach (var items in Model.listLesson.BaiHoc)
             {
-                <div class="baihoc" id="bai1">
+            <a href="/hoc/@Model.courseID/@items.MaBaiHoc">
+                <div class="baihoc">
                     <i class='bx bx-play-circle'></i>
                     <p id="name">@items.TenBaiHoc</p>
                     <i id="number" class='bx bx-lock-open'></i>
                 </div>
+            </a>
             }
         </div>
     </div>

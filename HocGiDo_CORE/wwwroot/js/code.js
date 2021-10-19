@@ -3,10 +3,6 @@ var css = document.getElementById("css");
 var js = document.getElementById("javascript");
 var text = document.getElementById("text");
 
-// var array = ['<table>\n', '', '<tr>\n', '', '', '', '<td>Emil</td>\n', '', '', '', '<td>Tobias</td>\n', '', '', '', '<td>Linus</td>\n', '', '</tr>\n</table>'];
-// console.log(array.toString().replaceAll(",", " "))
-// html.value = array.toString().replaceAll(",", " ");
-
 var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     tabSize: 4,
     mode: "xml",
@@ -20,21 +16,11 @@ var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     highlightMatches: true,
 });
 
-// myCodeMirrorHtml.getDoc().setValue("hello");
-var demo_input = document.getElementById('demo_input');
-var array = ['<table>\n', '', '<tr>\n', '', '', '', '<td>Emil</td>\n', '', '', '', '<td>Tobias</td>\n', '', '', '', '<td>Linus</td>\n', '', '</tr>\n</table>'];
-var type_this = array.toString().replaceAll(",", " ");
-
-var index = 0;
-
-window.next_letter = function() {
-    if (index <= type_this.length) {
-        myCodeMirrorHtml.getDoc().setValue(type_this.substr(0, index++));
-        setTimeout("next_letter()", 50);
-    }
+function addCodeExample(expCode) {
+    var array = expCode;
+    var type_this = array.toString().replaceAll(",", " ");
+    myCodeMirrorHtml.getDoc().setValue(type_this);
 }
-
-next_letter();
 
 var myCodeMirrorCss = CodeMirror.fromTextArea(css, {
     tabSize: 4,

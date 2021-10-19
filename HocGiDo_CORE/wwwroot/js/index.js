@@ -1,7 +1,5 @@
 $(document).ready(function() {
-    $(".loadHere").load('../../View/TrangChu.html')
     sideBarOC();
-    sideBarClick();
     dropDownUser();
     openSidePhone();
 })
@@ -22,24 +20,14 @@ function sideBarOC() {
 
 function openSidePhone() {
     var openSide = document.getElementById("openMenu");
-    openSide.onclick = function() {
+    openSide.onclick = function () {
         document.getElementById("Side").classList.add("active");
     }
 
     var closeMenu = document.getElementById("closeMenu");
-    closeMenu.onclick = function() {
+    closeMenu.onclick = function () {
         document.getElementById("Side").classList.remove("active");
     }
-}
-
-function sideBarClick() {
-    $("#bx-home").click(function() {
-        $(".loadHere").load('../../View/TrangChu.html')
-    })
-
-    $("#bx-laptop").click(function() {
-        window.location = "../../View/code.html"
-    })
 }
 
 function dropDownUser() {
