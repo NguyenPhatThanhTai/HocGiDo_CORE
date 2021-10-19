@@ -1,5 +1,8 @@
 ﻿//Code example
 var html = document.getElementById("code");
+var css = document.getElementById("css");
+var js = document.getElementById("js");
+
 var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     tabSize: 4,
     mode: "xml",
@@ -13,11 +16,61 @@ var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     readOnly: true
 });
 
+var myCodeMirrorCss = CodeMirror.fromTextArea(css, {
+    tabSize: 4,
+    mode: "css",
+    theme: 'dracula',
+    lineNumbers: true,
+    styleActiveSelected: true,
+    styleActiveLine: true,
+    indentWithTabs: true,
+    matchBrackets: true,
+    highlightMatches: true,
+});
+
+var myCodeMirrorJs = CodeMirror.fromTextArea(js, {
+    tabSize: 4,
+    mode: "javascript",
+    theme: 'dracula',
+    lineNumbers: true,
+    styleActiveSelected: true,
+    styleActiveLine: true,
+    indentWithTabs: true,
+    matchBrackets: true,
+    highlightMatches: true,
+});
+
 function setCodeExample(examPCode) {
     var code = examPCode;
     var type_this = code.toString().replaceAll(",", " ");
     myCodeMirrorHtml.getDoc().setValue(type_this);
 }
+
+//choice
+var buttonChoice = document.querySelectorAll(".btnChoice");
+var textAreaCode = document.querySelectorAll(".code");
+textAreaCode[0].style.display = "block";
+buttonChoice[0].classList.add("active");
+
+clickChoice()
+
+function clickChoice() {
+    buttonChoice.forEach(function (current, index) {
+        buttonChoice[index].addEventListener("click", function () {
+            textAreaCode.forEach(function (curr, ind) {
+                textAreaCode[ind].style.display = "none";
+            })
+
+            buttonChoice.forEach(function (cu, i) {
+                buttonChoice[i].classList.remove("active");
+            })
+
+            buttonChoice[index].classList.add("active");
+            textAreaCode[index].style.display = "block";
+        });
+    })
+}
+
 //Tab
  var i, tabcontent, tablinks;
  tablinks = document.getElementsByClassName("tablinks");

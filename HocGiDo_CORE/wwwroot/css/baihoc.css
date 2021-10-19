@@ -94,6 +94,27 @@
     text-indent: 50px;
 }
 
+.example #choice {
+    text-align: right;
+    margin: 10px;
+}
+
+    .example #choice button {
+        padding: 10px;
+        width: 100px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+.code {
+    display: none;
+}
+
+.btnChoice.active {
+    background-color: coral;
+    color: #fff
+}
+
 .CodeMirror {
     font-size: 15px;
     margin: 10px;

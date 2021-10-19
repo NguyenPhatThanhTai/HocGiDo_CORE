@@ -31,7 +31,20 @@
                 @Model.lesson.LyThuyet
                 <h3>Ví dụ:</h3>
                 <div class="example">
-                    <textarea id="code"></textarea>
+                    <div id="choice">
+                        <button class="btnChoice">HTML</button>
+                        <button class="btnChoice">CSS</button>
+                        <button class="btnChoice">JS</button>
+                    </div>
+                    <div class="code">
+                        <textarea id="code"></textarea>
+                    </div>
+                    <div class="code">
+                        <textarea id="css"></textarea>
+                    </div>
+                    <div class="code">
+                        <textarea id="js"></textarea>
+                    </div>
                 </div>
                 <div class="tryIt">
                     <a href="/code/@ViewData["CourseId"]/@Model.lesson.MaBaiHoc">Thử code nào!</a>
