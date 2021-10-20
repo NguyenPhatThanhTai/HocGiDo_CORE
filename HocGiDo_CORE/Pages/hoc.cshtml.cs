@@ -12,6 +12,8 @@ namespace HocGiDo_CORE.Pages
     public class hocModel : PageModel
     {
         public Lesson lesson { get; set; }
+        public ListLesson listLesson { get; set; }
+        public string courseID;
         public async Task<IActionResult> OnGet(string kh, string bh)
         {
             if (kh == null)
@@ -20,9 +22,9 @@ namespace HocGiDo_CORE.Pages
             }
             else
             {
-                ListLesson listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
+                listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
                 lesson = listLesson.BaiHoc.FirstOrDefault(p => p.MaBaiHoc.Equals(bh));
-                ViewData["CourseId"] = kh;
+                courseID = kh;
                 return Page();
             }
         }

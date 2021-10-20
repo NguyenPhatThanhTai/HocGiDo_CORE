@@ -100,8 +100,8 @@
 }
 
     .example #choice button {
-        padding: 10px;
-        width: 100px;
+        padding: 7px;
+        width: 70px;
         cursor: pointer;
         text-align: center;
     }
@@ -155,6 +155,10 @@
 .ds {
     height: 420px;
     overflow-y: auto;
+}
+
+.ds a{
+    text-decoration: none;
 }
 
 

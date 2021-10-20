@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,14 @@ namespace HocGiDo_CORE
             services.AddRazorPages();
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.HttpOnly = HttpOnlyPolicy.Always;
+                options.Secure = CookieSecurePolicy.Always;
+                // you can add more options here and they will be applied to all cookies (middleware and manually created cookies)
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="tryIt">
-                    <a href="/code/@ViewData["CourseId"]/@Model.lesson.MaBaiHoc">Thử code nào!</a>
+                    <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
                 <div id="exam_list"></div>
             </div>
@@ -66,56 +66,16 @@
     <div class="right_content">
         <h3>Danh sách bài học</h3>
         <div class="ds">
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Làm được gì sau khóa học?</p>
-                <i id="number" class='bx bx-lock-open'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">HTML, CSS là gì?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Làm quen với Dev tools?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Cài đặt môi trường?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Cấu trúc file HTML?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Comments trong HTML?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Thẻ HTML thông dụng?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Attribute trong HTML?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">Attribute trong HTML?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
-            <div class="baihoc">
-                <i class='bx bx-play-circle'></i>
-                <p id="name">ID và Class?</p>
-                <i id="number" class='bx bx-lock'></i>
-            </div>
+            @foreach (var items in Model.listLesson.BaiHoc)
+            {
+                <a href="/hoc/@Model.courseID/@items.MaBaiHoc">
+                    <div class="baihoc">
+                        <i class='bx bx-play-circle'></i>
+                        <p id="name">@items.TenBaiHoc</p>
+                        <i id="number" class='bx bx-lock-open'></i>
+                    </div>
+                </a>
+            }
         </div>
     </div>
 </div>

@@ -20,6 +20,7 @@ namespace HocGiDo_CORE.Pages
         public IActionResult OnGet()
         {
             HttpContext.Session.Remove("Logined");
+            Response.Cookies.Delete("Remember");
             return Page();
         }
 
@@ -41,7 +42,15 @@ namespace HocGiDo_CORE.Pages
             }
             else
             {
-                HttpContext.Session.SetString("Logined", JsonConvert.SerializeObject(await new ExcuteJsonClass().getUser(result.message)));
+                var userInf = await new ExcuteJsonClass().getUser(result.message);
+                HttpContext.Session.SetString("Logined", JsonConvert.SerializeObject(userInf));
+
+                if (login.Keeplogin.Equals("true"))
+                {
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddDays(30);
+                    Response.Cookies.Append("Remember", JsonConvert.SerializeObject(userInf), option);
+                }
                 return RedirectToPage("/Index");
             }
         }

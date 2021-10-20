@@ -144,10 +144,17 @@
             @using Newtonsoft.Json;
             @using HocGiDo_CORE.ModelsJson;
             @{
+                var cookieRemember = Context.Request.Cookies["Remember"];
+                UserInf userInf;
+                if(cookieRemember != null)
+                {
+                    Context.Session.SetString("Logined", cookieRemember);
+                }
+
                 var logined = Context.Session.GetString("Logined");
                 if (logined != null)
                 {
-                    UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                    userInf = JsonConvert.DeserializeObject<UserInf>(logined);
                     <div id="User" data-dropdown>
                         <img src="~/Img/avatarZL.jpg" data-dropdown-user>
                         <div class="popup">

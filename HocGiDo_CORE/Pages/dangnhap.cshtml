@@ -47,16 +47,20 @@
                         <img src="~/Img/logo.png">
                         <div>
                             <i class='bx bx-user-circle'></i>
-                            <input type="text" placeholder="Tài khoản của bạn" asp-for="login.UserName">
+                            <input class="type" type="text" placeholder="Tài khoản của bạn" asp-for="login.UserName">
                         </div>
                         <div>
                             <i class='bx bx-lock showP' id="show"></i>
                             <i class='bx bx-lock-open showP' id="close"></i>
-                            <input id="pass" type="password" placeholder="Mật khẩu của bạn" asp-for="login.Passworld">
+                            <input class="type" id="pass" type="password" placeholder="Mật khẩu của bạn" asp-for="login.Passworld">
+                            <div class="remember">
+                                <input type="checkbox" value="true" asp-for="login.Keeplogin">Nhớ mật khẩu của tôi!
+                                <input type="hidden" value="false" asp-for="login.Keeplogin">
+                            </div>
                         </div>
                         <div class="login_area">
-                            <input type="submit" id="submit" value="Đăng nhập">
-                            <input type="button" onclick="location.href='/dangky';" id="register" value="Đăng kí">
+                            <input class="type" type="submit" id="submit" value="Đăng nhập">
+                            <input class="type" type="button" onclick="location.href='/dangky';" id="register" value="Đăng kí">
                         </div>
                     </form>
                 </div>
