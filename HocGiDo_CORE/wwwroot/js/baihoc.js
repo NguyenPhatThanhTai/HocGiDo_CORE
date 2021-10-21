@@ -20,30 +20,39 @@ var myCodeMirrorCss = CodeMirror.fromTextArea(css, {
     tabSize: 4,
     mode: "css",
     theme: 'dracula',
-    lineNumbers: true,
     styleActiveSelected: true,
     styleActiveLine: true,
     indentWithTabs: true,
     matchBrackets: true,
     highlightMatches: true,
+    readOnly: true
 });
 
 var myCodeMirrorJs = CodeMirror.fromTextArea(js, {
     tabSize: 4,
     mode: "javascript",
     theme: 'dracula',
-    lineNumbers: true,
     styleActiveSelected: true,
     styleActiveLine: true,
     indentWithTabs: true,
     matchBrackets: true,
     highlightMatches: true,
+    readOnly: true
 });
 
 function setCodeExample(examPCode) {
-    var code = examPCode;
-    var type_this = code.toString().replaceAll(",", " ");
-    myCodeMirrorHtml.getDoc().setValue(type_this);
+    var array = examPCode;
+
+    console.log(examPCode);
+
+    var htmlSet = array[0].join(" ");
+    myCodeMirrorHtml.getDoc().setValue(htmlSet);
+
+    var cssSet = array[1].join(" ");
+    myCodeMirrorCss.getDoc().setValue(cssSet);
+
+    var jsSet = array[2].join(" ");
+    myCodeMirrorJs.getDoc().setValue(jsSet);
 }
 
 //choice

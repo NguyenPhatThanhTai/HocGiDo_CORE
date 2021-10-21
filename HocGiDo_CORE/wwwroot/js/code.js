@@ -16,12 +16,6 @@ var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     highlightMatches: true,
 });
 
-function addCodeExample(expCode) {
-    var array = expCode;
-    var type_this = array.toString().replaceAll(",", " ");
-    myCodeMirrorHtml.getDoc().setValue(type_this);
-}
-
 var myCodeMirrorCss = CodeMirror.fromTextArea(css, {
     tabSize: 4,
     mode: "css",
@@ -57,6 +51,19 @@ var myCodeMirrorText = CodeMirror.fromTextArea(text, {
     matchBrackets: true,
     highlightMatches: true,
 });
+
+function addCodeExample(expCode) {
+    var array = expCode;
+
+    var htmlSet = array[0].join(" ");
+    myCodeMirrorHtml.getDoc().setValue(htmlSet);
+
+    var cssSet = array[1].join(" ");
+    myCodeMirrorCss.getDoc().setValue(cssSet);
+
+    var jsSet = array[2].join(" ");
+    myCodeMirrorJs.getDoc().setValue(jsSet);
+}
 // var Css = document.querySelector(".Css ");
 var outPut = document.querySelector(".out");
 
@@ -67,16 +74,26 @@ function sendCode() {
 
     //add dữ liệu vô
     doc.body.innerHTML = myCodeMirrorHtml.getValue();
-    var newArray = myCodeMirrorHtml.getValue().split(" ");
-    console.log(newArray)
+    //
+    var htmlArray = myCodeMirrorHtml.getValue().split(" ");
+    var jsArray = myCodeMirrorJs.getValue().split(" ");
+    var cssArray = myCodeMirrorCss.getValue().split(" ");
+
+    var totalArray = [
+        htmlArray, cssArray, jsArray
+    ]
+
+    console.log(totalArray)
+    //document.getElementById("testhere").value = JSON.stringify(totalArray);
+    //var type = document.getElementById("testhere").value.toString().replaceAll(",", " ");
+    // myCodeMirrorHtml.getDoc().setValue(type);
 
     style.innerHTML = myCodeMirrorCss.getValue();
     doc.body.appendChild(style);
+
     script.innerHTML = myCodeMirrorJs.getValue();
     script.type = 'text/javascript';
     doc.head.appendChild(script);
-
-    console.log(myCodeMirrorJs.getValue())
 
     //libary
     var link = document.createElement("link");
