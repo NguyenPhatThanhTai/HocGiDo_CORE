@@ -53,7 +53,7 @@
                 </div>
                 <div class="box_inf ">
                     <p class="tittle ">Thành Phố</p>
-                    <input class="inf" type="text" value="@Model.userInf.user.DiaChi" asp-for="userInf.user.DiaChi" disabled>
+                    <input class="inf" type="text" value="@Html.Raw(Model.userInf.user.DiaChi)" asp-for="userInf.user.DiaChi" disabled>
                 </div>
                 <div class="box_inf ">
                     <p class="tittle ">Email</p>

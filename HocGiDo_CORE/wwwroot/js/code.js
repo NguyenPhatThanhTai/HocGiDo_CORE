@@ -52,16 +52,20 @@ var myCodeMirrorText = CodeMirror.fromTextArea(text, {
     highlightMatches: true,
 });
 
-function addCodeExample(expCode) {
-    var array = expCode;
+function addCodeExample(expCode, key) {
+    console.log("truoc khi encrypt: " + expCode)
+    var decrypted = CryptoJS.AES.decrypt(expCode, key).toString(CryptoJS.enc.Utf8)
 
-    var htmlSet = array[0].join(" ");
+    console.log("Sau khi encrypt: " + decrypted);
+    decrypted = JSON.parse(decrypted);
+
+    var htmlSet = decrypted[0].join(" ");
     myCodeMirrorHtml.getDoc().setValue(htmlSet);
 
-    var cssSet = array[1].join(" ");
+    var cssSet = decrypted[1].join(" ");
     myCodeMirrorCss.getDoc().setValue(cssSet);
 
-    var jsSet = array[2].join(" ");
+    var jsSet = decrypted[2].join(" ");
     myCodeMirrorJs.getDoc().setValue(jsSet);
 }
 // var Css = document.querySelector(".Css ");

@@ -40,18 +40,20 @@ var myCodeMirrorJs = CodeMirror.fromTextArea(js, {
     readOnly: true
 });
 
-function setCodeExample(examPCode) {
-    var array = examPCode;
+function setCodeExample(examPCode, key) {
+    console.log("truoc khi encrypt: " + examPCode)
+    var decrypted = CryptoJS.AES.decrypt(examPCode, key).toString(CryptoJS.enc.Utf8);
 
-    console.log(examPCode);
+    console.log("Sau khi encrypt: " + decrypted);
+    decrypted = JSON.parse(decrypted);
 
-    var htmlSet = array[0].join(" ");
+    var htmlSet = decrypted[0].join(" ");
     myCodeMirrorHtml.getDoc().setValue(htmlSet);
 
-    var cssSet = array[1].join(" ");
+    var cssSet = decrypted[1].join(" ");
     myCodeMirrorCss.getDoc().setValue(cssSet);
 
-    var jsSet = array[2].join(" ");
+    var jsSet = decrypted[2].join(" ");
     myCodeMirrorJs.getDoc().setValue(jsSet);
 }
 

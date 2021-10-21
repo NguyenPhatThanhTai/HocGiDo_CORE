@@ -21,6 +21,7 @@
     <script type="text/javascript" src="~/Resource/mode/css/css.js"></script>
     <script src="https://unpkg.com/typeit@8.0.3/dist/index.umd.js"></script>
     <link rel="stylesheet" href="~/css/code.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 
@@ -70,6 +71,6 @@
 @if (Model.lesson != null)
 {
 <script>
-    addCodeExample(@Html.Raw(Model.lesson.CodeMau));
+    addCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaBaiHoc)");
 </script>
 }

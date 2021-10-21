@@ -13,6 +13,7 @@
     <script type="text/javascript" src="~/Resource/mode/css/css.js"></script>
     <script src="https://unpkg.com/typeit@8.0.3/dist/index.umd.js"></script>
     <script src="~/Resource/mode/javascript/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 }
 
 <div class="main_content">
@@ -82,7 +83,7 @@
 <div style="clear: both;"></div>
 <script src="~/js/baihoc.js"></script>
 <script>
-    setCodeExample(@Html.Raw(Model.lesson.CodeMau));
+    setCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaBaiHoc)");
 </script>
 
 @*@section footer{

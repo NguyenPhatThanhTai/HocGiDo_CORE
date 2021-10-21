@@ -28,9 +28,9 @@ namespace HocGiDo_CORE.Pages
             }
 
             ResultReturn result = await new ExcuteJsonClass().Register(resgister);
-            if (result.message.Equals("duplicate") || result == null)
+            if (result.message.Equals("duplicate") || result.message.Equals("error") || result == null)
             {
-                ViewData["RegisterResult"] = "Tài khoản đã tồn tại trên hệ thống!";
+                ViewData["RegisterResult"] = "Có lỗi xảy ra rồi!";
                 return Page();
             }
             else
