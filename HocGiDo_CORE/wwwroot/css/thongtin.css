@@ -118,6 +118,64 @@
         background-color: rgb(255, 104, 49);
     }
 
+.baihoc {
+    display: flex;
+    background-color: rgb(204, 204, 204);
+    color: rgb(56, 56, 56);
+    margin: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    padding: 15px;
+}
+
+    .baihoc #name {
+        line-height: 30px;
+    }
+
+    .baihoc i {
+        margin: 0 10px 0 20px;
+        color: coral;
+        font-size: 30px;
+    }
+
+    .baihoc #number {
+        position: absolute;
+        right: 0;
+        z-index: 99;
+        font-family: cursive;
+        line-height: 30px;
+    }
+
+    .baihoc .bx-lock-open {
+        color: cadetblue;
+    }
+
+    .baihoc .bx-lock {
+        color: rgb(221, 132, 132);
+    }
+
+    .baihoc:hover {
+        background-color: rgb(180, 180, 180);
+    }
+
+    .baihoc::after {
+        content: '';
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        width: 40px;
+        height: 40px;
+        right: 5px;
+        top: 10px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+.ds {
+    max-height: 500px;
+    overflow-x: auto;
+}
+
 .save {
     display: flex;
     align-items: center;
