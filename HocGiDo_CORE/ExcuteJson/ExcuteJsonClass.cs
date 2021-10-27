@@ -89,5 +89,22 @@ namespace HocGiDo_CORE.ExcuteJson
             var resp = JsonConvert.DeserializeObject<ListLesson>(responseString);
             return resp;
         }
+
+        public async Task<ListQuestion> getIdExamOfLesson(string MaBH)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("ExamId") + MaBH);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            if (resp.message != null)
+            {
+                var responseStringExam = await client.GetStringAsync(new ApiContain().getUrlApi("ListExam") + resp.message);
+                var respExam = JsonConvert.DeserializeObject<ListQuestion>(responseStringExam);
+                return respExam;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

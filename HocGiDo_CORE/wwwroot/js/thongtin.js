@@ -32,9 +32,6 @@ function chanceInf() {
             if (inputs[index].type == 'password') {
                 inputs[index].type = "text";
             }
-            if (inputs[index].id == 'date') {
-                inputs[index].type = "date";
-            }
             inputs[index].disabled = false;
         })
     })

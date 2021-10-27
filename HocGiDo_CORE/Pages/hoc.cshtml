@@ -50,7 +50,24 @@
                 <div class="tryIt">
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
-                <div id="exam_list"></div>
+                @*<div id="exam_list"></div>*@
+            <div class="exam">
+                <form method="post" class="answer">
+                    @{ var i = 1; var j = 1;}
+                    @foreach (var items in Model.listQuestion.CauHoi)
+                    {
+                        <p>Câu @i: @items.NoiDungCauHoi</p>
+                        @foreach (var items2 in items.DapAn)
+                        {
+                            <div><input type="radio" asp-for="answerVM.NoiDungDapAn" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
+                            j++;
+                        }
+                        i++;
+                        j = 1;
+                    }
+                    <input class="submit" type="submit" value="Gửi" />
+                </form>
+            </div>
             </div>
 
             <div id="note" class="tabcontent">

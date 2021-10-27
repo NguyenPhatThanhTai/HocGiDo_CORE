@@ -10,28 +10,34 @@ namespace HocGiDo_CORE.ExcuteJson
         public String getUrlApi(String apiName)
         {
             var api = "";
+            var host = "http://hocgido-api.gq/";
             switch (apiName)
             {
                 case "course":
-                    api = "http://hocgido-api.gq/api/khoahoc";
+                    api ="api/khoahoc";
                     break;
                 case "user":
-                    api = "https://hocgido-api.gq/api/nguoidung?MaTK=";
+                    api = "api/nguoidung?MaTK=";
                     break;
                 case "login":
-                    api = "https://hocgido-api.gq/api/dangnhap";
+                    api = "api/dangnhap";
                     break;
                 case "register":
-                    api = "https://hocgido-api.gq/api/dangki";
+                    api = "api/dangki";
                     break;
                 case "lesson":
-                    api = "https://hocgido-api.gq/api/baihoc?MaKH=";
+                    api = "api/baihoc?MaKH=";
+                    break;
+                case "ExamId":
+                    api = "api/kiemtra?MaBaiHoc=";
+                    break;
+                case "ListExam":
+                    api = "api/cauhoi?MaKT=";
                     break;
                 default:
                     return null;
-                    break;
             }
-            return api;
+            return host + api;
         }
     }
 }

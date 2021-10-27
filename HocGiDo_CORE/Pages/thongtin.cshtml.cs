@@ -23,6 +23,8 @@ namespace HocGiDo_CORE.Pages
             else
             {
                 userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                DateTime birth = DateTime.Parse(userInf.user.NgaySinh);
+                userInf.user.NgaySinh = birth.ToString("yyyy-MM-dd");
                 return Page();
             }
         }

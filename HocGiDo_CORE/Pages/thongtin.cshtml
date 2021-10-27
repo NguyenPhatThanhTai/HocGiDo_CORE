@@ -45,7 +45,7 @@
                 </div>
                 <div class="box_inf">
                     <p class="tittle ">Ngày sinh:</p>
-                    <input class="inf" id="date" type="text" value="@Model.userInf.user.NgaySinh" asp-for="userInf.user.NgaySinh" asp-format="{0:yyyy/MM/dd}" disabled>
+                    <input class="inf" id="date" type="date" asp-format="{0:yyyy-MM-dd}" value="@Model.userInf.user.NgaySinh" asp-for="userInf.user.NgaySinh" class="form-control" disabled>
                 </div>
                 <div class="box_inf ">
                     <p class="tittle ">Số điện thoại:</p>
