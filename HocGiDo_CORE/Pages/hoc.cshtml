@@ -19,7 +19,7 @@
 <div class="main_content">
     <div class="left_content">
         <video class="videoPlayer" width="100%" controls muted="muted" autoplay>
-            <source src="https://meet-hgd.herokuapp.com/video?url=@Model.lesson.Video" type="video/mp4" />
+            @*<source src="https://meet-hgd.herokuapp.com/video?url=@Model.lesson.Video" type="video/mp4" />*@
         </video>
         <div class="detail">
             <div class="tab">
@@ -51,23 +51,23 @@
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
                 @*<div id="exam_list"></div>*@
-            <div class="exam">
-                <form method="post" class="answer">
+                <div class="exam">
                     @{ var i = 1; var j = 1;}
                     @foreach (var items in Model.listQuestion.CauHoi)
                     {
                         <p>Câu @i: @items.NoiDungCauHoi</p>
-                        @foreach (var items2 in items.DapAn)
-                        {
-                            <div><input type="radio" asp-for="answerVM.NoiDungDapAn" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
-                            j++;
-                        }
+                        <form class="answer">
+                            @foreach (var items2 in items.DapAn)
+                            {
+                                <div><input type="radio" name="@i" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
+                                j++;
+                            }
+                        </form>
                         i++;
                         j = 1;
                     }
-                    <input class="submit" type="submit" value="Gửi" />
-                </form>
-            </div>
+                </div>
+                <button class="submit">Kiểm tra!</button>
             </div>
 
             <div id="note" class="tabcontent">
@@ -90,7 +90,7 @@
                     <div class="baihoc">
                         <i class='bx bx-play-circle'></i>
                         <p id="name">@items.TenBaiHoc</p>
-                        <i id="number" class='bx bx-lock-open'></i>
+                        <i id="number @items.MaBaiHoc" class='bx bx-lock-open'></i>
                     </div>
                 </a>
             }
@@ -106,3 +106,47 @@
 @*@section footer{
     <script src="~/js/baihoc.js"></script>
 }*@
+<script>
+    $(".submit").click(function (e) {
+        e.preventDefault();
+
+        //get correct answers list
+        var correctAnswersList = [];
+        var arrayQuestions = JSON.parse('@Html.Raw(Json.Serialize(Model.listQuestion))');
+        console.log(arrayQuestions);
+        arrayQuestions.cauHoi.forEach(function (current, index) {
+            current.dapAn.forEach(function (curr, ind) {
+                if (curr.dapAnDung == true) {
+                    correctAnswersList.push(curr.noiDungDapAn);
+                }
+            })
+        })
+
+        console.log(correctAnswersList);
+
+        //get answers from user
+        var forms = document.getElementsByClassName("answer");
+        var arrayAnswer = [];
+
+        Array.prototype.forEach.call(forms, function (el, li) {
+            for (var i = 0; i < forms[li].length; i++) {
+                if (forms[li].getElementsByTagName("input")[i].checked) {
+                    arrayAnswer.push(forms[li].getElementsByTagName("input")[i].value)
+                }
+            }
+        });
+
+        console.log(arrayAnswer);
+
+        var is_same = (arrayAnswer.length == correctAnswersList.length) && correctAnswersList.every(function (element, index) {
+            return correctAnswersList[index] == arrayAnswer[index];
+        });
+
+        if (is_same) {
+            '@Model.nextLesson()';
+            alert("Chính xác")
+        } else {
+            alert("Sai rồi")
+        }
+    })
+</script>

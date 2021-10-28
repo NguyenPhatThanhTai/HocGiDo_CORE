@@ -34,15 +34,8 @@ namespace HocGiDo_CORE.Pages
             }
         }
 
-        [BindProperty]
-        public AnswerVM answerVM { get; set; }
-        public IActionResult OnPostAsync()
+        public IActionResult nextLesson()
         {
-            foreach(var items in answerVM.NoiDungDapAn)
-            {
-
-            }
-
             return Page();
         }
     }
