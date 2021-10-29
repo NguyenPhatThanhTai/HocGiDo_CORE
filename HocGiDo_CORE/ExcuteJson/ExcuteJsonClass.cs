@@ -41,6 +41,8 @@ namespace HocGiDo_CORE.ExcuteJson
 
             var response = await client.PostAsync(new ApiContain().getUrlApi("login"), contentData);
 
+            System.Diagnostics.Debug.WriteLine("O day ================= " + new ApiContain().getUrlApi("login"));
+
             if (response.IsSuccessStatusCode)
             {
                 var stringData = await response.Content.ReadAsStringAsync();
@@ -105,6 +107,14 @@ namespace HocGiDo_CORE.ExcuteJson
             {
                 return null;
             }
+        }
+
+        public async Task<ResultReturn> checkRegisterCourse(string MaKH, string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("checkRegisterCourse") + "?MaKH=" + MaKH + "&MaND=" + MaND);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            return resp;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace HocGiDo_CORE.Pages
             }
 
             ResultReturn result = await new ExcuteJsonClass().Login(login);
-            if (result.message.Equals("error"))
+            if (result == null || result.message.Equals("error"))
             {
                 ViewData["LoginResult"] = "Sai tài khoản hoặc mật khẩu, vui lòng kiểm tra lại";
                 return Page();

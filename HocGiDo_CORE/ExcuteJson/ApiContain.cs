@@ -10,7 +10,7 @@ namespace HocGiDo_CORE.ExcuteJson
         public String getUrlApi(String apiName)
         {
             var api = "";
-            var host = "http://hocgido-api.gq/";
+            var host = "https://hocgido-api.gq/";
             switch (apiName)
             {
                 case "course":
@@ -34,8 +34,12 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "ListExam":
                     api = "api/cauhoi?MaKT=";
                     break;
+                case "checkRegisterCourse":
+                    api = "api/kiemtradangkikhoahoc"; // two parameters
+                    break;
                 default:
                     return null;
+                    break;
             }
             return host + api;
         }
