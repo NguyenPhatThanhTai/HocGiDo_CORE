@@ -21,6 +21,9 @@ function clickItems() {
             if (items[index].id == 'save') {
                 document.getElementsByClassName('save')[0].style.display = 'block';
             }
+            if (items[index].id == 'courseList') {
+                document.getElementsByClassName('courseList')[0].style.display = 'block';
+            }
         });
     });
 }

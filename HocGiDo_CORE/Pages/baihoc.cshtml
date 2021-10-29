@@ -1,4 +1,4 @@
-﻿@page "{kh?}"
+﻿@page "{MaKH?}"
 @model HocGiDo_CORE.Pages.baihocModel
 @{
     ViewData["Title"] = "Danh sách bài học";
@@ -63,9 +63,11 @@
                 }
                 else
                 {
+                <a asp-page-handler="RegisterCourse" asp-route-id="@Model.courseID">
                     <div class="dangky">
                         <p>Đăng ký ngay!</p>
                     </div>
+                </a>
                 }
             }
             else
@@ -106,7 +108,7 @@
                     <div class="baihoc">
                         <i class='bx bx-play-circle'></i>
                         <p id="name">@items.TenBaiHoc</p>
-                        <i id="number" class='bx bx-lock-open'></i>
+                        <i id="number" class='bx bx-lock'></i>
                     </div>
                 }
             }

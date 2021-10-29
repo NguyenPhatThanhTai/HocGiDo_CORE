@@ -37,9 +37,14 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "checkRegisterCourse":
                     api = "api/kiemtradangkikhoahoc"; // two parameters
                     break;
+                case "registerCourse":
+                    api = "api/dangkikhoahocmoi"; // two parameters
+                    break;
+                case "getListCourseRegisted":
+                    api = "api/danhsachkhoahocdangki?MaND=";
+                    break;
                 default:
                     return null;
-                    break;
             }
             return host + api;
         }

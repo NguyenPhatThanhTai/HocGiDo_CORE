@@ -145,27 +145,28 @@
         width: 130px;
     }
 
+    .gioithieu a{
+        text-decoration: none;
+        color: #fff;
+    }
+
 .dangky {
     color: white;
     margin: 10px;
 }
 
-.dangky a{
-    text-decoration: none;
+.dangky p {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    background-color: #ff7f50;
+    text-align: center;
+    cursor: pointer;
 }
 
-    .dangky p {
-        padding: 10px;
-        margin: 10px;
-        border-radius: 12px;
-        background-color: #ff7f50;
-        text-align: center;
-        cursor: pointer;
-    }
-
-        .dangky p:hover {
-            background-color: #ff642c;
-        }
+.dangky p:hover {
+    background-color: #ff642c;
+}
 
 .themvaogio {
     display: flex;

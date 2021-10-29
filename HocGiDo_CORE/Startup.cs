@@ -63,6 +63,7 @@ namespace HocGiDo_CORE
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

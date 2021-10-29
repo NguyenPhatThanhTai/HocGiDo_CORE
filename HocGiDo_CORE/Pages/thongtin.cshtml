@@ -18,7 +18,7 @@
                     <i class='bx bx-heart'></i>
                     <p>Lưu bài học</p>
                 </div>
-                <div class="items" id="checked">
+                <div class="items" id="courseList">
                     <i class='bx bx-check'></i>
                     <p>Khóa học đã đăng ký</p>
                 </div>
@@ -126,6 +126,28 @@
                     <p id="name">HTML, CSS là gì?</p>
                     <i id="number" class='bx bx-lock'></i>
                 </div>
+            </div>
+        </div>
+        <div class="courseList view">
+            <div class="content">
+                @foreach (var items in Model.listCourseRegisted.DanhSachKhoaHocDangKi)
+                {
+                    <a href="/baihoc/@items.MaKH">
+                        <div class="course" id="Html">
+                            <p id="p1" style="background-color: #e44d26;">
+                                @items.TenKH
+                                <img src="~/Img/html.jpg">
+                            </p>
+                            <div class="discrip">
+                                <p id="p2">@items.MoTaKH</p>
+                                <div id="view">
+                                    <i class='bx bx-user-check'></i>
+                                    <span id="p3">@items.LuotDK</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
             </div>
         </div>
     </div>

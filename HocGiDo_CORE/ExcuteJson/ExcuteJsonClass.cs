@@ -116,5 +116,21 @@ namespace HocGiDo_CORE.ExcuteJson
 
             return resp;
         }
+
+        public async Task<ResultReturn> registerCourse(string MaKH, string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("registerCourse") + "?MaKH=" + MaKH + "&MaND=" + MaND);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            return resp;
+        }
+
+        public async Task<ListCourseRegisted> getListCourseRegisted(string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("getListCourseRegisted") + MaND);
+            var resp = JsonConvert.DeserializeObject<ListCourseRegisted>(responseString);
+
+            return resp;
+        }
     }
 }

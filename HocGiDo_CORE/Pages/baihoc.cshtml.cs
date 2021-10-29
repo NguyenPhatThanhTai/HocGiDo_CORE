@@ -17,38 +17,70 @@ namespace HocGiDo_CORE.Pages
         public string courseID;
         public bool checkRegisterCourse = false;
         public bool checkLogined = false;
-        public async Task<IActionResult> OnGet(string kh)
+        public async Task<IActionResult> OnGet(string MaKH)
         {
-            if(kh == null)
+            if(MaKH == null)
             {
                 return RedirectToPage("/Index", new { id = 3 }); // truyền parameter qua
             }
             else
             {
-                courseID = kh;
-                listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
-
-                var logined = HttpContext.Session.GetString("Logined");
-                if(logined != null)
-                {
-                    try
-                    {
-                        UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
-                        checkLogined = true;
-
-                        if (new ExcuteJsonClass().checkRegisterCourse(kh, userInf.user.MaND).Equals("success"))
-                        {
-                            checkRegisterCourse = true;
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        e.Message.ToString();
-                    }
-                }
-
+                await check(MaKH);
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnGetRegisterCourse(string MaKH)
+        {
+            var logined = HttpContext.Session.GetString("Logined");
+            if(logined != null)
+            {
+                UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                ResultReturn result = await new ExcuteJsonClass().registerCourse(MaKH, userInf.user.MaND);
+
+                await check(MaKH);
+
+                if (result.message.Equals("success"))
+                {
+                    return Page();
+                }
+                else
+                {
+                    return Page();
+                }
+            }
+            else
+            {
+                return RedirectToPage("/dangnhap");
+            }
+        }
+
+        public async Task<bool> check(string MaKH)
+        {
+            courseID = MaKH;
+            listLesson = await new ExcuteJsonClass().getLessonOfCourse(MaKH);
+
+            var logined = HttpContext.Session.GetString("Logined");
+
+            if (logined != null)
+            {
+                try
+                {
+                    UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                    checkLogined = true;
+
+                    ResultReturn result = await new ExcuteJsonClass().checkRegisterCourse(MaKH, userInf.user.MaND);
+                    if (result.message.Equals("success"))
+                    {
+                        checkRegisterCourse = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.Message.ToString();
+                }
+            }
+            return true;
         }
     }
 }

@@ -1,3 +1,7 @@
+* {
+    transition: 0.3s;
+}
+
 .left_contain {
     float: left;
     min-width: 20%;
@@ -96,13 +100,17 @@
 
     .box_inf .inf {
         background-color: rgba(238, 238, 238, 0.788);
-        border: 1px solid rgb(218, 218, 218);
         border-radius: 5px;
         padding: 10px;
         width: 250px;
         text-align: center;
+        border: none;
         color: black;
     }
+
+        .box_inf .inf:focus {
+            outline: none;
+        }
 
 .Chance p {
     background-color: coral;
@@ -183,6 +191,99 @@
     display: none;
 }
 
+.courseList {
+    display: none;
+}
+
+
+/* Course */
+
+.content {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    overflow: hidden;
+}
+
+    .content a{
+        text-decoration: none;
+        color: black;
+        margin: 10px;
+    }
+
+    .course {
+        width: 300px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .course:hover #p1 img {
+        width: 120px;
+        top: 10px;
+    }
+
+    .course:hover #p1 {
+        font-size: 25px;
+    }
+
+        .course:hover #p1::after {
+            transition: all 0.5s ease;
+            height: 170px;
+            width: 170px;
+            right: -40px;
+            top: -10px;
+        }
+
+    .course #p1::after {
+        content: '';
+        height: 170px;
+        width: 170px;
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 100%;
+        right: -40px;
+        top: -10px;
+        z-index: 0;
+    }
+
+    .course #p1 {
+        padding: 30px;
+        color: #ffffff;
+        font-weight: bold;
+        background-color: darkorange;
+        border-radius: 12px;
+        height: 150px;
+        text-align: left;
+        position: relative;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+        .course #p1 img {
+            position: absolute;
+            width: 100px;
+            top: 25px;
+            z-index: 2;
+            right: 0;
+        }
+
+    .course .discrip {
+        text-align: left;
+        margin: 10px;
+        font-size: 15px;
+    }
+
+.discrip #p2 {
+    font-weight: bold;
+}
+
+.discrip #view {
+    font-size: 10px;
+    margin: 10px 0 0 0;
+    color: rgba(128, 128, 128, 0.719);
+}
+
 @media screen and (max-width: 1023px) {
     .left_contain {
         float: none;
@@ -213,6 +314,7 @@
 
     .box_inf .inf {
         width: 100%;
+        color: black;
     }
 
     .right_contain .detail .picture {
