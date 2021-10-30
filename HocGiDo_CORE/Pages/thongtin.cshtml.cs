@@ -26,8 +26,6 @@ namespace HocGiDo_CORE.Pages
             else
             {
                 userInf = JsonConvert.DeserializeObject<UserInf>(logined);
-                DateTime birth = DateTime.Parse(userInf.user.NgaySinh);
-                userInf.user.NgaySinh = birth.ToString("yyyy-MM-dd");
                 listCourseRegisted = await new ExcuteJsonClass().getListCourseRegisted(userInf.user.MaND);
 
                 listSavedLesson = await new ExcuteJsonClass().getListSavedLesson(userInf.user.MaND);

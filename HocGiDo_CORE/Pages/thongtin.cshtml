@@ -68,8 +68,7 @@
             <div class="ds">
                 @foreach (var items in Model.listSavedLesson.DanhSachLuuBaiHoc)
                 {
-                    @*<a href="/hoc/@items.courseID/@items.MaBaiHoc">*@
-                    <a href="#">
+                    <a href="/hoc/@items.MaKH/@items.MaBaiHoc">
                         <div class="baihoc">
                             <i class='bx bx-play-circle'></i>
                             <p id="name">@items.TenBaiHoc</p>

@@ -8,6 +8,7 @@ namespace HocGiDo_CORE.ModelsJson
     public class Lesson
     {
         public string MaBaiHoc { get; set; }
+        public string MaKH { get; set; }
         public string TenBaiHoc { get; set; }
         public string Video { get; set; }
         public string GioiThieu { get; set; }
