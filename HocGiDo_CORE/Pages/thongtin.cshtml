@@ -66,66 +66,17 @@
         </div>
         <div class="save view">
             <div class="ds">
-                <div class="baihoc" id="bai1">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">Làm được gì sau khóa học?</p>
-                    <i id="number" class='bx bx-lock-open'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
-                <div class="baihoc">
-                    <i class='bx bx-play-circle'></i>
-                    <p id="name">HTML, CSS là gì?</p>
-                    <i id="number" class='bx bx-lock'></i>
-                </div>
+                @foreach (var items in Model.listSavedLesson.DanhSachLuuBaiHoc)
+                {
+                    @*<a href="/hoc/@items.courseID/@items.MaBaiHoc">*@
+                    <a href="#">
+                        <div class="baihoc">
+                            <i class='bx bx-play-circle'></i>
+                            <p id="name">@items.TenBaiHoc</p>
+                            <i id="number" class='bx bx-lock-open'></i>
+                        </div>
+                    </a>
+                }
             </div>
         </div>
         <div class="courseList view">

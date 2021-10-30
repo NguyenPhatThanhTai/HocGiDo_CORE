@@ -53,16 +53,37 @@
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px 14px 50px;
+    padding: 14px 16px 14px 30px;
     transition: 0.3s;
     font-size: 17px;
     position: relative;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.tab .saveLesson {
+    background-color: coral;
+    color: white;
+}
+
+.tab .saveLesson:hover {
+    background-color: rgb(255, 104, 50);
+}
+
+.tab .savedLesson {
+    background-color: rgb(72, 209, 45);
+    color: white;
+}
+
+.tab .savedLesson:hover {
+    background-color: rgb(2, 185, 2);
 }
 
 .tab i {
     font-size: 20px;
     position: absolute;
-    left: 20px;
+    left: 0px;
+    padding: 0 0 0 5px;
 }
 
 

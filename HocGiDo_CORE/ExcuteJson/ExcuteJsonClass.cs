@@ -132,5 +132,29 @@ namespace HocGiDo_CORE.ExcuteJson
 
             return resp;
         }
+
+        public async Task<ResultReturn> saveLesson(string MaBH, string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("saveLesson") + "?MaBaiHoc=" + MaBH + "&MaND=" + MaND);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            return resp;
+        }
+
+        public async Task<ResultReturn> checkSaveLesson(string MaBH, string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("checkSaveLesson") + "?MaBaiHoc=" + MaBH + "&MaND=" + MaND);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            return resp;
+        }
+
+        public async Task<ListSavedLesson> getListSavedLesson(string MaND)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("getListSavedLesson") + MaND);
+            var resp = JsonConvert.DeserializeObject<ListSavedLesson>(responseString);
+
+            return resp;
+        }
     }
 }

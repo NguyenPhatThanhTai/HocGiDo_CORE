@@ -84,9 +84,9 @@ function clickChoice() {
 
 //Tab
  var i, tabcontent, tablinks;
- tablinks = document.getElementsByClassName("tablinks");
+tablinks = document.getElementsByClassName("links");
  tabcontent = document.getElementsByClassName("tabcontent");
- tablinks[2].classList.add("active");
+ tablinks[1].classList.add("active");
  tabcontent[0].style.display = "block";
 
  function openCity(evt, cityName) {

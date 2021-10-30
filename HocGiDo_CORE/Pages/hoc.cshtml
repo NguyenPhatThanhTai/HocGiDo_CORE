@@ -22,10 +22,17 @@
             @*<source src="https://meet-hgd.herokuapp.com/video?url=@Model.lesson.Video" type="video/mp4" />*@
         </video>
         <div class="detail">
-            <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'cmt')"> <i class='bx bx-comment-detail'></i>Bình luận</i></button>
-                <button class="tablinks" onclick="openCity(event, 'note')"><i class='bx bx-notepad'></i>Ghi chú</button>
-                <button class="tablinks" onclick="openCity(event, 'subject')"><i class='bx bx-book-reader'></i>Bài học</button>
+            <div class="tab" id="tab">
+                @if (Model.checkSavedLesson)
+                {
+                    <button class="tablinks savedLesson save"><i class='bx bx-check-circle'></i>Đã lưu</button>
+                }
+                else
+                {
+                    <button class="tablinks saveLesson save"><i class='bx bx-save'></i>Lưu bài</button>
+                }
+                <button class="tablinks links" onclick="openCity(event, 'cmt')"><i class='bx bx-comment-detail'></i>Bình luận</button>
+                <button class="tablinks links" onclick="openCity(event, 'subject')"><i class='bx bx-book-reader'></i>Bài học</button>
             </div>
             <div id="subject" class="tabcontent">
                 <h3>@Model.lesson.GioiThieu</h3>
@@ -70,11 +77,6 @@
                 <button class="submit">Kiểm tra!</button>
             </div>
 
-            <div id="note" class="tabcontent">
-                <h3>Ghi Chú</h3>
-                <p>Bài này hiện tại chưa có ghi chú</p>
-            </div>
-
             <div id="cmt" class="tabcontent">
                 <h3>Bình Luận</h3>
                 <p>Bài này chưa có bình luận nào, hãy là người bình luận đầu tiên nào</p>
@@ -104,8 +106,8 @@
 </script>
 
 @*@section footer{
-    <script src="~/js/baihoc.js"></script>
-}*@
+        <script src="~/js/baihoc.js"></script>
+    }*@
 <script>
     $(".submit").click(function (e) {
         e.preventDefault();
@@ -143,10 +145,37 @@
         });
 
         if (is_same) {
-            '@Model.nextLesson()';
             alert("Chính xác")
         } else {
             alert("Sai rồi")
         }
+    })
+</script>
+
+<script>
+    $(document).on('click', ".save", function (e) {
+        console.log("click ajax")
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "?MaBH=@Model.lesson.MaBaiHoc&handler=SaveLesson",
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+
+            success: function (data) {
+                if (data.status == "success") {
+                    if ('@Model.checkSavedLesson') {
+                        @{Model.checkSavedLesson = false;}
+                    }
+                    else {
+                        @{Model.checkSavedLesson = true;}
+                    }
+                    $("#tab").load(location.href + " #tab");
+                }
+            }
+        })
     })
 </script>

@@ -28,6 +28,7 @@ namespace HocGiDo_CORE
             services.AddRazorPages();
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession();
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;

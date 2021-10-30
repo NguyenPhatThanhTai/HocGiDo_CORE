@@ -15,6 +15,7 @@ namespace HocGiDo_CORE.Pages
     {
         public UserInf userInf { get; set; }
         public ListCourseRegisted listCourseRegisted { get; set; }
+        public ListSavedLesson listSavedLesson { get; set; }
         public async Task<IActionResult> OnGet()
         {
             var logined = HttpContext.Session.GetString("Logined");
@@ -28,6 +29,8 @@ namespace HocGiDo_CORE.Pages
                 DateTime birth = DateTime.Parse(userInf.user.NgaySinh);
                 userInf.user.NgaySinh = birth.ToString("yyyy-MM-dd");
                 listCourseRegisted = await new ExcuteJsonClass().getListCourseRegisted(userInf.user.MaND);
+
+                listSavedLesson = await new ExcuteJsonClass().getListSavedLesson(userInf.user.MaND);
 
                 return Page();
             }
