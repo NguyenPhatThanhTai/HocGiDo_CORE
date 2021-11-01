@@ -52,6 +52,9 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "getListSavedLesson":
                     api = "api/danhsachluubaihoc?MaND=";
                     break;
+                case "getListComment":
+                    api = "api/binhluan?MaBaiHoc=";
+                    break;
                 default:
                     return null;
             }

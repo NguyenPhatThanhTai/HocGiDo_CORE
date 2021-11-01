@@ -79,7 +79,17 @@
 
             <div id="cmt" class="tabcontent">
                 <h3>Bình Luận</h3>
-                <p>Bài này chưa có bình luận nào, hãy là người bình luận đầu tiên nào</p>
+                <!-- <p>Bài này chưa có bình luận nào, hãy là người bình luận đầu tiên nào</p> -->
+                <div class="containComment">
+                    @foreach (var items in Model.listComment.BinhLuan)
+                    {
+                        <div class="comment">
+                            <img src="~/Img/avatarZL.jpg">
+                            <b>Người dùng nào đó - @items.NgayBL</b>
+                            <p>@items.NoiDung</p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@ namespace HocGiDo_CORE.Pages
         public Lesson lesson { get; set; }
         public ListLesson listLesson { get; set; }
         public ListQuestion listQuestion { get; set; }
+        public ListComment listComment { get; set; }
         public string courseID;
         public bool checkSavedLesson = false;
         public async Task<IActionResult> OnGet(string kh, string bh)
@@ -37,9 +38,12 @@ namespace HocGiDo_CORE.Pages
             else
             {
                 listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
-                lesson = listLesson.BaiHoc.FirstOrDefault(p => p.MaBaiHoc.Equals(bh));
+
+                lesson = listLesson.BaiHoc.First(p => p.MaBaiHoc.Equals(bh));
 
                 listQuestion = await new ExcuteJsonClass().getIdExamOfLesson(bh);
+
+                listComment = await new ExcuteJsonClass().getListComment(bh);
 
                 courseID = kh;
 
