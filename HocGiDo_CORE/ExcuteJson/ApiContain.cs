@@ -55,6 +55,9 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "getListComment":
                     api = "api/binhluan?MaBaiHoc=";
                     break;
+                case "sendComment":
+                    api = "api/binhluanmoi";
+                    break;
                 default:
                     return null;
             }

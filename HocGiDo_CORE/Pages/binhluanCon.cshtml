@@ -1,0 +1,24 @@
+﻿@page "{bh?}"
+@model HocGiDo_CORE.Pages.binhluanConModel
+@{
+    Layout = null;
+}
+
+<h3>Nhập bình luận:</h3>
+<div class="type-comment">
+        <textarea id="comment" placeholder="Nhập bình luận..." rows="7"></textarea>
+        <input type="submit" class="sendComment" value="Gửi bình luận">
+</div>
+<h3>Bình Luận</h3>
+<!-- <p>Bài này chưa có bình luận nào, hãy là người bình luận đầu tiên nào</p> -->
+<div class="containComment" id="listComment">
+    @foreach (var items in Model.listComment.BinhLuan)
+    {
+        <div class="comment">
+            <img src="~/Img/avatarZL.jpg">
+            <b>@items.HoTen</b>
+            <p>@items.NoiDung</p>
+            <i>@items.NgayBL</i>
+        </div>
+    }
+</div>

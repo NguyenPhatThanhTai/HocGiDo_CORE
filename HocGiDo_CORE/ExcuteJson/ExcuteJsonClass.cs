@@ -41,8 +41,6 @@ namespace HocGiDo_CORE.ExcuteJson
 
             var response = await client.PostAsync(new ApiContain().getUrlApi("login"), contentData);
 
-            System.Diagnostics.Debug.WriteLine("O day ================= " + new ApiContain().getUrlApi("login"));
-
             if (response.IsSuccessStatusCode)
             {
                 var stringData = await response.Content.ReadAsStringAsync();
@@ -163,6 +161,32 @@ namespace HocGiDo_CORE.ExcuteJson
             var resp = JsonConvert.DeserializeObject<ListComment>(responseString);
 
             return resp;
+        }
+
+        public async Task<ResultReturn> sendComment(CommentVM cmt)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"noiDung",""+cmt.noiDung+""},
+                    {"maND",""+cmt.maND+""},
+                    {"maBaiHoc",""+cmt.maBaiHoc+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("sendComment"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

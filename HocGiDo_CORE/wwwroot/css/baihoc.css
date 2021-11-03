@@ -319,6 +319,34 @@
     margin-bottom: 20px;
 }
 
+.type-comment {
+    margin: 10px;
+}
+
+    .type-comment textarea {
+        width: 100%;
+        resize: none;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 141, 99, 0.808);
+    }
+
+        .type-comment textarea:focus {
+            outline: none;
+        }
+
+    .type-comment input {
+        width: 100%;
+        display: block;
+        background-color: coral;
+        color: #fff;
+        border-radius: 10px;
+        padding: 13px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+    }
+
 .comment {
     position: relative;
     margin: 30px 10px 10px 10px;
@@ -359,6 +387,14 @@
         top: 15px;
         font-style: oblique;
         color: coral;
+    }
+
+    .comment i {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: coral;
+        margin: 10px;
     }
 
 @media only screen and (max-width: 600px) {

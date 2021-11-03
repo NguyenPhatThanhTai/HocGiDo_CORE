@@ -17,9 +17,9 @@ namespace HocGiDo_CORE.Pages
         public Lesson lesson { get; set; }
         public ListLesson listLesson { get; set; }
         public ListQuestion listQuestion { get; set; }
-        public ListComment listComment { get; set; }
         public string courseID;
         public bool checkSavedLesson = false;
+
         public async Task<IActionResult> OnGet(string kh, string bh)
         {
             var logined = HttpContext.Session.GetString("Logined");
@@ -37,18 +37,16 @@ namespace HocGiDo_CORE.Pages
             }
             else
             {
-                listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
-
-                lesson = listLesson.BaiHoc.First(p => p.MaBaiHoc.Equals(bh));
-
-                listQuestion = await new ExcuteJsonClass().getIdExamOfLesson(bh);
-
-                listComment = await new ExcuteJsonClass().getListComment(bh);
-
-                courseID = kh;
-
                 try
                 {
+                    listLesson = await new ExcuteJsonClass().getLessonOfCourse(kh);
+
+                    lesson = listLesson.BaiHoc.First(p => p.MaBaiHoc.Equals(bh));
+
+                    listQuestion = await new ExcuteJsonClass().getIdExamOfLesson(bh);
+
+                    courseID = kh;
+
                     UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
                     ResultReturn resultReturn = await new ExcuteJsonClass().checkSaveLesson(bh, userInf.user.MaND);
                     if (resultReturn.message.Equals("success"))
@@ -60,7 +58,7 @@ namespace HocGiDo_CORE.Pages
                 catch(Exception e)
                 {
                     e.Message.ToString();
-                    return RedirectToPage("/dangnhap");
+                    return RedirectToPage("/index");
                 }
             }
         }
@@ -84,6 +82,45 @@ namespace HocGiDo_CORE.Pages
                 {
                     status = false,
                     code = "500"
+                });
+            }
+        }
+
+        public async Task<JsonResult> OnGetSendComment(string noiDung, string maBaiHoc)
+        {
+            var logined = HttpContext.Session.GetString("Logined");
+            if (logined != null)
+            {
+                UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+
+                CommentVM comment = new CommentVM()
+                {
+                    maBaiHoc = maBaiHoc,
+                    maND = userInf.user.MaND,
+                    noiDung = noiDung
+                };
+
+                ResultReturn resultReturn = await new ExcuteJsonClass().sendComment(comment);
+                if (resultReturn.message.Equals("success"))
+                {
+                    return new JsonResult(new
+                    {
+                        message = "success"
+                    });
+                }
+                else
+                {
+                    return new JsonResult(new
+                    {
+                        message = "failed"
+                    });
+                }
+            }
+            else
+            {
+                return new JsonResult(new
+                {
+                    message = "failed"
                 });
             }
         }

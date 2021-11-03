@@ -78,18 +78,7 @@
             </div>
 
             <div id="cmt" class="tabcontent">
-                <h3>Bình Luận</h3>
-                <!-- <p>Bài này chưa có bình luận nào, hãy là người bình luận đầu tiên nào</p> -->
-                <div class="containComment">
-                    @foreach (var items in Model.listComment.BinhLuan)
-                    {
-                        <div class="comment">
-                            <img src="~/Img/avatarZL.jpg">
-                            <b>Người dùng nào đó - @items.NgayBL</b>
-                            <p>@items.NoiDung</p>
-                        </div>
-                    }
-                </div>
+                @* Load here *@
             </div>
         </div>
     </div>
@@ -163,6 +152,10 @@
 </script>
 
 <script>
+    $(document).ready(function () {
+        $('#cmt').load('/binhluanCon/?bh='+'@Model.lesson.MaBaiHoc');
+    })
+
     $(document).on('click', ".save", function (e) {
         console.log("click ajax")
         e.preventDefault();
@@ -184,6 +177,31 @@
                         @{Model.checkSavedLesson = true;}
                     }
                     $("#tab").load(location.href + " #tab");
+                }
+            }
+        })
+    })
+
+    $(document).on('click', ".sendComment", function (e) {
+        console.log("click ajax send comment")
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "?noiDung=" + document.getElementById("comment").value + "&maBaiHoc=@Model.lesson.MaBaiHoc&handler=SendComment",
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+
+            error: function (e) {
+                console.log(e);
+            },
+
+            success: function (data) {
+                if (data.message == "success") {
+                    $('#cmt').load('/binhluanCon/?bh=' + '@Model.lesson.MaBaiHoc');
+                    $("#cmt").animate({ scrollTop: $('#cmt').prop("scrollHeight") }, 1000);
                 }
             }
         })
