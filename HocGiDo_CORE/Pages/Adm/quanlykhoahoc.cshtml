@@ -1,0 +1,112 @@
+﻿@page
+@model HocGiDo_CORE.Pages.Adm.managerCourseModel
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@section headerAdmin{
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/Admin/QLKhoaHoc.css">
+    <link rel="stylesheet" href="~/css/alert.css">
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+}
+
+<div class="tittle">
+    <h3>Quản lý khóa học</h3>
+</div>
+<h2>Chọn khóa học:</h2>
+
+<div class="inputContain">
+    <form method="post" enctype="multipart/form-data">
+        <div class="leftInput">
+            <input asp-for="addCourse.tenKH" type="text" placeholder="Tên khóa học mới" required>
+            <textarea asp-for="addCourse.moTaKH" rows="5" placeholder="Mô tả khóa học" required></textarea>
+            <input asp-for="addCourse.mauSac" type="text" placeholder="Mã màu khóa học" required>
+        </div>
+        <div class="rightInput">
+            <img id="previewImg" src="https://kinhnghiemlaptrinh.com/wp-content/uploads/2019/09/html-la-gi-kinh-nghiem-lap-trinh-1.png">
+            <label for="image">Chọn ảnh</label>
+            <input accept="image/*" asp-for="addCourse.CourseImage" id="image" type="file" style="display: none;" required>
+        </div>
+        <input class="submit" type="submit" value="Thêm khóa học">
+    </form>
+    <div style="clear: both;"></div>
+    <div class="listCourse">
+        <table>
+            <tr>
+                <th>Mã khóa học</th>
+                <th>Tên khóa học</th>
+                <th>Mô tả khóa học</th>
+                <th>Lượt đăng ký</th>
+                <th>Hành động</th>
+            </tr>
+            @foreach (var items in Model.listCourse.KhoaHoc)
+            {
+                <tr>
+                    <td>@items.MaKH</td>
+                    <td>@items.TenKH</td>
+                    <td>@items.MoTaKH</td>
+                    <td>@items.LuotDK</td>
+                    <td>
+                        <p id="detail" onclick="updateCourse('@items.MaKH')">Sửa</p>
+                        <p id="delete">Xóa</p>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Cập nhật khóa học</h2>
+        </div>
+        <div class="modal-body" id="update-modal">
+            @* load here *@
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("image").onchange = evt => {
+        const [file] = document.getElementById("image").files;
+        if (file) {
+            document.getElementById("previewImg").src = URL.createObjectURL(file);
+        }
+    }
+</script>
+<script>
+    function updateCourse(id) {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        $('#update-modal').load('/Adm/suakhoahocCon/?kh='+ id);
+
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+</script>

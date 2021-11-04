@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\CourseImage\CSS.jpg" />
     <Content Remove="wwwroot\css\baihoc.css" />
     <Content Remove="wwwroot\css\code.css" />
     <Content Remove="wwwroot\css\dangki.css" />
@@ -14,11 +15,10 @@
     <Content Remove="wwwroot\css\TrangChu.css" />
     <Content Remove="wwwroot\Img\avatarZL.jpg" />
     <Content Remove="wwwroot\Img\c.jpg" />
-    <Content Remove="wwwroot\Img\css.jpg" />
     <Content Remove="wwwroot\Img\googleLogo.png" />
     <Content Remove="wwwroot\Img\html.jpg" />
     <Content Remove="wwwroot\Img\java.jpg" />
-    <Content Remove="wwwroot\Img\js.jpg" />
+    <Content Remove="wwwroot\Img\JavaScript.jpg" />
     <Content Remove="wwwroot\Img\logo.png" />
     <Content Remove="wwwroot\Img\php.jpg" />
     <Content Remove="wwwroot\Img\python.jpg" />
@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Adm\Index.cshtml" />
+    <None Include="Pages\Adm\Login.cshtml" />
+    <None Include="Pages\Adm\quanlykhoahoc.cshtml" />
+    <None Include="wwwroot\CourseImage\CSS.jpg" />
     <None Include="wwwroot\css\baihoc.css" />
     <None Include="wwwroot\css\code.css" />
     <None Include="wwwroot\css\dangki.css" />
@@ -40,16 +44,15 @@
     <None Include="wwwroot\css\index.css" />
     <None Include="wwwroot\css\TrangChu.css" />
     <None Include="wwwroot\Img\avatarZL.jpg" />
-    <None Include="wwwroot\Img\c.jpg" />
-    <None Include="wwwroot\Img\css.jpg" />
+    <None Include="wwwroot\CourseImage\c.jpg" />
     <None Include="wwwroot\Img\googleLogo.png" />
-    <None Include="wwwroot\Img\html.jpg" />
-    <None Include="wwwroot\Img\java.jpg" />
-    <None Include="wwwroot\Img\js.jpg" />
+    <None Include="wwwroot\CourseImage\HTML.jpg" />
+    <None Include="wwwroot\CourseImage\Java.jpg" />
+    <None Include="wwwroot\CourseImage\JavaScript.jpg" />
     <None Include="wwwroot\Img\logo.png" />
-    <None Include="wwwroot\Img\php.jpg" />
-    <None Include="wwwroot\Img\python.jpg" />
-    <None Include="wwwroot\Img\sql.jpg" />
+    <None Include="wwwroot\CourseImage\php.jpg" />
+    <None Include="wwwroot\CourseImage\python.jpg" />
+    <None Include="wwwroot\CourseImage\sql.jpg" />
     <None Include="wwwroot\js\baihoc.js" />
     <None Include="wwwroot\js\code.js" />
     <None Include="wwwroot\js\dangnhap.js" />

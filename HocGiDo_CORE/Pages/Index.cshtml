@@ -51,9 +51,10 @@
         {
             <a href="/baihoc/@items.MaKH" class="clickCourse">
                 <div class="course">
-                    <p id="p1" style="background-color: #e44d26;">
+                    <p id="p1" style="background-color: @items.MauSac ;">
                         @items.TenKH
-                        <img src="~/Img/html.jpg">
+                        @{ var ImgCourse = items.TenKH + ".jpg";}
+                        <img src="~/CourseImage/@ImgCourse">
                     </p>
                     <div class="discrip">
                         <p id="p2">@items.MoTaKH</p>

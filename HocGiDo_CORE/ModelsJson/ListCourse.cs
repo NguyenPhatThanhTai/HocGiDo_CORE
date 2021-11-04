@@ -10,7 +10,7 @@ namespace HocGiDo_CORE.ModelsJson
         public string MaKH { get; set; }
         public string TenKH { get; set; }
         public string MoTaKH { get; set; }
-
+        public string MauSac { get; set; }
         public string LuotDK { get; set; }
     }
 }

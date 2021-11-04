@@ -1,5 +1,6 @@
 ﻿using HocGiDo_CORE.ModelsJson;
 using HocGiDo_CORE.ViewModels;
+using HocGiDo_CORE.ViewModels.Admin;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -176,6 +177,59 @@ namespace HocGiDo_CORE.ExcuteJson
             var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync(new ApiContain().getUrlApi("sendComment"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> addCourse(AddCourse addCourse)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"tenKH",""+addCourse.tenKH+""},
+                    {"moTaKH",""+addCourse.moTaKH+""},
+                    {"maMau",""+addCourse.mauSac+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("addCourse"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> updateCourse(UpdateCourse updateCourse)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"maKH",""+updateCourse.maKH+""},
+                    {"tenKH",""+updateCourse.tenKH+""},
+                    {"moTaKH",""+updateCourse.moTaKH+""},
+                    {"mauSac",""+updateCourse.mauSac+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("updateCourse"), contentData);
 
             if (response.IsSuccessStatusCode)
             {

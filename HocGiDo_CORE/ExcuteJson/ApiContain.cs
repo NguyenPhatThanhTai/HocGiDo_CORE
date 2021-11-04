@@ -58,6 +58,15 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "sendComment":
                     api = "api/binhluanmoi";
                     break;
+
+                //admin
+
+                case "addCourse":
+                    api = "api/themkhoahocmoi";
+                    break;
+                case "updateCourse":
+                    api = "api/suakhoahoc";
+                    break;
                 default:
                     return null;
             }

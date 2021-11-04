@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/Admin/style.css">
+    @RenderSection("headerAdmin", false)
+    <title>HocGiDo-Admin</title>
+</head>
+
+<body>
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-accusoft"></span><span>Học Lập Trình</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="" class="active">
+                        <span class="las la-igloo"></span>
+                        <span>HocGiDo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-user"></span>
+                        <span>Tài Khoản</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Adm/quanlykhoahoc">
+                        <span class="las la-clipboard-list"></span>
+                        <span>Khóa Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-shopping-bag"></span>
+                        <span>Bài Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-receipt"></span>
+                        <span>Code Trực Tiếp</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-user-circle"></span>
+                        <span>Clip Hướng Dẫn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-clipboard-list"></span>
+                        <span>Ôn Tập</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label> HocGiDo
+            </h2>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Search here" />
+            </div>
+            <div class="user-wrapper">
+                <img src="https://gamek.mediacdn.vn/thumb_w/640/133514250583805952/2021/9/7/photo-1-16310152604821794731420.jpg" width="30px" height="30px" alt="">
+                <div>
+                    <h4>Đức nè</h4>
+                    <small>Super admin</small>
+                </div>
+            </div>
+        </header>
+        <main>
+            @if (ViewData["AdminResult"] != null)
+            {
+                <div class="alert" id="alert">
+                    <div class="content_alert">
+                        <b>Thông báo: </b>@ViewData["AdminResult"]
+                        <a class="btn_close" onclick="document.getElementById('alert').style.display = 'none'"><i class='bx bx-x'></i></a>
+                    </div>
+                </div>
+            }
+            @RenderBody()
+        </main>
+    </div>
+</body>
+
+</html>
+
+@RenderSection("footerAdmin", false)

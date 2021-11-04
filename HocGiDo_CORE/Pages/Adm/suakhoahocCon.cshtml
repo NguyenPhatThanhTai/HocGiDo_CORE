@@ -1,0 +1,30 @@
+﻿@page "{kh?}"
+@model HocGiDo_CORE.Pages.suakhoahocConModel
+@{
+    Layout = "";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="leftInput">
+        <input asp-for="updateCourse.maKH" type="text" placeholder="Mã khóa học" value="@Model.course.MaKH" required disabled>
+        <input asp-for="updateCourse.tenKH" type="text" placeholder="Tên khóa học" value="@Model.course.TenKH" required>
+        <textarea asp-for="updateCourse.moTaKH" rows="5" placeholder="Mô tả khóa học" required>@Model.course.MoTaKH</textarea>
+        <input asp-for="updateCourse.mauSac" type="text" placeholder="Mã màu khóa học" value="@Model.course.MauSac" required>
+    </div>
+    <div class="rightInput">
+        @{ var imageCourse = Model.course.TenKH + ".jpg";}
+        <img id="previewImgUpdate" src="~/CourseImage/@imageCourse">
+        <label for="imageUpdate">Chọn ảnh</label>
+        <input accept="image/*" asp-for="updateCourse.CourseImage" id="imageUpdate" type="file" style="display: none;" required>
+    </div>
+    <input class="submit" type="submit" value="Cập nhật khóa học">
+</form>
+
+<script>
+    document.getElementById("imageUpdate").onchange = evt => {
+        const [file] = document.getElementById("imageUpdate").files;
+        if (file) {
+            document.getElementById("previewImgUpdate").src = URL.createObjectURL(file);
+        }
+    }
+</script>
