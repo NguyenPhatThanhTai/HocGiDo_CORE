@@ -8,10 +8,10 @@ namespace HocGiDo_CORE.ViewModels.Admin
 {
     public class UpdateCourse
     {
-        public string tenKH { get; set; }
-        public string moTaKH { get; set; }
-        public string mauSac { get; set; }
-        public string maKH { get; set; }
-        public IFormFile CourseImage { set; get; }
+        public string MaKHUpdate { get; set; }
+        public string TenKHUpdate { get; set; }
+        public string MoTaKHUpdate { get; set; }
+        public string MauSacUpdate { get; set; }
+        public IFormFile CourseImageUpdate { set; get; }
     }
 }

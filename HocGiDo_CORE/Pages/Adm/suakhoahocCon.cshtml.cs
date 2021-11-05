@@ -23,8 +23,11 @@ namespace HocGiDo_CORE.Pages
 
         public Course listCourse { get; set; }
         public ListCourse course { get; set; }
+        public string courseId { get; set; }
+
         public async Task<IActionResult> OnGet(string kh)
         {
+            courseId = kh;
             listCourse = await new ExcuteJsonClass().getCourse();
             course = listCourse.KhoaHoc.First(p => p.MaKH.Equals(kh));
 
@@ -33,46 +36,52 @@ namespace HocGiDo_CORE.Pages
 
         [BindProperty]
         public UpdateCourse updateCourse { get; set; }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostUpdateCourse()
         {
-            if (updateCourse.mauSac == null || updateCourse.moTaKH == null || updateCourse.tenKH == null || updateCourse.CourseImage == null || updateCourse.maKH == null)
+            if (updateCourse.MauSacUpdate == null || updateCourse.MoTaKHUpdate == null || updateCourse.TenKHUpdate == null || updateCourse.CourseImageUpdate == null || updateCourse.MaKHUpdate == null)
             {
                 ViewData["AdminResult"] = "Vui lòng điền đầy đủ thông tin cập nhật!";
                 listCourse = await new ExcuteJsonClass().getCourse();
+                System.Diagnostics.Debug.WriteLine("Null o day" + updateCourse.MauSacUpdate + "/" + updateCourse.MoTaKHUpdate + "/" + updateCourse.TenKHUpdate + "/" + updateCourse.MaKHUpdate + "/" + updateCourse.CourseImageUpdate.FileName);
                 return RedirectToPage("/Adm/quanlykhoahoc");
             }
-            try
-            {
-                var uniqueFileName = GetUniqueFileName(updateCourse.CourseImage.FileName);
+            //try
+            //{
+                var uniqueFileName = GetUniqueFileName(updateCourse.CourseImageUpdate.FileName);
                 var uploads = Path.Combine(Environment.WebRootPath, "CourseImage");
-                var filePath = Path.Combine(uploads, updateCourse.tenKH + ".jpg");
+                var filePath = Path.Combine(uploads, updateCourse.MaKHUpdate + ".jpg");
 
                 if (System.IO.File.Exists(filePath))
                 {
+                    System.GC.Collect();
+                    System.GC.WaitForPendingFinalizers();
                     System.IO.File.Delete(filePath);
                 }
 
-                updateCourse.CourseImage.CopyTo(new FileStream(filePath, FileMode.Create));
-            }
-            catch (Exception e)
-            {
-                e.Message.ToString();
-                listCourse = await new ExcuteJsonClass().getCourse();
-                return Page();
-            }
+                updateCourse.CourseImageUpdate.CopyTo(new FileStream(filePath, FileMode.Create));
+            //}
+            //catch (Exception e)
+            //{
+            //    e.Message.ToString();
+            //    listCourse = await new ExcuteJsonClass().getCourse();
+            //    return RedirectToPage("/Adm/Index");
+            //}
 
-            ResultReturn result = await new ExcuteJsonClass().updateCourse(updateCourse);
+                ResultReturn result = await new ExcuteJsonClass().updateCourse(updateCourse);
+                System.Diagnostics.Debug.WriteLine("o day ne ====================" + result.message);
 
             if (result.message.Equals("success"))
             {
                 ViewData["AdminResult"] = "Đã cập nhật thành công!";
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return RedirectToPage("/Adm/quanlykhoahoc");
+                System.Diagnostics.Debug.WriteLine("thanh cong");
+                return Redirect("/Adm/quanlykhoahoc");
             }
             else
             {
                 ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
                 listCourse = await new ExcuteJsonClass().getCourse();
+                System.Diagnostics.Debug.WriteLine("That bai");
                 return RedirectToPage("/Adm/quanlykhoahoc");
             }
         }

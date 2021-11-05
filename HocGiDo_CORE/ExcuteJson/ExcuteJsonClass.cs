@@ -220,10 +220,10 @@ namespace HocGiDo_CORE.ExcuteJson
         {
             var data = new Dictionary<string, string>
                 {
-                    {"maKH",""+updateCourse.maKH+""},
-                    {"tenKH",""+updateCourse.tenKH+""},
-                    {"moTaKH",""+updateCourse.moTaKH+""},
-                    {"mauSac",""+updateCourse.mauSac+""}
+                    {"maKH",""+updateCourse.MaKHUpdate+""},
+                    {"tenKH",""+updateCourse.TenKHUpdate+""},
+                    {"moTaKH",""+updateCourse.MoTaKHUpdate+""},
+                    {"mauSac",""+updateCourse.MauSacUpdate+""}
                 };
 
             var jsonData = JsonConvert.SerializeObject(data);

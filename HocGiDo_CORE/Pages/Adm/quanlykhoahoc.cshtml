@@ -33,7 +33,7 @@
             <label for="image">Chọn ảnh</label>
             <input accept="image/*" asp-for="addCourse.CourseImage" id="image" type="file" style="display: none;" required>
         </div>
-        <input class="submit" type="submit" value="Thêm khóa học">
+        <input class="submit" type="submit" asp-page-handler="AddCourse" value="Thêm khóa học">
     </form>
     <div style="clear: both;"></div>
     <div class="listCourse">
@@ -93,7 +93,7 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        $('#update-modal').load('/Adm/suakhoahocCon/?kh='+ id);
+        $('#update-modal').load('/Adm/suakhoahocCon?kh='+ id);
 
         modal.style.display = "block";
 

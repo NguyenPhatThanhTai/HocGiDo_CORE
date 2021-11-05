@@ -1,24 +1,31 @@
-﻿@page "{kh?}"
+﻿@page
+
 @model HocGiDo_CORE.Pages.suakhoahocConModel
 @{
     Layout = "";
 }
-
-<form method="post" enctype="multipart/form-data">
-    <div class="leftInput">
-        <input asp-for="updateCourse.maKH" type="text" placeholder="Mã khóa học" value="@Model.course.MaKH" required disabled>
-        <input asp-for="updateCourse.tenKH" type="text" placeholder="Tên khóa học" value="@Model.course.TenKH" required>
-        <textarea asp-for="updateCourse.moTaKH" rows="5" placeholder="Mô tả khóa học" required>@Model.course.MoTaKH</textarea>
-        <input asp-for="updateCourse.mauSac" type="text" placeholder="Mã màu khóa học" value="@Model.course.MauSac" required>
-    </div>
-    <div class="rightInput">
-        @{ var imageCourse = Model.course.TenKH + ".jpg";}
-        <img id="previewImgUpdate" src="~/CourseImage/@imageCourse">
-        <label for="imageUpdate">Chọn ảnh</label>
-        <input accept="image/*" asp-for="updateCourse.CourseImage" id="imageUpdate" type="file" style="display: none;" required>
-    </div>
-    <input class="submit" type="submit" value="Cập nhật khóa học">
-</form>
+@if (Model.course.MaKH != null)
+{
+    <form method="post" enctype="multipart/form-data">
+        <div class="leftInput">
+            <input asp-for="updateCourse.MaKHUpdate" type="text" placeholder="Mã khóa học" value="@Model.course.MaKH" readonly required>
+            <input asp-for="updateCourse.TenKHUpdate" type="text" placeholder="Tên khóa học" value="@Model.course.TenKH" required>
+            <input asp-for="updateCourse.MoTaKHUpdate" type="text" placeholder="Mô tả khóa học" value="@Model.course.MoTaKH" required>
+            <input asp-for="updateCourse.MauSacUpdate" type="text" placeholder="Mã màu khóa học" value="@Model.course.MauSac" required>
+        </div>
+        <div class="rightInput">
+            @{ var imageCourse = Model.course.MaKH + ".jpg";}
+            <img id="previewImgUpdate" src="~/CourseImage/@imageCourse">
+            <label for="imageUpdate">Chọn ảnh</label>
+            <input accept="image/*" asp-for="updateCourse.CourseImageUpdate" id="imageUpdate" type="file" style="display: none;">
+        </div>
+        <input class="submit" type="submit" asp-page-handler="UpdateCourse" value="Cập nhật khóa học">
+    </form>
+}
+else
+{
+    <b>Lỗi!!!</b>
+}
 
 <script>
     document.getElementById("imageUpdate").onchange = evt => {

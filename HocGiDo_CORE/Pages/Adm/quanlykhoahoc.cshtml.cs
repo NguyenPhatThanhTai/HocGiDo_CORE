@@ -31,7 +31,7 @@ namespace HocGiDo_CORE.Pages.Adm
 
         [BindProperty]
         public AddCourse addCourse { get; set; }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAddCourse()
         {
             if (addCourse.mauSac == null || addCourse.moTaKH == null || addCourse.tenKH == null || addCourse.CourseImage == null)
             {
@@ -50,7 +50,7 @@ namespace HocGiDo_CORE.Pages.Adm
             {
                 e.Message.ToString();
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return Page();
+                return Page(); ;
             }
 
             ResultReturn result = await new ExcuteJsonClass().addCourse(addCourse);
@@ -59,13 +59,13 @@ namespace HocGiDo_CORE.Pages.Adm
             {
                 ViewData["AdminResult"] = "Đã thêm thành công!";
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return Page();
+                return Page(); ;
             }
             else
             {
                 ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return Page();
+                return Page(); ;
             }
         }
 
