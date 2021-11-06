@@ -1,0 +1,44 @@
+﻿@page
+@model HocGiDo_CORE.Pages.Adm.quanlybaihocModel
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@section headerAdmin{
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/Admin/QLBaihoc.css">
+    <link rel="stylesheet" href="~/Resource/lib/codemirror.css">
+    <link rel="stylesheet" href="~/Resource/lib/theme/dracula.css">
+    <script src="~/Resource/lib/codemirror.js"></script>
+    <script src="~/Resource/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="~/Resource/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="~/Resource/mode/css/css.js"></script>
+    <title>Quản lý bài học</title>
+}
+
+<div class="tittle">
+    <h3>Quản lý bài học</h3>
+</div>
+<h2>Chọn bài học:</h2>
+<div style="width:100%;">
+    <select id="selectCourse" style="width:100%;">
+        <option>Chọn khóa học</option>
+        @foreach (var items in Model.listCourse.KhoaHoc)
+        {
+            <option value="@items.MaKH">@items.TenKH</option>
+        }
+    </select>
+</div>
+
+<div id="loadLessonOfCourse"></div>
+
+<script>
+    $('#selectCourse').on('change', function (e) {
+        e.preventDefault();
+        $('#loadLessonOfCourse').load('/Adm/quanlybaihocCon?kh=' + this.value);
+    });
+</script>

@@ -1,0 +1,20 @@
+﻿@page
+@model HocGiDo_CORE.Pages.Adm.suabaihocConModel
+@{
+    Layout = "";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="leftInput">
+        <input type="text" placeholder="Tên bài học mới" value="@Model.lesson.TenBaiHoc">
+        <input type="text" placeholder="Video mới" value="@Model.lesson.Video">
+        <input type="text" placeholder="Giới thiệu" value="@Model.lesson.GioiThieu">
+        <input type="text" placeholder="Lý thuyết" value="@Model.lesson.LyThuyet">
+        <textarea rows="5" placeholder="Mô tả bài học"></textarea>
+        <input id="submit" type="submit" value="Thêm bài học">
+    </div>
+    <div class="popupRight">
+        <h3>Chỉnh sửa code mẫu</h3>
+        <textarea rows="5" placeholder="Code mẫu" id="codeExampleUpdate"></textarea>
+    </div>
+</form>
