@@ -45,8 +45,8 @@ namespace HocGiDo_CORE.Pages
                 System.Diagnostics.Debug.WriteLine("Null o day" + updateCourse.MauSacUpdate + "/" + updateCourse.MoTaKHUpdate + "/" + updateCourse.TenKHUpdate + "/" + updateCourse.MaKHUpdate + "/" + updateCourse.CourseImageUpdate.FileName);
                 return RedirectToPage("/Adm/quanlykhoahoc");
             }
-            //try
-            //{
+            try
+            {
                 var uniqueFileName = GetUniqueFileName(updateCourse.CourseImageUpdate.FileName);
                 var uploads = Path.Combine(Environment.WebRootPath, "CourseImage");
                 var filePath = Path.Combine(uploads, updateCourse.MaKHUpdate + ".jpg");
@@ -59,27 +59,27 @@ namespace HocGiDo_CORE.Pages
                 }
 
                 updateCourse.CourseImageUpdate.CopyTo(new FileStream(filePath, FileMode.Create));
-            //}
-            //catch (Exception e)
-            //{
-            //    e.Message.ToString();
-            //    listCourse = await new ExcuteJsonClass().getCourse();
-            //    return RedirectToPage("/Adm/Index");
-            //}
+            }
+            catch (Exception e)
+            {
+                e.Message.ToString();
+                listCourse = await new ExcuteJsonClass().getCourse();
+                return RedirectToPage("/Adm/Index");
+            }
 
-                ResultReturn result = await new ExcuteJsonClass().updateCourse(updateCourse);
-                System.Diagnostics.Debug.WriteLine("o day ne ====================" + result.message);
+            ResultReturn result = await new ExcuteJsonClass().updateCourse(updateCourse);
+            System.Diagnostics.Debug.WriteLine("o day ne ====================" + result.message);
 
             if (result.message.Equals("success"))
             {
-                ViewData["AdminResult"] = "Đã cập nhật thành công!";
+                TempData["AdminResult"] = "Đã cập nhật thành công!";
                 listCourse = await new ExcuteJsonClass().getCourse();
                 System.Diagnostics.Debug.WriteLine("thanh cong");
                 return Redirect("/Adm/quanlykhoahoc");
             }
             else
             {
-                ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
+                TempData["AdminResult"] = "Đã có lỗi xảy ra!";
                 listCourse = await new ExcuteJsonClass().getCourse();
                 System.Diagnostics.Debug.WriteLine("That bai");
                 return RedirectToPage("/Adm/quanlykhoahoc");

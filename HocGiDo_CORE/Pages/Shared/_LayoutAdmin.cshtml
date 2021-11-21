@@ -87,11 +87,11 @@
             </div>
         </header>
         <main>
-            @if (ViewData["AdminResult"] != null)
+            @if (TempData["AdminResult"] != null)
             {
                 <div class="alert" id="alert">
                     <div class="content_alert">
-                        <b>Thông báo: </b>@ViewData["AdminResult"]
+                        <b>Thông báo: </b>@TempData["AdminResult"]
                         <a class="btn_close" onclick="document.getElementById('alert').style.display = 'none'"><i class='bx bx-x'></i></a>
                     </div>
                 </div>

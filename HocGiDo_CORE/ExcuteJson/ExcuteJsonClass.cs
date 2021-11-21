@@ -196,7 +196,7 @@ namespace HocGiDo_CORE.ExcuteJson
                 {
                     {"tenKH",""+addCourse.tenKH+""},
                     {"moTaKH",""+addCourse.moTaKH+""},
-                    {"maMau",""+addCourse.mauSac+""}
+                    {"mauSac",""+addCourse.mauSac+""}
                 };
 
             var jsonData = JsonConvert.SerializeObject(data);

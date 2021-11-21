@@ -279,13 +279,18 @@ main {
     resize: none;
 }
 
-.CodeMirror {
-    font-size: 15px;
-    width: 100%;
-    margin: 10px;
-    height: 330px;
-    border-radius: 10px;
-}
+    .leftInput #cke_editor-update {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .CodeMirror {
+        font-size: 15px;
+        width: 100%;
+        margin: 10px;
+        height: 330px;
+        border-radius: 10px;
+    }
 
 .leftInput input:focus {
     outline: none;
@@ -307,6 +312,7 @@ main {
 
 .listCourse {
     margin: 10px;
+    padding: 0 0 0 10px;
     height: 700px;
     overflow: auto;
     overflow-y: scroll;
@@ -593,6 +599,26 @@ td {
 .leftInput #cke_editor {
     margin: 10px;
     width: 100%;
+}
+
+.selectOption {
+    width: 100%;
+    padding: 5px 35px 5px 5px;
+    font-size: 13px;
+    border: 1px solid #CCC;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.selectOption::-ms-expand {
+    display: none;
+}
+
+@media screen and (min-width:0\0) {
+    .selectOption {
+        background: none\9;
+        padding: 5px\9;
+    }
 }
 
 @media only screen and (max-width: 1200px) {

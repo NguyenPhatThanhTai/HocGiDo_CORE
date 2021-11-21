@@ -9,8 +9,9 @@
         <input type="text" placeholder="Tên bài học mới" value="@Model.lesson.TenBaiHoc">
         <input type="text" placeholder="Video mới" value="@Model.lesson.Video">
         <input type="text" placeholder="Giới thiệu" value="@Model.lesson.GioiThieu">
-        <input type="text" placeholder="Lý thuyết" value="@Model.lesson.LyThuyet">
-        <textarea rows="5" placeholder="Mô tả bài học"></textarea>
+        <div id="editor-update">
+            <p>@Model.lesson.LyThuyet</p>
+        </div>
         <input id="submit" type="submit" value="Thêm bài học">
     </div>
     <div class="popupRight">
@@ -18,3 +19,6 @@
         <textarea rows="5" placeholder="Code mẫu" id="codeExampleUpdate"></textarea>
     </div>
 </form>
+<script>
+    CKEDITOR.replace('editor-update');
+</script>

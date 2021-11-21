@@ -35,37 +35,36 @@ namespace HocGiDo_CORE.Pages.Adm
         {
             if (addCourse.mauSac == null || addCourse.moTaKH == null || addCourse.tenKH == null || addCourse.CourseImage == null)
             {
-                ViewData["AdminResult"] = "Vui lòng điền đầy đủ thông tin!";
+                TempData["AdminResult"] = "Vui lòng điền đầy đủ thông tin!";
                 listCourse = await new ExcuteJsonClass().getCourse();
                 return Page();
             }
             try
             {
-                var uniqueFileName = GetUniqueFileName(addCourse.CourseImage.FileName);
-                var uploads = Path.Combine(Environment.WebRootPath, "CourseImage");
-                var filePath = Path.Combine(uploads, addCourse.tenKH + ".jpg");
-                addCourse.CourseImage.CopyTo(new FileStream(filePath, FileMode.Create));
+                ResultReturn result = await new ExcuteJsonClass().addCourse(addCourse);
+                if (!result.message.Equals("error"))
+                {
+                    var uniqueFileName = GetUniqueFileName(addCourse.CourseImage.FileName);
+                    var uploads = Path.Combine(Environment.WebRootPath, "CourseImage");
+                    var filePath = Path.Combine(uploads, result.message.ToString() + ".jpg");
+                    addCourse.CourseImage.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                    TempData["AdminResult"] = "Đã thêm thành công!";
+                    listCourse = await new ExcuteJsonClass().getCourse();
+                    return Page();
+                }
+                else
+                {
+                    TempData["AdminResult"] = "Đã có lỗi xảy ra!";
+                    listCourse = await new ExcuteJsonClass().getCourse();
+                    return Page();
+                }
             }
             catch(Exception e)
             {
                 e.Message.ToString();
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return Page(); ;
-            }
-
-            ResultReturn result = await new ExcuteJsonClass().addCourse(addCourse);
-
-            if (result.message.Equals("success"))
-            {
-                ViewData["AdminResult"] = "Đã thêm thành công!";
-                listCourse = await new ExcuteJsonClass().getCourse();
-                return Page(); ;
-            }
-            else
-            {
-                ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
-                listCourse = await new ExcuteJsonClass().getCourse();
-                return Page(); ;
+                return Page();
             }
         }
 
@@ -77,22 +76,32 @@ namespace HocGiDo_CORE.Pages.Adm
                 ResultReturn isDeleted = await new ExcuteJsonClass().deleteCourse(MaKH);
                 if (isDeleted.message.ToString().Equals("success"))
                 {
-                    ViewData["AdminResult"] = "Xóa khóa học thành công!";
+                    var uploads = Path.Combine(Environment.WebRootPath, "CourseImage");
+                    var filePath = Path.Combine(uploads, MaKH + ".jpg");
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.GC.Collect();
+                        System.GC.WaitForPendingFinalizers();
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    TempData["AdminResult"] = "Xóa khóa học thành công!";
                     listCourse = await new ExcuteJsonClass().getCourse();
-                    return new JsonResult(isDeleted.message.ToString());
+                    return new JsonResult("Success");
                 }
                 else
                 {
-                    ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
+                    TempData["AdminResult"] = "Đã có lỗi xảy ra!";
                     listCourse = await new ExcuteJsonClass().getCourse();
-                    return new JsonResult(isDeleted.message.ToString());
+                    return new JsonResult("Error");
                 }
             }
             else
             {
-                ViewData["AdminResult"] = "Không có ID truyền vào!";
+                TempData["AdminResult"] = "Không có ID truyền vào!";
                 listCourse = await new ExcuteJsonClass().getCourse();
-                return new JsonResult("Failed");
+                return new JsonResult("Error");
             }
         }
 
