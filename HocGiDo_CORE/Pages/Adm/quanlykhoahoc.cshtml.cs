@@ -69,6 +69,33 @@ namespace HocGiDo_CORE.Pages.Adm
             }
         }
 
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> OnPostDeleteCourse(string MaKH)
+        {
+            if (MaKH != null)
+            {
+                ResultReturn isDeleted = await new ExcuteJsonClass().deleteCourse(MaKH);
+                if (isDeleted.message.ToString().Equals("success"))
+                {
+                    ViewData["AdminResult"] = "Xóa khóa học thành công!";
+                    listCourse = await new ExcuteJsonClass().getCourse();
+                    return new JsonResult(isDeleted.message.ToString());
+                }
+                else
+                {
+                    ViewData["AdminResult"] = "Đã có lỗi xảy ra!";
+                    listCourse = await new ExcuteJsonClass().getCourse();
+                    return new JsonResult(isDeleted.message.ToString());
+                }
+            }
+            else
+            {
+                ViewData["AdminResult"] = "Không có ID truyền vào!";
+                listCourse = await new ExcuteJsonClass().getCourse();
+                return new JsonResult("Failed");
+            }
+        }
+
         private string GetUniqueFileName(string fileName)
         {
             fileName = Path.GetFileName(fileName);

@@ -590,6 +590,11 @@ td {
     }
 }
 
+.leftInput #cke_editor {
+    margin: 10px;
+    width: 100%;
+}
+
 @media only screen and (max-width: 1200px) {
     .sidebar {
         width: 70px;
@@ -705,6 +710,10 @@ td {
     .rightInput {
         width: 100%;
         float: none;
+        margin: 0;
+    }
+
+    .leftInput #cke_editor {
         margin: 0;
     }
 }

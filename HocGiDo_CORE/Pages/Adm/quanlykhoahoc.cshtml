@@ -3,6 +3,14 @@
 @{
     Layout = "_LayoutAdmin";
 }
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+}
+@Html.AntiForgeryToken()
 
 @section headerAdmin{
     <meta charset="UTF-8">
@@ -54,7 +62,7 @@
                     <td>@items.LuotDK</td>
                     <td>
                         <p id="detail" onclick="updateCourse('@items.MaKH')">Sửa</p>
-                        <p id="delete">Xóa</p>
+                        <p id="delete" data-id="@items.MaKH">Xóa</p>
                     </td>
                 </tr>
             }
@@ -93,7 +101,7 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        $('#update-modal').load('/Adm/suakhoahocCon?kh='+ id);
+        $('#update-modal').load('/Adm/suakhoahocCon?kh=' + id);
 
         modal.style.display = "block";
 
@@ -109,4 +117,35 @@
             }
         }
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '#delete', function () {
+            alert($(this).data('id'))
+            var id = $(this).data('id').toString();
+            $.ajax({
+                type: "POST",
+                url: "/Adm/quanlykhoahoc?handler=DeleteCourse",
+                data: {
+                    MaKH: id    
+                }, 
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: function (response) {
+                    if (response == 'success') {
+                        location.reload();
+                        alert(response)
+                    }
+                    else {
+                        alert(response)
+                    }
+                }
+            })
+        })
+    })
 </script>

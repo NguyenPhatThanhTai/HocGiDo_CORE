@@ -67,6 +67,9 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "updateCourse":
                     api = "api/suakhoahoc";
                     break;
+                case "deleteCourse":
+                    api = "api/xoakhoahoc";
+                    break;
                 default:
                     return null;
             }

@@ -9,8 +9,9 @@
         <input type="text" placeholder="Tên bài học mới">
         <input type="text" placeholder="Video mới">
         <input type="text" placeholder="Giới thiệu">
-        <input type="text" placeholder="Lý thuyết">
-        <textarea rows="5" placeholder="Mô tả bài học"></textarea>
+        <div id="editor">
+            <p>This is the editor content.</p>
+        </div>
         <textarea rows="5" placeholder="Code mẫu" id="codeExample"></textarea>
         <input id="submit" type="submit" value="Thêm bài học">
     </div>
@@ -62,7 +63,7 @@
             <h2>Cập nhật bài học</h2>
         </div>
         <div class="modal-body" id="loadUpdate">
-            
+
         </div>
     </div>
 </div>
@@ -103,6 +104,14 @@
                 modal.style.display = "none";
             }
         }
+    }
+</script>
+<script>
+    CKEDITOR.replace('editor');
+
+    function excuteCode() {
+        console.log(CKEDITOR.instances.editor.getData());
+        document.getElementById("codeResult").innerHTML = CKEDITOR.instances.editor.getData();
     }
 </script>
 
