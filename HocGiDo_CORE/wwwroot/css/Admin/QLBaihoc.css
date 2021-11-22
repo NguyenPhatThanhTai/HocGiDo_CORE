@@ -632,7 +632,16 @@ td {
     display: none;
 }
 
+.codeUpdate{
+    display: none;
+}
+
 .btnChoice.active {
+    background-color: #DD2F6E;
+    color: #fff
+}
+
+.btnChoiceInUpdate.active {
     background-color: #DD2F6E;
     color: #fff
 }

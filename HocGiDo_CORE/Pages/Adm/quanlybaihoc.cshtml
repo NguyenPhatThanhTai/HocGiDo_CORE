@@ -40,8 +40,15 @@
 <div id="loadLessonOfCourse"></div>
 
 <script>
-    $('#selectCourse').on('change', function (e) {
-        e.preventDefault();
-        $('#loadLessonOfCourse').load('/Adm/quanlybaihocCon?kh=' + this.value);
-    });
+    $(document).ready(function () {
+        var reload = '@TempData["MaKH"]';
+        if (reload != null && reload != '') {
+            $('#loadLessonOfCourse').load('/Adm/quanlybaihocCon?kh=' + '@TempData["MaKH"]');
+        }
+
+        $('#selectCourse').on('change', function (e) {
+            e.preventDefault();
+            $('#loadLessonOfCourse').load('/Adm/quanlybaihocCon?kh=' + this.value);
+        });
+    })
 </script>

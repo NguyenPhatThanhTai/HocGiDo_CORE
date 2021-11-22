@@ -36,7 +36,7 @@
             </div>
             <div id="subject" class="tabcontent">
                 <h3>@Model.lesson.GioiThieu</h3>
-                @Model.lesson.LyThuyet
+                <div id="descripsion"></div>
                 <h3>Ví dụ:</h3>
                 <div class="example">
                     <div id="choice">
@@ -101,7 +101,8 @@
 <div style="clear: both;"></div>
 <script src="~/js/baihoc.js"></script>
 <script>
-    setCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaBaiHoc)");
+    setCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaKH)");
+    setDescripsion("@Html.Raw(Model.lesson.LyThuyet)", "@Html.Raw(@Model.lesson.MaKH)");
 </script>
 
 @*@section footer{
@@ -153,7 +154,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#cmt').load('/binhluanCon/?bh='+'@Model.lesson.MaBaiHoc');
+        $('#cmt').load('/binhluanCon/?bh=' + '@Model.lesson.MaBaiHoc');
     })
 
     $(document).on('click', ".save", function (e) {

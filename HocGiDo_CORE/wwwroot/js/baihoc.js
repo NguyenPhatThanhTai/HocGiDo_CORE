@@ -57,6 +57,13 @@ function setCodeExample(examPCode, key) {
     myCodeMirrorJs.getDoc().setValue(jsSet);
 }
 
+function setDescripsion(descripsion, key) {
+    var decrypted = CryptoJS.AES.decrypt(descripsion, key).toString(CryptoJS.enc.Utf8);
+    console.log("=== Descripsion ===" + decrypted);
+
+    document.getElementById("descripsion").innerHTML = decrypted;
+}
+
 //choice
 var buttonChoice = document.querySelectorAll(".btnChoice");
 var textAreaCode = document.querySelectorAll(".code");

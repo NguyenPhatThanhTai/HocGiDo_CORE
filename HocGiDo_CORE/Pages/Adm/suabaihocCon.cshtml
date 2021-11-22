@@ -4,21 +4,195 @@
     Layout = "";
 }
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="updateLesson">
     <div class="leftInput">
-        <input type="text" placeholder="Tên bài học mới" value="@Model.lesson.TenBaiHoc">
-        <input type="text" placeholder="Video mới" value="@Model.lesson.Video">
-        <input type="text" placeholder="Giới thiệu" value="@Model.lesson.GioiThieu">
-        <div id="editor-update">
-            <p>@Model.lesson.LyThuyet</p>
-        </div>
-        <input id="submit" type="submit" value="Thêm bài học">
+        <input name="MaBH" type="hidden" value="@Model.lesson.MaBaiHoc"/>
+        <input name="MaKH" type="hidden" value="@Model.lesson.MaKH"/>
+        <input name="TenBH" type="text" placeholder="Tên bài học mới" value="@Model.lesson.TenBaiHoc">
+        <input name="Video" type="text" placeholder="Video mới" value="@Model.lesson.Video">
+        <input name="GioiThieu" type="text" placeholder="Giới thiệu" value="@Model.lesson.GioiThieu">
+        <div id="editor-update"></div>
+        <input id="submit" type="submit" value="Cập nhật bài học">
     </div>
     <div class="popupRight">
-        <h3>Chỉnh sửa code mẫu</h3>
-        <textarea rows="5" placeholder="Code mẫu" id="codeExampleUpdate"></textarea>
+        <div class="example">
+            <div id="choice">
+                <button type="button" class="btnChoiceInUpdate">HTML</button>
+                <button type="button" class="btnChoiceInUpdate">CSS</button>
+                <button type="button" class="btnChoiceInUpdate">JS</button>
+            </div>
+            <div class="codeUpdate">
+                <textarea rows="5" placeholder="HTML" id="htmlUpdate"></textarea>
+            </div>
+            <div class="codeUpdate">
+                <textarea rows="5" placeholder="CSS" id="cssUpdate"></textarea>
+            </div>
+            <div class="codeUpdate">
+                <textarea rows="5" placeholder="JS" id="jsUpdate"></textarea>
+            </div>
+        </div>
     </div>
 </form>
+
 <script>
     CKEDITOR.replace('editor-update');
+    var buttonChoice = document.querySelectorAll(".btnChoiceInUpdate");
+    var textAreaCode = document.querySelectorAll(".codeUpdate");
+    var myCodeMirrorHtmlUpdate;
+    var myCodeMirrorCssUpdate;
+    var myCodeMirrorJsUpdate;
+    var myCodeMirrorJavaUpdate;
+
+    $(document).ready(function () {
+        textAreaCode[0].style.display = "block";
+        buttonChoice[0].classList.add("active");
+
+        setCodeType('html', 'load');
+        clickChoice();
+
+        setCode("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaKH)");
+        setDescripsion("@Html.Raw(@Model.lesson.LyThuyet)", "@Html.Raw(@Model.lesson.MaKH)");
+
+        $(document).on('submit', '#updateLesson', function (e) {
+            e.preventDefault();
+
+            var htmlArray = myCodeMirrorHtmlUpdate.getValue().split(" ");
+            var cssArray = myCodeMirrorCssUpdate.getValue().split(" ");
+            var jsArray = myCodeMirrorJsUpdate.getValue().split(" ");
+
+            var totalArray = [
+                htmlArray, cssArray, jsArray
+            ]
+
+            var encryptLyThuyet = CryptoJS.AES.encrypt(CKEDITOR.instances['editor-update'].getData(), $(this).find('input[name="MaKH"]').val().toString());
+            var encryptCodeMau = CryptoJS.AES.encrypt(JSON.stringify(totalArray), $(this).find('input[name="MaKH"]').val().toString());
+
+            var content = {
+                'MaBaiHoc': $(this).find('input[name="MaBH"]').val(),
+                'TenBaiHoc': $(this).find('input[name="TenBH"]').val(),
+                'Video': $(this).find('input[name="Video"]').val(),
+                'GioiThieu': $(this).find('input[name="GioiThieu"]').val(),
+                'LyThuyet': encryptLyThuyet.toString(),
+                'CodeMau': encryptCodeMau.toString()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Adm/suabaihocCon?handler=UpdateLesson",
+                data: JSON.stringify(content),
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: function (response) {
+                    window.location.reload(true);
+                }
+            })
+        })
+    })
+
+    function setCodeType(type, action) {
+        if (action == 'load') {
+            var codeExample = document.getElementById("codeExample");
+        } else {
+            var codeExample = document.getElementById("codeExampleUpdate");
+        }
+
+        switch (type) {
+            case "html":
+                myCodeMirrorHtmlUpdate = CodeMirror.fromTextArea(document.getElementById("htmlUpdate"), {
+                    tabSize: 4,
+                    mode: "xml",
+                    htmlMode: true,
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                myCodeMirrorCssUpdate = CodeMirror.fromTextArea(document.getElementById("cssUpdate"), {
+                    tabSize: 4,
+                    mode: "css",
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                myCodeMirrorJsUpdate = CodeMirror.fromTextArea(document.getElementById("jsUpdate"), {
+                    tabSize: 4,
+                    mode: "javascript",
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                break;
+            case "java":
+                myCodeMirrorJavaUpdate = CodeMirror.fromTextArea(document.getElementById("java"), {
+                    tabSize: 4,
+                    mode: "css",
+                    theme: 'dracula',
+                    lineNumbers: true,
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+    //choice
+    function clickChoice() {
+        buttonChoice.forEach(function (current, index) {
+            buttonChoice[index].addEventListener("click", function () {
+                textAreaCode.forEach(function (curr, ind) {
+                    textAreaCode[ind].style.display = "none";
+                })
+
+                buttonChoice.forEach(function (cu, i) {
+                    buttonChoice[i].classList.remove("active");
+                })
+
+                buttonChoice[index].classList.add("active");
+                textAreaCode[index].style.display = "block";
+            });
+        })
+    }
+
+    function setCode(examPCode, key) {
+        var decrypted = CryptoJS.AES.decrypt(examPCode, key).toString(CryptoJS.enc.Utf8);
+        decrypted = JSON.parse(decrypted);
+
+        console.log("=== Code ===" + decrypted);
+
+        var htmlSet = decrypted[0].join(" ");
+        myCodeMirrorHtmlUpdate.getDoc().setValue(htmlSet);
+
+        var cssSet = decrypted[1].join(" ");
+        myCodeMirrorCssUpdate.getDoc().setValue(cssSet);
+
+        var jsSet = decrypted[2].join(" ");
+        myCodeMirrorJsUpdate.getDoc().setValue(jsSet);
+    }
+
+    function setDescripsion(descripsion, key) {
+        var decrypted = CryptoJS.AES.decrypt(descripsion, key).toString(CryptoJS.enc.Utf8);
+        console.log("=== Descripsion ===" + decrypted);
+
+        setTimeout(function () {
+            CKEDITOR.instances['editor-update'].setData(decrypted);
+        }, 2000);
+    }
 </script>

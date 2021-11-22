@@ -55,7 +55,7 @@
                     <td>@items.LuocHoc</td>
                     <td>
                         <p id="detail" onclick="modalPopup('lesson', '@Html.Raw(items.MaKH)', '@Html.Raw(items.MaBaiHoc)', 'null')">Sửa</p>
-                        <p id="delete">Xóa</p>
+                        <p id="delete" data-id="@items.MaBaiHoc">Xóa</p>
                     </td>
                 </tr>
             }
@@ -127,8 +127,8 @@
             console.log("vao lesson");
 
             var htmlArray = myCodeMirrorHtml.getValue().split(" ");
-            var jsArray = myCodeMirrorCss.getValue().split(" ");
-            var cssArray = myCodeMirrorJs.getValue().split(" ");
+            var cssArray = myCodeMirrorCss.getValue().split(" ");
+            var jsArray = myCodeMirrorJs.getValue().split(" ");
 
             var totalArray = [
                 htmlArray, cssArray, jsArray
@@ -152,6 +152,27 @@
                 data: JSON.stringify(content),
                 dataType: "json",
                 contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: function (response) {
+                    window.location.reload(true);
+                }
+            })
+        })
+
+        $(document).on('click', '#delete', function () {
+            var id = $(this).data('id').toString();
+            $.ajax({
+                type: "POST",
+                url: "/Adm/quanlybaihocCon?handler=DeleteLesson",
+                data: {
+                    MaBH: id,
+                    MaKH: @Model.MaKH
+                },
+                dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("XSRF-TOKEN",
                         $('input:hidden[name="__RequestVerificationToken"]').val());

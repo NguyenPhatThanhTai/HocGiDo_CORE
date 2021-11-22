@@ -295,5 +295,59 @@ namespace HocGiDo_CORE.ExcuteJson
                 return null;
             }
         }
+
+        public async Task<ResultReturn> deleteLesson(string MaBH)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"maBaiHoc",""+MaBH+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("deleteLesson"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> updateLesson(Lesson lesson)
+        {
+            System.Diagnostics.Debug.WriteLine("=============== " + lesson.TenBaiHoc);
+            var data = new Dictionary<string, string>
+                {
+                    {"maBaiHoc",""+lesson.MaBaiHoc+""},
+                    {"tenBaiHoc",""+lesson.TenBaiHoc+""},
+                    {"video",""+lesson.Video+""},
+                    {"gioiThieu",""+lesson.GioiThieu+""},
+                    {"lyThuyet",""+lesson.LyThuyet+""},
+                    {"codeMau",""+lesson.CodeMau+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("updateLesson"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
