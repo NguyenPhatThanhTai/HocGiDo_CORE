@@ -614,11 +614,27 @@ td {
     display: none;
 }
 
-@media screen and (min-width:0\0) {
-    .selectOption {
-        background: none\9;
-        padding: 5px\9;
-    }
+.example #choice {
+    text-align: left;
+    margin: 10px 0 10px 10px;
+}
+
+.example #choice button {
+    padding: 7px;
+    width: 70px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+}
+
+.code {
+    display: none;
+}
+
+.btnChoice.active {
+    background-color: #DD2F6E;
+    color: #fff
 }
 
 @media only screen and (max-width: 1200px) {

@@ -215,6 +215,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\CourseImage\" />
+    <Folder Include="wwwroot\js\Admin\" />
   </ItemGroup>
 
 </Project>

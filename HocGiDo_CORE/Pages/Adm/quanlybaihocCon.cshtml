@@ -3,17 +3,43 @@
 @{
     Layout = "";
 }
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+}
+@Html.AntiForgeryToken()
 
 <div class="inputContain">
     <div class="leftInput">
-        <input type="text" placeholder="Tên bài học mới">
-        <input type="text" placeholder="Video mới">
-        <input type="text" placeholder="Giới thiệu">
-        <div id="editor">
-            <p>This is the editor content.</p>
-        </div>
-        <textarea rows="5" placeholder="Code mẫu" id="codeExample"></textarea>
-        <input id="submit" type="submit" value="Thêm bài học">
+        <form id="addLessonForm" method="post" enctype="multipart/form-data">
+            <input name="MaKH" type="hidden" value="@Model.MaKH" />
+            <input name="TenBaiHoc" type="text" placeholder="Tên bài học mới">
+            <input name="Video" type="text" placeholder="Video mới">
+            <input name="GioiThieu" type="text" placeholder="Giới thiệu">
+            <div id="editor">
+                <p>This is the editor content.</p>
+            </div>
+            <div class="example">
+                <div id="choice">
+                    <button type="button" class="btnChoice">HTML</button>
+                    <button type="button" class="btnChoice">CSS</button>
+                    <button type="button" class="btnChoice">JS</button>
+                </div>
+                <div class="code">
+                    <textarea rows="5" placeholder="HTML" id="html"></textarea>
+                </div>
+                <div class="code">
+                    <textarea rows="5" placeholder="CSS" id="css"></textarea>
+                </div>
+                <div class="code">
+                    <textarea rows="5" placeholder="JS" id="js"></textarea>
+                </div>
+            </div>
+            <input id="submit" type="submit" value="Thêm bài học">
+        </form>
     </div>
     <div class="listCourse">
         <table>
@@ -68,24 +94,83 @@
     </div>
 </div>
 
-<script type="text/javascript " src="~/js/QLBaiHoc.js"></script>
-
 <script>
-    $('#selectLesson').on('change', function () {
-        $('#loadExamOfLesson').load('/Adm/quanlycauhoiCon?bh=' + this.value);
-    });
+    CKEDITOR.replace('editor');
+
+    function excuteCode() {
+        console.log(CKEDITOR.instances.editor.getData());
+        document.getElementById("codeResult").innerHTML = CKEDITOR.instances.editor.getData();
+    }
 </script>
 
 <script>
+    var buttonChoice = document.querySelectorAll(".btnChoice");
+    var textAreaCode = document.querySelectorAll(".code");
+    var myCodeMirrorHtml;
+    var myCodeMirrorCss;
+    var myCodeMirrorJs;
+    var myCodeMirrorJava;
+
+    $(document).ready(function () {
+        textAreaCode[0].style.display = "block";
+        buttonChoice[0].classList.add("active");
+
+        setCodeType('html', 'load');
+        clickChoice();
+
+        $('#selectLesson').on('change', function () {
+            $('#loadExamOfLesson').load('/Adm/quanlycauhoiCon?bh=' + this.value);
+        });
+
+        $('#addLessonForm').on('submit', function (e) {
+            e.preventDefault();
+            console.log("vao lesson");
+
+            var htmlArray = myCodeMirrorHtml.getValue().split(" ");
+            var jsArray = myCodeMirrorCss.getValue().split(" ");
+            var cssArray = myCodeMirrorJs.getValue().split(" ");
+
+            var totalArray = [
+                htmlArray, cssArray, jsArray
+            ]
+
+            var encryptLyThuyet = CryptoJS.AES.encrypt(CKEDITOR.instances.editor.getData(), $(this).find('input[name="MaKH"]').val().toString());
+            var encryptCodeMau = CryptoJS.AES.encrypt(JSON.stringify(totalArray), $(this).find('input[name="MaKH"]').val().toString());
+
+            var content = {
+                'MaKH': $(this).find('input[name="MaKH"]').val(),
+                'TenBaiHoc': $(this).find('input[name="TenBaiHoc"]').val(),
+                'Video': $(this).find('input[name="Video"]').val(),
+                'GioiThieu': $(this).find('input[name="GioiThieu"]').val(),
+                'LyThuyet': encryptLyThuyet.toString(),
+                'CodeMau': encryptCodeMau.toString()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Adm/quanlybaihocCon?handler=AddLesson",
+                data: JSON.stringify(content),
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: function (response) {
+                    window.location.reload(true);
+                }
+            })
+        })
+    })
+
     function modalPopup(type, typeCode, id, questId) {
-        // Get the modal
         var modal = document.getElementById("myModal");
 
         var span = document.getElementsByClassName("close")[0];
 
         modal.style.display = "block";
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
         }
@@ -98,20 +183,88 @@
             setCodeType('HTML', 'update');
         }
 
-        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
     }
-</script>
-<script>
-    CKEDITOR.replace('editor');
 
-    function excuteCode() {
-        console.log(CKEDITOR.instances.editor.getData());
-        document.getElementById("codeResult").innerHTML = CKEDITOR.instances.editor.getData();
+    function setCodeType(type, action) {
+        if (action == 'load') {
+            var codeExample = document.getElementById("codeExample");
+        } else {
+            var codeExample = document.getElementById("codeExampleUpdate");
+        }
+
+        switch (type) {
+            case "html":
+                myCodeMirrorHtml = CodeMirror.fromTextArea(document.getElementById("html"), {
+                    tabSize: 4,
+                    mode: "xml",
+                    htmlMode: true,
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                myCodeMirrorCss = CodeMirror.fromTextArea(document.getElementById("css"), {
+                    tabSize: 4,
+                    mode: "css",
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                myCodeMirrorJs = CodeMirror.fromTextArea(document.getElementById("js"), {
+                    tabSize: 4,
+                    mode: "javascript",
+                    theme: 'dracula',
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                break;
+            case "java":
+                myCodeMirrorJava = CodeMirror.fromTextArea(document.getElementById("java"), {
+                    tabSize: 4,
+                    mode: "css",
+                    theme: 'dracula',
+                    lineNumbers: true,
+                    styleActiveSelected: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    highlightMatches: true,
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+    //choice
+    function clickChoice() {
+        buttonChoice.forEach(function (current, index) {
+            buttonChoice[index].addEventListener("click", function () {
+                textAreaCode.forEach(function (curr, ind) {
+                    textAreaCode[ind].style.display = "none";
+                })
+
+                buttonChoice.forEach(function (cu, i) {
+                    buttonChoice[i].classList.remove("active");
+                })
+
+                buttonChoice[index].classList.add("active");
+                textAreaCode[index].style.display = "block";
+            });
+        })
     }
 </script>
 

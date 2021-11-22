@@ -266,5 +266,34 @@ namespace HocGiDo_CORE.ExcuteJson
                 return null;
             }
         }
+
+        public async Task<ResultReturn> addLesson(Lesson lesson)
+        {
+            var data = new Dictionary<string, string>
+                {
+                    {"maKH",""+lesson.MaKH+""},
+                    {"tenBaiHoc",""+lesson.TenBaiHoc+""},
+                    {"video",""+lesson.Video+""},
+                    {"gioiThieu",""+lesson.GioiThieu+""},
+                    {"lyThuyet",""+lesson.LyThuyet+""},
+                    {"codeMau",""+lesson.CodeMau+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("addLesson"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
