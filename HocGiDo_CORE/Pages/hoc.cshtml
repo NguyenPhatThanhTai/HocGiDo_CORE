@@ -64,10 +64,13 @@
                     {
                         <p>Câu @i: @items.NoiDungCauHoi</p>
                         <form class="answer">
-                            @foreach (var items2 in items.DapAn)
+                            @if (items.DapAn != null)
                             {
-                                <div><input type="radio" name="@i" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
-                                j++;
+                                @foreach (var items2 in items.DapAn)
+                                {
+                                    <div><input type="radio" name="@i" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
+                                    j++;
+                                }
                             }
                         </form>
                         i++;

@@ -5,28 +5,36 @@
 }
 
 <div class="leftInput">
-    <input type="text" placeholder="Câu hỏi">
-    <input type="text" placeholder="Đáp án 1">
-    <input type="text" placeholder="Đáp án 2">
-    <input type="text" placeholder="Đáp án 3">
-    <input type="text" placeholder="Đáp án 4">
-    <input id="submit" type="submit" value="Thêm câu hỏi">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="exam.MaBH" value="@Model.lessonId"/>
+        <input asp-for="exam.TenCauHoi" type="text" placeholder="Câu hỏi">
+        <input asp-page-handler="AddExam" id="submit" type="submit" value="Thêm câu hỏi">
+    </form>
 </div>
 <div class="listCourse" style="height: 350px;">
     <table>
         <tr>
             <th>Câu hỏi</th>
+            <th>Số câu trả lời</th>
             <th>Hành động</th>
         </tr>
         @foreach (var items in Model.listQuestion.CauHoi)
         {
-            <tr>
-                <td>@items.MaCauHoi</td>
-                <td>
-                    <p id="detail" onclick="modalPopup('exam', 'null', '@Html.Raw(Model.lessonId)', '@Html.Raw(items.MaCauHoi)')">Sửa</p>
-                    <p id="delete">Xóa</p>
-                </td>
-            </tr>
+    <tr>
+         <td>@items.MaCauHoi</td>
+                @if (items.DapAn != null)
+                {
+                    <td>@items.DapAn.Count</td>
+                }
+                else
+                {
+                    <td>0</td>
+                }
+         <td>
+            <p id="detail" onclick="modalPopup('exam', 'null', '@Html.Raw(Model.lessonId)', '@Html.Raw(items.MaCauHoi)')">Thêm đáp án</p>
+            <p id="delete">Xóa</p>
+         </td>
+    </tr>
         }
     </table>
 </div>

@@ -118,6 +118,11 @@
         setCodeType('html', 'load');
         clickChoice();
 
+        var loadQuest = '@TempData["MaBH"]';
+        if (loadQuest != null && loadQuest != "") {
+            $('#loadExamOfLesson').load('/Adm/quanlycauhoiCon?bh=' + loadQuest);
+        }
+
         $('#selectLesson').on('change', function () {
             $('#loadExamOfLesson').load('/Adm/quanlycauhoiCon?bh=' + this.value);
         });

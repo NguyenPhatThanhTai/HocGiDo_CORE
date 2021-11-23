@@ -11,6 +11,6 @@ namespace HocGiDo_CORE.ModelsJson
         public string NoiDungCauHoi { get; set; }
         public string TheLoai { get; set; }
 
-        public List<Answer> DapAn { get; set; }
+        public List<Answer>? DapAn { get; set; }
     }
 }

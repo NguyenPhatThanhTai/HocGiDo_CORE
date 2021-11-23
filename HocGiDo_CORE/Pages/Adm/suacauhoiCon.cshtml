@@ -6,11 +6,11 @@
 
 <form method="post" enctype="multipart/form-data">
     <div class="leftInput" style="width: 100%;">
-        <input type="text" placeholder="Câu hỏi">
-        <input type="text" placeholder="Đáp án 1">
-        <input type="text" placeholder="Đáp án 2">
-        <input type="text" placeholder="Đáp án 3">
-        <input type="text" placeholder="Đáp án 4">
-        <input id="submit" type="submit" value="Cập nhật câu hỏi">
+        <input type="hidden" asp-for="exam.MaCH" value="@Model.MaCH"/>
+        <input asp-for="exam.TenDapAn" type="text" placeholder="Đáp án mới">
+        <div>
+            <input asp-for="exam.DapAnDung" id="trueAnswer" type="checkbox" style="text-align: left; width: 300px;">
+        </div>
+        <input id="submit" type="submit" asp-page-handler="AddAnswer" value="Thêm đáp án">
     </div>
 </form>

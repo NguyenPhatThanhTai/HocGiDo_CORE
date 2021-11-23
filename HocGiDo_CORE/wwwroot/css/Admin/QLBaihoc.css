@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
     --main-color: #DD2F6E;
     --color-dark: #1D2231;
@@ -279,18 +279,18 @@ main {
     resize: none;
 }
 
-    .leftInput #cke_editor-update {
-        margin: 10px;
-        width: 100%;
-    }
+.leftInput #cke_editor-update {
+    margin: 10px;
+    width: 100%;
+}
 
-    .CodeMirror {
-        font-size: 15px;
-        width: 100%;
-        margin: 10px;
-        height: 330px;
-        border-radius: 10px;
-    }
+.CodeMirror {
+    font-size: 15px;
+    width: 100%;
+    margin: 10px;
+    height: 330px;
+    border-radius: 10px;
+}
 
 .leftInput input:focus {
     outline: none;
@@ -308,6 +308,16 @@ main {
 
 .leftInput #submit:hover {
     background-color: #DD2F6E;
+}
+
+.leftInput #trueAnswer {
+    position: relative;
+}
+
+.leftInput #trueAnswer::before {
+    content: "Đặt làm đáp án đúng";
+    position: absolute;
+    margin-top: -5px;
 }
 
 .listCourse {

@@ -322,7 +322,6 @@ namespace HocGiDo_CORE.ExcuteJson
 
         public async Task<ResultReturn> updateLesson(Lesson lesson)
         {
-            System.Diagnostics.Debug.WriteLine("=============== " + lesson.TenBaiHoc);
             var data = new Dictionary<string, string>
                 {
                     {"maBaiHoc",""+lesson.MaBaiHoc+""},
@@ -337,6 +336,61 @@ namespace HocGiDo_CORE.ExcuteJson
             var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync(new ApiContain().getUrlApi("updateLesson"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> addQuestion(string QuestName, string type, string MaBH)
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("ExamId") + MaBH);
+            var resp = JsonConvert.DeserializeObject<ResultReturn>(responseString);
+
+            var data = new Dictionary<string, string>
+                {
+                    {"noiDungCauHoi",""+QuestName+""},
+                    {"theLoai",""+type+""},
+                    {"maKT",""+resp.message+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("addNewQuestion"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> addNewAnswer(string TenDapAn, bool DapAnDung, string MaCauHoi)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"noiDungDapAn",""+TenDapAn+""},
+                    {"dapAnDung",DapAnDung},
+                    {"maCauHoi",""+MaCauHoi+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("addNewAnswer"), contentData);
 
             if (response.IsSuccessStatusCode)
             {

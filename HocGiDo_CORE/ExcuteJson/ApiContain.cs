@@ -79,6 +79,12 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "updateLesson":
                     api = "api/suabaihoc";
                     break;
+                case "addNewQuestion":
+                    api = "api/themcauhoimoi";
+                    break;
+                case "addNewAnswer":
+                    api = "api/themdapanmoi";
+                    break;
                 default:
                     return null;
             }
