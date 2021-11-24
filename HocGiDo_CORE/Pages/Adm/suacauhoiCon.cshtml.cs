@@ -15,46 +15,64 @@ namespace HocGiDo_CORE.Pages.Adm
         public ListQuestion listQuestion { get; set; }
         public Question question { get; set; }
         public string MaCH { get; set; }
+        public string MaBH { get; set; }
         public async Task<IActionResult> OnGet(string bh, string questId)
         {
             MaCH = questId;
+            MaBH = bh;
             listQuestion = await new ExcuteJsonClass().getIdExamOfLesson(bh);
+            question = listQuestion.CauHoi.FirstOrDefault(p => p.MaCauHoi.Equals(questId));
             return Page();
         }
 
-        [BindProperty]
-        public AddExam exam { get; set; }
-        public async Task<IActionResult> OnPostAddAnswer()
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAddAnswer([FromBody]AddExam exam)
         {
             if(exam.TenDapAn != null && exam.MaCH != null)
             {
-                bool trueAnswer = false;
-                if(exam.DapAnDung != null)
-                {
-                    trueAnswer = true;
-                }
-
-                ResultReturn result = await new ExcuteJsonClass().addNewAnswer(exam.TenDapAn, trueAnswer, exam.MaCH);
+                ResultReturn result = await new ExcuteJsonClass().addNewAnswer(exam.TenDapAn, false, exam.MaCH);
 
                 if(result.message.Equals("success"))
                 {
-                    TempData["AdminResult"] = "Thêm câu trả lời thành công!";
-                    TempData["MaBH"] = exam.MaBH;
-                    return RedirectToPage("/Adm/quanlybaihoc");
+                    return new JsonResult("Success");
                 }
                 else
                 {
-                    TempData["AdminResult"] = "Thêm câu trả lời thất bại!";
-                    TempData["MaBH"] = exam.MaBH;
-                    return RedirectToPage("/Adm/quanlybaihoc");
+                    return new JsonResult("Failed");
                 }
             }
             else
             {
-                TempData["AdminResult"] = "Thất bại!";
-                TempData["MaBH"] = exam.MaBH;
-                return RedirectToPage("/Adm/quanlybaihoc");
+                return new JsonResult("Failed");
             }
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostDeleteAnswer(string answerId)
+        {
+            if(answerId != null)
+            {
+                ResultReturn result = await new ExcuteJsonClass().deleteAnswer(answerId);
+
+                if (result.message.Equals("success"))
+                {
+                    return new JsonResult("Success");
+                }
+                else
+                {
+                    return new JsonResult("Failed");
+                }
+            }
+            else
+            {
+                return new JsonResult("Failed");
+            }
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostUpdateExam(string questName, AddExam[] listAnswer, string trueAnswer)
+        {
+
         }
     }
 }

@@ -4,13 +4,130 @@
     Layout = "";
 }
 
-<form method="post" enctype="multipart/form-data">
-    <div class="leftInput" style="width: 100%;">
-        <input type="hidden" asp-for="exam.MaCH" value="@Model.MaCH"/>
-        <input asp-for="exam.TenDapAn" type="text" placeholder="Đáp án mới">
-        <div>
-            <input asp-for="exam.DapAnDung" id="trueAnswer" type="checkbox" style="text-align: left; width: 300px;">
+<div class="listAnswer" style="width: 100%;">
+    <form id="updateExam">
+        <div id="question">
+            <input type="text" value="@Model.question.NoiDungCauHoi" placeholder="Sửa câu hỏi">
+            <input id="MaCH" type="hidden" value="@Model.question.MaCauHoi">
         </div>
-        <input id="submit" type="submit" asp-page-handler="AddAnswer" value="Thêm đáp án">
-    </div>
-</form>
+        @foreach (var item in Model.question.DapAn)
+        {
+            <div class="detailAnswer">
+                <input id="questName" class="deleteAnswer" data-chid="@item.MaDapAn" type="button" value="Xóa">
+                <input name="answerContent" type="text" value="@item.NoiDungDapAn" placeholder="Sửa câu trả lời ">
+                @if (item.DapAnDung)
+                {
+                    <input name="trueAnswer" type="radio" checked><span>Đáp án đúng</span><br>
+                }
+                else
+                {
+                    <input name="trueAnswer" type="radio"><span>Đáp án đúng</span><br>
+                }
+                <input name="answerId" type="hidden" value="@item.MaDapAn">
+            </div>
+        }
+        <div id="newQuestion">
+            <input id="answerName" type="text" placeholder="Câu hỏi mới">
+            <input id="addQuestion" type="button" value="Thêm câu hỏi">
+        </div>
+        <input type="submit" value="Cập nhật">
+    </form>
+</div>
+
+<script>
+    $('#updateExam').on('submit', function (e) {
+        e.preventDefault();
+
+        var value = [];
+        $('detailAnswer').each(function () {
+            var answer = {
+                MaCH = $(this).find("input:name='answerContent'"),
+                TenCauHoi = $(this).find("input:name='answerContent'")
+            };
+            value.push(answer)
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "/Adm/suacauhoiCon?handler=UpdateExam",
+            data: {
+                questName: $('#questName').val(),
+                listAnswer: value,
+                trueAnswer: $('input[name=trueAnswer]:checked', this).val()
+            },
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+
+            success: function (response) {
+                if (response == 'Success') {
+                    alert("Xóa hỏi thành công!");
+                    $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+                }
+                else {
+                    alert("Xóa câu hỏi thất bại!");
+                }
+            }
+        })
+    })
+
+    $('.deleteAnswer').on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "/Adm/suacauhoiCon?handler=DeleteAnswer",
+            data: {
+                answerId: $(this).data('chid')
+            },
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+
+            success: function (response) {
+                if (response == 'Success') {
+                    alert("Xóa hỏi thành công!");
+                    $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+                }
+                else {
+                    alert("Xóa câu hỏi thất bại!");
+                }
+            }
+        })
+    })
+
+    $('#addQuestion').on('click', function (e) {
+        e.preventDefault();
+
+        var content = {
+            'TenDapAn': $('#answerName').val(),
+            'MaCH': $('#MaCH').val(),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Adm/suacauhoiCon?handler=AddAnswer",
+            data: JSON.stringify(content),
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+
+            success: function (response) {
+                if (response == 'Success') {
+                    alert("Thêm câu hỏi thành công!");
+                    $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+                }
+                else {
+                    alert("Thêm câu hỏi thất bại!");
+                }
+            }
+        })
+    })
+</script>

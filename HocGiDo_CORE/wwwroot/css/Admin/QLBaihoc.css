@@ -555,6 +555,8 @@ td {
 .modal-body {
     padding: 2px 16px;
     margin: 20px;
+    overflow-x: auto;
+    height: 350px;
 }
 
 .modal-footer {
@@ -654,6 +656,54 @@ td {
 .btnChoiceInUpdate.active {
     background-color: #DD2F6E;
     color: #fff
+}
+
+.listAnswer input[type=text] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+    .listAnswer input[type=text]:focus {
+        outline: none;
+    }
+
+.listAnswer input[type=radio] {
+    margin-right: 5px;
+}
+
+.listAnswer input[type=submit] {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #DD2F6E;
+    color: #fff;
+    width: 100%;
+    border: none;
+}
+
+.listAnswer input[type=button] {
+    padding: 10px;
+    margin: 10px;
+    width: 5%;
+    border-radius: 8px;
+    background-color: rgb(231, 74, 74);
+    border: none;
+    color: #fff;
+}
+
+    .listAnswer input[type=button]:focus {
+        outline: none;
+    }
+
+.listAnswer #newQuestion input[type=text] {
+    width: 100%;
+}
+
+.listAnswer #newQuestion input[type=button] {
+    width: 30%;
+    background-color: #1D2231;
 }
 
 @media only screen and (max-width: 1200px) {

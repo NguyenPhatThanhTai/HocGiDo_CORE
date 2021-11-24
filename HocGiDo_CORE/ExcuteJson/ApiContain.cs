@@ -85,6 +85,9 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "addNewAnswer":
                     api = "api/themdapanmoi";
                     break;
+                case "deleteAnswer":
+                    api = "api/xoadapan";
+                    break;
                 default:
                     return null;
             }

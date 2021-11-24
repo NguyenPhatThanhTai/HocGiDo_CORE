@@ -202,7 +202,7 @@
         }
 
         if (type == 'exam') {
-            $('#loadUpdate').load('/Adm/suacauhoiCon?kh=' + typeCode + '&bh=' + id + '&questId=' + questId);
+            $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + id + '&questId=' + questId);
         }
         else {
             $('#loadUpdate').load('/Adm/suabaihocCon?kh=' + typeCode + '&bh=' + id);

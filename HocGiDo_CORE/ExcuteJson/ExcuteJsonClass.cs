@@ -403,5 +403,29 @@ namespace HocGiDo_CORE.ExcuteJson
                 return null;
             }
         }
+
+        public async Task<ResultReturn> deleteAnswer(string MaDapAn)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"maDapAn",""+MaDapAn+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("deleteAnswer"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
