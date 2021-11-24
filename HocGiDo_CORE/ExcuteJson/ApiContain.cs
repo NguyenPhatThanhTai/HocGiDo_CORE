@@ -88,6 +88,12 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "deleteAnswer":
                     api = "api/xoadapan";
                     break;
+                case "updateQuestion":
+                    api = "api/suacauhoi";
+                    break;
+                case "updateAnswer":
+                    api = "api/suadapan";
+                    break;
                 default:
                     return null;
             }

@@ -427,5 +427,57 @@ namespace HocGiDo_CORE.ExcuteJson
                 return null;
             }
         }
+
+        public async Task<ResultReturn> updateExam(string MaCH, string TenCauHoi, string TheLoai)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"maCauHoi",""+MaCH+""},
+                    {"noiDungCauHoi",""+TenCauHoi+""},
+                    {"theLoai",""+TheLoai+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("updateQuestion"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> updateAnswer(string MaDA, string NoiDungDapAn, bool DapAnDung)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"maDapAn",""+MaDA+""},
+                    {"noiDungDapAn",""+NoiDungDapAn+""},
+                    {"dapAnDung", DapAnDung},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("updateAnswer"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

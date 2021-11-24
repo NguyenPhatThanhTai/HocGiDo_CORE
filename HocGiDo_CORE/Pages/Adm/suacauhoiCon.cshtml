@@ -7,21 +7,21 @@
 <div class="listAnswer" style="width: 100%;">
     <form id="updateExam">
         <div id="question">
-            <input type="text" value="@Model.question.NoiDungCauHoi" placeholder="Sửa câu hỏi">
+            <input id="questName" type="text" value="@Model.question.NoiDungCauHoi" placeholder="Sửa câu hỏi">
             <input id="MaCH" type="hidden" value="@Model.question.MaCauHoi">
         </div>
         @foreach (var item in Model.question.DapAn)
         {
             <div class="detailAnswer">
-                <input id="questName" class="deleteAnswer" data-chid="@item.MaDapAn" type="button" value="Xóa">
+                <input class="deleteAnswer" data-chid="@item.MaDapAn" type="button" value="Xóa">
                 <input name="answerContent" type="text" value="@item.NoiDungDapAn" placeholder="Sửa câu trả lời ">
                 @if (item.DapAnDung)
                 {
-                    <input name="trueAnswer" type="radio" checked><span>Đáp án đúng</span><br>
+                    <input name="trueAnswer" type="radio" value="@item.MaDapAn" checked><span>Đáp án đúng</span><br>
                 }
                 else
                 {
-                    <input name="trueAnswer" type="radio"><span>Đáp án đúng</span><br>
+                    <input name="trueAnswer" type="radio" value="@item.MaDapAn"><span>Đáp án đúng</span><br>
                 }
                 <input name="answerId" type="hidden" value="@item.MaDapAn">
             </div>
@@ -35,25 +35,28 @@
 </div>
 
 <script>
-    $('#updateExam').on('submit', function (e) {
+    $('#updateExam').submit(function (e) {
         e.preventDefault();
 
         var value = [];
-        $('detailAnswer').each(function () {
+        $('.detailAnswer').each(function () {
             var answer = {
-                MaCH = $(this).find("input:name='answerContent'"),
-                TenCauHoi = $(this).find("input:name='answerContent'")
+                MaDA: $(this).find("input[name='answerId']").val(),
+                TenDapAn: $(this).find("input[name='answerContent']").val()
             };
-            value.push(answer)
+            value.push(answer);
         })
+
+        console.log($(this).find('input[name=trueAnswer]:checked', this).val());
 
         $.ajax({
             type: "POST",
             url: "/Adm/suacauhoiCon?handler=UpdateExam",
             data: {
+                MaCH: $("#MaCH").val(),
                 questName: $('#questName').val(),
                 listAnswer: value,
-                trueAnswer: $('input[name=trueAnswer]:checked', this).val()
+                trueAnswer: $(this).find('input[name=trueAnswer]:checked', this).val()
             },
             dataType: "json",
             beforeSend: function (xhr) {
