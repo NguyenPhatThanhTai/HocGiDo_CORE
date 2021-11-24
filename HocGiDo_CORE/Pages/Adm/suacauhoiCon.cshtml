@@ -10,21 +10,24 @@
             <input id="questName" type="text" value="@Model.question.NoiDungCauHoi" placeholder="Sửa câu hỏi">
             <input id="MaCH" type="hidden" value="@Model.question.MaCauHoi">
         </div>
-        @foreach (var item in Model.question.DapAn)
+        @if (Model.question.DapAn != null)
         {
-            <div class="detailAnswer">
-                <input class="deleteAnswer" data-chid="@item.MaDapAn" type="button" value="Xóa">
-                <input name="answerContent" type="text" value="@item.NoiDungDapAn" placeholder="Sửa câu trả lời ">
-                @if (item.DapAnDung)
-                {
-                    <input name="trueAnswer" type="radio" value="@item.MaDapAn" checked><span>Đáp án đúng</span><br>
-                }
-                else
-                {
-                    <input name="trueAnswer" type="radio" value="@item.MaDapAn"><span>Đáp án đúng</span><br>
-                }
-                <input name="answerId" type="hidden" value="@item.MaDapAn">
-            </div>
+            @foreach (var item in Model.question.DapAn)
+            {
+                <div class="detailAnswer">
+                    <input class="deleteAnswer" data-chid="@item.MaDapAn" type="button" value="Xóa">
+                    <input name="answerContent" type="text" value="@item.NoiDungDapAn" placeholder="Sửa câu trả lời ">
+                    @if (item.DapAnDung)
+                    {
+                        <input name="trueAnswer" type="radio" value="@item.MaDapAn" checked><span>Đáp án đúng</span><br>
+                    }
+                    else
+                    {
+                        <input name="trueAnswer" type="radio" value="@item.MaDapAn"><span>Đáp án đúng</span><br>
+                    }
+                    <input name="answerId" type="hidden" value="@item.MaDapAn">
+                </div>
+            }
         }
         <div id="newQuestion">
             <input id="answerName" type="text" placeholder="Câu hỏi mới">
@@ -66,11 +69,11 @@
 
             success: function (response) {
                 if (response == 'Success') {
-                    alert("Xóa hỏi thành công!");
+                    alert("Sửa thành công!");
                     $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
                 }
                 else {
-                    alert("Xóa câu hỏi thất bại!");
+                    alert("Sửa thất bại!");
                 }
             }
         })

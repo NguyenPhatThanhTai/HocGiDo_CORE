@@ -272,10 +272,10 @@
     border-radius: 12px;
 }
 
-.exam p {
-    font-size: 20px;
+.exam #questName {
+    font-size: 15px;
     font-weight: bold;
-    padding: 20px;
+    padding: 20px 20px 20px 0;
 }
 
 .exam .answer label {

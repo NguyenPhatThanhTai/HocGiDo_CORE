@@ -58,11 +58,11 @@
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
                 @*<div id="exam_list"></div>*@
-                <div class="exam">
-                    @{ var i = 1; var j = 1;}
-                    @foreach (var items in Model.listQuestion.CauHoi)
-                    {
-                        <p>Câu @i: @items.NoiDungCauHoi</p>
+                @{ var i = 1; var j = 1;}
+                @foreach (var items in Model.listQuestion.CauHoi)
+                {
+                    <div class="exam">
+                        <p id="questName">Câu @i: @items.NoiDungCauHoi</p>
                         <form class="answer">
                             @if (items.DapAn != null)
                             {
@@ -73,11 +73,14 @@
                                 }
                             }
                         </form>
-                        i++;
-                        j = 1;
-                    }
-                </div>
-                <button class="submit">Kiểm tra!</button>
+                    </div>
+                    i++;
+                    j = 1;
+                }
+                @if (Model.listQuestion.CauHoi.Count > 0)
+                {
+                    <button class="submit">Kiểm tra!</button>
+                }
             </div>
 
             <div id="cmt" class="tabcontent">
