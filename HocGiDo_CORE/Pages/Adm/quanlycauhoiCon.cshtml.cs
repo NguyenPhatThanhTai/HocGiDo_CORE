@@ -25,9 +25,9 @@ namespace HocGiDo_CORE.Pages.Adm
         public AddExam exam { get; set; }
         public async Task<IActionResult> OnPostAddExam()
         {
-            if(exam.TenCauHoi != null && exam.MaBH != null)
+            if(exam.TenCauHoi != null && exam.MaBH != null && exam.TheLoai != null)
             {
-                ResultReturn result = await new ExcuteJsonClass().addQuestion(exam.TenCauHoi, "tracnghiem", exam.MaBH);
+                ResultReturn result = await new ExcuteJsonClass().addQuestion(exam.TenCauHoi, exam.TheLoai, exam.MaBH);
                 if(result.message.Equals("success"))
                 {
                     TempData["AdminResult"] = "Thêm câu hỏi thành công!";

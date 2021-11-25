@@ -13,5 +13,6 @@ namespace HocGiDo_CORE.ViewModels.Admin
         public string TenCauHoi { get; set; }
         public string TenDapAn { get; set; }
         public string DapAnDung { get; set; }
+        public string TheLoai { get; set; }
     }
 }

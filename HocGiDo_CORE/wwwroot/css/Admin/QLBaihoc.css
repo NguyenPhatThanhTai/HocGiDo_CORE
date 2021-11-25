@@ -269,6 +269,13 @@ main {
     border: none;
 }
 
+.leftInput input[type=radio] {
+    width: 10%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
 .leftInput textarea {
     display: block;
     width: 100%;
@@ -763,7 +770,7 @@ td {
         background-color: #1D2231;
         color: #fff;
         border-radius: 8px;
-        width: 30%;
+        width: fit-content;
         margin: 10px;
     }
 
@@ -779,6 +786,10 @@ td {
     .codeExam #addTestCase {
         border-top: 1px solid black;
     }
+
+.detailTestCase input[type=button] {
+    background-color: rgb(233, 60, 60);
+}
 
 @media only screen and (max-width: 1200px) {
     .sidebar {

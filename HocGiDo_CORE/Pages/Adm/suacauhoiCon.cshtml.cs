@@ -70,12 +70,12 @@ namespace HocGiDo_CORE.Pages.Adm
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostUpdateExam(string questName, AddExam[] listAnswer, string trueAnswer, string MaCH)
+        public async Task<IActionResult> OnPostUpdateExam(string questName, AddExam[] listAnswer, string trueAnswer, string MaCH, string type)
         {
             if(questName != null && listAnswer.Length > 0 && trueAnswer != null && MaCH != null)
             {
                 //update name of question first
-                ResultReturn updateNameQuestion = await new ExcuteJsonClass().updateExam(MaCH, questName, "tracnghiem");
+                ResultReturn updateNameQuestion = await new ExcuteJsonClass().updateExam(MaCH, questName, type);
                 bool checkUpdate = true;
 
                 //update answer
