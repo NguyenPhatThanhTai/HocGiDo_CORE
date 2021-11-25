@@ -384,7 +384,7 @@ td {
     background-color: rgb(111, 188, 190);
 }
 
-.listCourse td #delete {
+.listCourse td .delete {
     background-color: rgb(221, 55, 55);
 }
 
@@ -469,7 +469,7 @@ td {
     background-color: rgb(111, 188, 190);
 }
 
-.listCourse2 td #delete {
+.listCourse2 td .delete {
     background-color: rgb(221, 55, 55);
 }
 
@@ -653,6 +653,14 @@ td {
     color: #fff
 }
 
+.listAnswer {
+    display: none;
+}
+
+.listAnswer.active {
+    display: block;
+}
+
 .btnChoiceInUpdate.active {
     background-color: #DD2F6E;
     color: #fff
@@ -705,6 +713,72 @@ td {
     width: 30%;
     background-color: #1D2231;
 }
+
+.switchType {
+    border-bottom: 1px solid #1D2231;
+}
+
+    .switchType button {
+        padding: 10px;
+        margin: 10px 0 10px 10px;
+        border: none;
+        border-radius: 8px;
+        color: black;
+        background-color: rgb(219, 219, 219);
+        cursor: pointer;
+    }
+
+        .switchType button.active {
+            background-color: #eb6c9a;
+            color: #fff;
+        }
+
+.codeExam {
+    display: none;
+}
+
+    .codeExam.active {
+        display: block;
+    }
+
+    .codeExam #cke_questCode {
+        margin: 10px;
+    }
+
+    .codeExam input[type=text] {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 8px;
+        border: none;
+        width: 30%;
+    }
+
+        .codeExam input[type=text]:focus {
+            outline: none;
+        }
+
+    .codeExam input[type=button] {
+        border: none;
+        padding: 10px;
+        background-color: #1D2231;
+        color: #fff;
+        border-radius: 8px;
+        width: 30%;
+        margin: 10px;
+    }
+
+    .codeExam input[type=submit] {
+        border: none;
+        padding: 10px;
+        background-color: #e64b84;
+        color: #fff;
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .codeExam #addTestCase {
+        border-top: 1px solid black;
+    }
 
 @media only screen and (max-width: 1200px) {
     .sidebar {

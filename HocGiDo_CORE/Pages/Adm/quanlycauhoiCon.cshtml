@@ -32,9 +32,38 @@
                 }
          <td>
             <p id="detail" onclick="modalPopup('exam', 'null', '@Html.Raw(Model.lessonId)', '@Html.Raw(items.MaCauHoi)')">Sửa đáp án</p>
-            <p id="delete">Xóa</p>
+            <p class="delete" id="deleteExam" data-id="@items.MaCauHoi">Xóa</p>
          </td>
     </tr>
         }
     </table>
 </div>
+
+<script>
+    $(document).ready(function (e) {
+        $(document).on('click', '#deleteExam', function () {
+            var id = $(this).data("id").toString();
+            if (confirm('Xóa câu hỏi này?')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Adm/quanlycauhoiCon?handler=DeleteExam",
+                    data: {
+                        MaCH: id,
+                        MaBH: '@Model.lessonId'
+                    },
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+
+                    success: function (response) {
+                        window.location.reload(true);
+                    }
+                })
+            } else {
+                // Do nothing!
+            }
+        })
+    })
+</script>

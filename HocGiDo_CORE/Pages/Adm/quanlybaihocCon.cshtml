@@ -55,7 +55,7 @@
                     <td>@items.LuocHoc</td>
                     <td>
                         <p id="detail" onclick="modalPopup('lesson', '@Html.Raw(items.MaKH)', '@Html.Raw(items.MaBaiHoc)', 'null')">Sửa</p>
-                        <p id="delete" data-id="@items.MaBaiHoc">Xóa</p>
+                        <p class="delete" id="deleteLesson" data-id="@items.MaBaiHoc">Xóa</p>
                     </td>
                 </tr>
             }
@@ -168,25 +168,29 @@
             })
         })
 
-        $(document).on('click', '#delete', function () {
+        $(document).on('click', '#deleteLesson', function () {
             var id = $(this).data('id').toString();
-            $.ajax({
-                type: "POST",
-                url: "/Adm/quanlybaihocCon?handler=DeleteLesson",
-                data: {
-                    MaBH: id,
-                    MaKH: @Model.MaKH
-                },
-                dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("XSRF-TOKEN",
-                        $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
+            if (confirm('Xóa bài học này?')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Adm/quanlybaihocCon?handler=DeleteLesson",
+                    data: {
+                        MaBH: id,
+                        MaKH: '@Model.MaKH'
+                    },
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
 
-                success: function (response) {
-                    window.location.reload(true);
-                }
-            })
+                    success: function (response) {
+                        window.location.reload(true);
+                    }
+                })
+            } else {
+                // Do nothing!
+            }
         })
     })
 

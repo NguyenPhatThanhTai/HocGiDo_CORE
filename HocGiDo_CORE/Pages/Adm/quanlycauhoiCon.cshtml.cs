@@ -48,5 +48,32 @@ namespace HocGiDo_CORE.Pages.Adm
                 return RedirectToPage("/Adm/quanlybaihoc");
             }
         }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostDeleteExam(string MaCH, string MaBH)
+        {
+            if(MaCH != null && MaBH != null)
+            {
+                ResultReturn result = await new ExcuteJsonClass().deleteExam(MaCH);
+                if (result.message.Equals("success"))
+                {
+                    TempData["AdminResult"] = "Xóa câu hỏi thành công!";
+                    TempData["MaBH"] = MaBH;
+                    return new JsonResult("Success");
+                }
+                else
+                {
+                    TempData["AdminResult"] = "Xóa câu hỏi thất bại!";
+                    TempData["MaBH"] = MaBH;
+                    return new JsonResult("Failed");
+                }
+            }
+            else
+            {
+                TempData["AdminResult"] = "Có lỗi xảy ra!";
+                TempData["MaBH"] = MaBH;
+                return new JsonResult("Failed");
+            }
+        }
     }
 }

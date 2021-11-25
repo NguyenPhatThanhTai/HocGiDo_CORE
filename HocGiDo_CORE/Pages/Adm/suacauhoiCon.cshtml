@@ -3,8 +3,11 @@
 @{
     Layout = "";
 }
-
-<div class="listAnswer" style="width: 100%;">
+<div class="switchType">
+    <button class="choseExamType">Trắc nghiệm</button>
+    <button class="choseExamType">Tự luận</button>
+</div>
+<div class="listAnswer typeCode" style="width: 100%;">
     <form id="updateExam">
         <div id="question">
             <input id="questName" type="text" value="@Model.question.NoiDungCauHoi" placeholder="Sửa câu hỏi">
@@ -36,8 +39,51 @@
         <input type="submit" value="Cập nhật">
     </form>
 </div>
+<div class="codeExam typeCode">
+    <div id="questCode"></div>
+    <div>
+        <input type="text" placeholder="Test case">
+        <input type="text" placeholder="Kết quả">
+    </div>
+    <div>
+        <input type="text" placeholder="Test case">
+        <input type="text" placeholder="Kết quả">
+    </div>
+    <div>
+        <input type="text" placeholder="Test case">
+        <input type="text" placeholder="Kết quả">
+    </div>
+    <div>
+        <input type="text" placeholder="Test case">
+        <input type="text" placeholder="Kết quả">
+    </div>
+    <div id="addTestCase">
+        <input type="text" placeholder="Test case mới">
+        <input type="text" placeholder="Kết quả mới">
+        <input type="button" value="Thêm test case">
+    </div>
+    <input type="submit" value="Lưu câu hỏi">
+</div>
 
 <script>
+    CKEDITOR.replace('questCode');
+    var typeExam = document.querySelectorAll(".choseExamType");
+    typeExam[0].classList.add("active");
+
+    document.getElementsByClassName("typeCode")[0].classList.add("active");
+
+    typeExam.forEach(function (item, index) {
+        item.addEventListener('click', function () {
+            for (i = 0; i < typeExam.length; i++) {
+                typeExam[i].classList.remove("active");
+                document.getElementsByClassName("typeCode")[i].classList.remove("active");
+            }
+            this.classList.add("active");
+            console.log(index)
+            document.getElementsByClassName("typeCode")[index].classList.add("active");
+        })
+    })
+
     $('#updateExam').submit(function (e) {
         e.preventDefault();
 
