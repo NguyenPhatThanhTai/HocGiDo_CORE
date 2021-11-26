@@ -57,11 +57,15 @@
                 <div class="tryIt">
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
-                @{ var i = 1; var j = 1;}
+                <script>
+                    var test_case_array = [];
+                </script>
+                @{ var i = 1; var j = 1; bool isEssay = true;}
                 @foreach (var items in Model.listQuestion.CauHoi)
                 {
                     @if (items.TheLoai.Equals("tracnghiem"))
                     {
+                        isEssay = false;
                         <div class="exam">
                             <p id="questName">Câu @i: @items.NoiDungCauHoi</p>
                             <form class="answer">
@@ -91,6 +95,18 @@
 
                         @if (items.DapAn != null)
                         {
+                            <script>
+                                var myCodeMirrorEssay = CodeMirror.fromTextArea(essayCode, {
+                                    tabSize: 4,
+                                    mode: "javascript",
+                                    theme: 'dracula',
+                                    styleActiveSelected: true,
+                                    styleActiveLine: true,
+                                    indentWithTabs: true,
+                                    matchBrackets: true,
+                                    highlightMatches: true,
+                                })
+                            </script>
                             var hidden = 0;
                             @foreach (var item in items.DapAn)
                             {
@@ -98,7 +114,14 @@
                                     var check = @hidden;
                                     var descrypted = CryptoJS.AES.decrypt('@Html.Raw(item.NoiDungDapAn)', '@Model.lessonID').toString(CryptoJS.enc.Utf8);
                                     descrypted = JSON.parse(descrypted);
-                                    $('#testCaseList').append('<input class="testCaseDetail" type="text" disabled value="Test case: ' + check + ' - ' + descrypted.array + '">');
+                                    var array = {
+                                        "array": JSON.parse(descrypted.array),
+                                        "result": descrypted.result,
+                                        "MaDA": '@item.MaDapAn'
+                                    }
+
+                                    test_case_array.push(array);
+                                    $('#testCaseList').append('<input class="testCaseDetail" id="@item.MaDapAn" type="text" disabled value="Test case: ' + check + ' - ' + descrypted.array + '">');
 
                                 </script>
 
@@ -107,7 +130,7 @@
                         }
                     }
                 }
-                @if (Model.listQuestion.CauHoi.Count > 0)
+                @if (Model.listQuestion.CauHoi.Count > 0 && !isEssay)
                 {
                     <button class="submit">Kiểm tra!</button>
                 }
@@ -145,6 +168,29 @@
         <script src="~/js/baihoc.js"></script>
     }*@
 <script>
+    console.log(test_case_array);
+
+    $("#runTestCase").click(function (e) {
+        e.preventDefault();
+
+        var code_to = myCodeMirrorEssay.getValue();
+        try {
+            test_case_array.forEach(function (items, index) {
+                var Array_test = items.array;
+                var result_code = new Function('Array_test', code_to)(Array_test)
+                if (result_code == items.result) {
+                    console.log("case " + Number(index + 1) + "đúng")
+                    $("#" + items.MaDA.toString()).css({ backgroundColor: "#3AC37F" });
+                } else {
+                    console.log("case " + Number(index + 1) + " sai")
+                    $("#" + items.MaDA.toString()).css({ backgroundColor: "#ED5B5B" });
+                };
+            })
+        } catch (err) {
+            alert("Lỗi code " + err);
+        }
+    })
+
     $(".submit").click(function (e) {
         e.preventDefault();
 
