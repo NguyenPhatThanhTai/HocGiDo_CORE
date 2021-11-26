@@ -18,6 +18,7 @@ namespace HocGiDo_CORE.Pages
         public ListLesson listLesson { get; set; }
         public ListQuestion listQuestion { get; set; }
         public string courseID;
+        public string lessonID;
         public bool checkSavedLesson = false;
 
         public async Task<IActionResult> OnGet(string kh, string bh)
@@ -46,6 +47,7 @@ namespace HocGiDo_CORE.Pages
                     listQuestion = await new ExcuteJsonClass().getIdExamOfLesson(bh);
 
                     courseID = kh;
+                    lessonID = bh;
 
                     UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
                     ResultReturn resultReturn = await new ExcuteJsonClass().checkSaveLesson(bh, userInf.user.MaND);

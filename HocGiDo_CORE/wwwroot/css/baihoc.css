@@ -397,6 +397,52 @@
         margin: 10px;
     }
 
+.exam_essay {
+    margin-top: 100px;
+}
+
+    .exam_essay h4 {
+        padding: 10px;
+        background-color: rgb(224, 224, 224);
+        margin: 10px;
+        border-radius: 8px;
+    }
+
+    .exam_essay #runTestCase {
+        padding: 10px;
+        border: none;
+        margin-left: 10px;
+        background-color: coral;
+        color: #fff;
+        width: fit-content;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .exam_essay #testCaseList {
+        margin: 10px;
+        padding: 10px 0 0 0;
+        width: 100%;
+    }
+
+        .exam_essay #testCaseList input {
+            margin: 5px 10px 0 0;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .exam_essay #testCaseList .testCaseDetail {
+            width: 30%;
+            background-color: #11101d;
+        }
+
+        .exam_essay #testCaseList #testCaseResult {
+            width: 25%;
+            background-color: coral;
+        }
+
 @media only screen and (max-width: 600px) {
     .left_content {
         width: 100%;
@@ -407,4 +453,13 @@
         width: 100%;
         height: 100%;
     }
+    .exam_essay #testCaseList {
+        padding: 0;
+        margin: 0;
+    }
+
+        .exam_essay #testCaseList .testCaseDetail {
+            width: 100%;
+            background-color: #11101d;
+        }
 }

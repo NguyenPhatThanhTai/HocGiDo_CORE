@@ -57,25 +57,55 @@
                 <div class="tryIt">
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
-                @*<div id="exam_list"></div>*@
                 @{ var i = 1; var j = 1;}
                 @foreach (var items in Model.listQuestion.CauHoi)
                 {
-                    <div class="exam">
-                        <p id="questName">Câu @i: @items.NoiDungCauHoi</p>
-                        <form class="answer">
-                            @if (items.DapAn != null)
-                            {
-                                @foreach (var items2 in items.DapAn)
+                    @if (items.TheLoai.Equals("tracnghiem"))
+                    {
+                        <div class="exam">
+                            <p id="questName">Câu @i: @items.NoiDungCauHoi</p>
+                            <form class="answer">
+                                @if (items.DapAn != null)
                                 {
-                                    <div><input type="radio" name="@i" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
-                                    j++;
+                                    @foreach (var items2 in items.DapAn)
+                                    {
+                                        <div><input type="radio" name="@i" value="@items2.NoiDungDapAn" id="@i@j"><label for="@i@j">@items2.NoiDungDapAn</label></div><br>
+                                        j++;
+                                    }
                                 }
+                            </form>
+                        </div>
+                        i++;
+                        j = 1;
+                    }
+                    else
+                    {
+                        <div class="exam_essay">
+                            <h4>@items.NoiDungCauHoi</h4>
+                            <textarea id="essayCode" name="codeEssay" placeholder="Code trực tiếp ở đây"></textarea>
+                            <button id="runTestCase">Chạy test case!</button>
+                            <div id="testCaseList">
+
+                            </div>
+                        </div>
+
+                        @if (items.DapAn != null)
+                        {
+                            var hidden = 0;
+                            @foreach (var item in items.DapAn)
+                            {
+                                <script>
+                                    var check = @hidden;
+                                    var descrypted = CryptoJS.AES.decrypt('@Html.Raw(item.NoiDungDapAn)', '@Model.lessonID').toString(CryptoJS.enc.Utf8);
+                                    descrypted = JSON.parse(descrypted);
+                                    $('#testCaseList').append('<input class="testCaseDetail" type="text" disabled value="Test case: ' + check + ' - ' + descrypted.array + '">');
+
+                                </script>
+
+                                hidden++;
                             }
-                        </form>
-                    </div>
-                    i++;
-                    j = 1;
+                        }
+                    }
                 }
                 @if (Model.listQuestion.CauHoi.Count > 0)
                 {
