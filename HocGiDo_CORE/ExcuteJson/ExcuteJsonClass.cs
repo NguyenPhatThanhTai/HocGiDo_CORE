@@ -503,5 +503,13 @@ namespace HocGiDo_CORE.ExcuteJson
                 return null;
             }
         }
+
+        public async Task<ListUser> getListUser()
+        {
+            var responseString = await client.GetStringAsync(new ApiContain().getUrlApi("listUser"));
+            var resp = JsonConvert.DeserializeObject<ListUser>(responseString);
+
+            return resp;
+        }
     }
 }
