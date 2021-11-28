@@ -2,6 +2,7 @@
 var html = document.getElementById("code");
 var css = document.getElementById("css");
 var js = document.getElementById("js");
+var backendCode = document.getElementById("backend");
 
 var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     tabSize: 4,
@@ -40,6 +41,17 @@ var myCodeMirrorJs = CodeMirror.fromTextArea(js, {
     readOnly: true
 });
 
+var myCodeMirrorJava = CodeMirror.fromTextArea(backendCode, {
+    tabSize: 4,
+    mode: "text/x-java",
+    theme: 'dracula',
+    styleActiveSelected: true,
+    styleActiveLine: true,
+    indentWithTabs: true,
+    matchBrackets: true,
+    highlightMatches: true,
+});
+
 function setCodeExample(examPCode, key) {
     console.log("truoc khi encrypt: " + examPCode)
     var decrypted = CryptoJS.AES.decrypt(examPCode, key).toString(CryptoJS.enc.Utf8);
@@ -47,14 +59,26 @@ function setCodeExample(examPCode, key) {
     console.log("Sau khi encrypt: " + decrypted);
     decrypted = JSON.parse(decrypted);
 
-    var htmlSet = decrypted[0].join(" ");
-    myCodeMirrorHtml.getDoc().setValue(htmlSet);
+    if (decrypted[1] != null && decrypted[2] != null) {
+        $('.example').css({ display: "block" });
+        $('.exampleBackEndCode').css({ display: "none" });
 
-    var cssSet = decrypted[1].join(" ");
-    myCodeMirrorCss.getDoc().setValue(cssSet);
+        var htmlSet = decrypted[0].join(" ");
+        myCodeMirrorHtml.getDoc().setValue(htmlSet);
 
-    var jsSet = decrypted[2].join(" ");
-    myCodeMirrorJs.getDoc().setValue(jsSet);
+        var cssSet = decrypted[1].join(" ");
+        myCodeMirrorCss.getDoc().setValue(cssSet);
+
+        var jsSet = decrypted[2].join(" ");
+        myCodeMirrorJs.getDoc().setValue(jsSet);
+    }
+    else {
+        $('.example').css({ display: "none" });
+        $('.exampleBackEndCode').css({ display: "block" });
+
+        var backendCode = decrypted[0].join(" ");
+        myCodeMirrorJava.getDoc().setValue(backendCode);
+    }
 }
 
 function setDescripsion(descripsion, key) {

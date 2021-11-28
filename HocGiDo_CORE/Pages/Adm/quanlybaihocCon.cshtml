@@ -22,6 +22,11 @@
             <div id="editor">
                 <p>This is the editor content.</p>
             </div>
+            <select class="selectCodeSide">
+                <option disabled selected>Chọn ngôn ngữ</option>
+                <option value="front">Phía Front-End</option>
+                <option value="back">Phía Back-End</option>
+            </select>
             <div class="example">
                 <div id="choice">
                     <button type="button" class="btnChoice">HTML</button>
@@ -38,6 +43,9 @@
                     <textarea rows="5" placeholder="JS" id="js"></textarea>
                 </div>
             </div>
+            <div class="exampleBackEndCode">
+                <textarea rows="5" placeholder="Backend Code" id="backend"></textarea>
+             </div>
             <input id="submit" type="submit" value="Thêm bài học">
         </form>
     </div>
@@ -111,6 +119,17 @@
     var myCodeMirrorJs;
     var myCodeMirrorJava;
 
+    myCodeMirrorJava = CodeMirror.fromTextArea(document.getElementById("backend"), {
+        tabSize: 4,
+        mode: "text/x-java",
+        theme: 'dracula',
+        styleActiveSelected: true,
+        styleActiveLine: true,
+        indentWithTabs: true,
+        matchBrackets: true,
+        highlightMatches: true,
+    });
+
     $(document).ready(function () {
         textAreaCode[0].style.display = "block";
         buttonChoice[0].classList.add("active");
@@ -127,6 +146,24 @@
             $('#loadExamOfLesson').load('/Adm/quanlycauhoiCon?bh=' + this.value);
         });
 
+        $('.selectCodeSide').on('change', function() {
+            if (this.value == 'front') {
+                $('.example').css({ display: "block" });
+                $('.exampleBackEndCode').css({ display: "none" });
+            } else {
+                $('.example').css({ display: "none" });
+                $('.exampleBackEndCode').css({ display: "block" });
+
+            // $('.selectCodeLanguage').on('change', function() {
+            //     if (this.value == 'java') {
+            //         myCodeMirrorJava.setOption("mode", "text/x-java");
+            //     } else {
+            //         myCodeMirrorJava.setOption("mode", "text/x-csharp");
+            //     }
+            // })
+            }
+        })
+
         $('#addLessonForm').on('submit', function (e) {
             e.preventDefault();
             console.log("vao lesson");
@@ -135,9 +172,19 @@
             var cssArray = myCodeMirrorCss.getValue().split(" ");
             var jsArray = myCodeMirrorJs.getValue().split(" ");
 
-            var totalArray = [
-                htmlArray, cssArray, jsArray
-            ]
+            var totalArray = [];
+
+            if($('.selectCodeSide').val() == 'back'){
+                var javaArray = myCodeMirrorJava.getValue().split(" ");
+                totalArray.push(javaArray)
+            }
+            else{
+                totalArray.push(htmlArray);
+                totalArray.push(cssArray);
+                totalArray.push(jsArray);
+            }
+
+            console.log(totalArray);
 
             var encryptLyThuyet = CryptoJS.AES.encrypt(CKEDITOR.instances.editor.getData(), $(this).find('input[name="MaKH"]').val().toString());
             var encryptCodeMau = CryptoJS.AES.encrypt(JSON.stringify(totalArray), $(this).find('input[name="MaKH"]').val().toString());
@@ -262,11 +309,10 @@
                 });
                 break;
             case "java":
-                myCodeMirrorJava = CodeMirror.fromTextArea(document.getElementById("java"), {
+                myCodeMirrorJava = CodeMirror.fromTextArea(document.getElementById("backendUpdate"), {
                     tabSize: 4,
-                    mode: "css",
+                    mode: "text/x-java",
                     theme: 'dracula',
-                    lineNumbers: true,
                     styleActiveSelected: true,
                     styleActiveLine: true,
                     indentWithTabs: true,

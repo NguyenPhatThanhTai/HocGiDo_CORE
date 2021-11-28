@@ -119,6 +119,14 @@
         border: none;
         border-radius: 10px;
     }
+
+    .frontend {
+        display: none;
+    }
+
+    .backend {
+        display: none;
+    }
     
     @media screen and (max-width: 600px) {
         .left {

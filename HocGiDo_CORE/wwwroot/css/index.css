@@ -286,7 +286,7 @@
                 opacity: 0;
             }
 
-            .sideBar ul li:hover .tooltip {
+/*            .sideBar ul li:hover .tooltip {
                 top: 50%;
                 opacity: 1;
             }
@@ -294,7 +294,7 @@
     .sideBar.active ul li:hover .tooltip {
         top: 50%;
         opacity: 0;
-    }
+    }*/
 
     .sideBar ul li input {
         position: absolute;

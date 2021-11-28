@@ -11,7 +11,7 @@ namespace HocGiDo_CORE.ModelsJson
         public string MaTK { get; set; }
         public string TenTK { get; set; }
         public string MatKhau { get; set; }
-        public string Quyen { get; set; }
+        public bool Quyen { get; set; }
         public string MaND { get; set; }
         public string HoTen { get; set; }
         public string NgaySinh { get; set; }

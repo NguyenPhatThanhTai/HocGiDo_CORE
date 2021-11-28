@@ -11,6 +11,7 @@
     <script src="~/Resource/lib/codemirror.js"></script>
     <script type="text/javascript" src="~/Resource/mode/xml/xml.js"></script>
     <script type="text/javascript" src="~/Resource/mode/css/css.js"></script>
+    <script type="text/javascript" src="~/Resource/mode/clike/clike.js"></script>
     <script src="https://unpkg.com/typeit@8.0.3/dist/index.umd.js"></script>
     <script src="~/Resource/mode/javascript/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -53,6 +54,9 @@
                     <div class="code">
                         <textarea id="js"></textarea>
                     </div>
+                </div>
+                <div class="exampleBackEndCode">
+                    <textarea rows="5" placeholder="Backend Code" id="backend"></textarea>
                 </div>
                 <div class="tryIt">
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>

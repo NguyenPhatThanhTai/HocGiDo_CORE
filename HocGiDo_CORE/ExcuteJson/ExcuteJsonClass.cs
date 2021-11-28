@@ -511,5 +511,54 @@ namespace HocGiDo_CORE.ExcuteJson
 
             return resp;
         }
+
+        public async Task<ResultReturn> deleteUser(string MaTK, string MaND)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"maTK",""+MaTK+""},
+                    {"maND",""+MaND+""},
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("deleteUser"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ResultReturn> upToAdmin(string MaTK)
+        {
+            var data = new Dictionary<string, object>
+                {
+                    {"maTK",""+MaTK+""}
+                };
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(new ApiContain().getUrlApi("upToAdmin"), contentData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stringData = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResultReturn>(stringData);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

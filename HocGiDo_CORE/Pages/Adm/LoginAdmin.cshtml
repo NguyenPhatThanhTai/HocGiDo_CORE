@@ -1,0 +1,44 @@
+﻿@page
+@model HocGiDo_CORE.Pages.Adm.LoginAdminModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Admin/LoginAdmin.css">
+    <link rel="stylesheet" type="text/css" href="~/css/alert.css">
+    <title>Đăng nhập Admin</title>
+</head>
+
+<body>
+    @if (ViewData["LoginResult"] != null)
+    {
+    <div class="alert" id="alert">
+        <div class="content_alert">
+            <b>Thông báo: </b>@ViewData["LoginResult"]
+            <a class="btn_close" onclick="document.getElementById('alert').style.display = 'none'"><i class='bx bx-x'></i></a>
+        </div>
+    </div>
+    }
+    <div class="container">
+        <form class="form-login" method="post">
+            <h1>Đăng Nhập Admin</h1>
+            <div class="form-text">
+                <input type="text" placeholder="Tài khoản Admin" asp-for="loginAdmin.UserName">
+            </div>
+            <div class="form-text">
+                <input type="password" placeholder="Mật khẩu Admin" asp-for="loginAdmin.Passworld">
+            </div>
+            <input type="submit" value="Đăng nhập">
+        </form>
+    </div>
+</body>
+
+</html>

@@ -633,6 +633,14 @@ td {
     display: none;
 }
 
+.example {
+    display: none;
+}
+
+.exampleBackEndCode {
+    display: none;
+}
+
 .example #choice {
     text-align: left;
     margin: 10px 0 10px 10px;
@@ -790,6 +798,18 @@ td {
 .detailTestCase input[type=button] {
     background-color: rgb(233, 60, 60);
 }
+
+.selectCodeSide {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px;
+    border: none;
+}
+
+    .selectCodeSide:focus {
+        outline: none;
+    }
 
 @media only screen and (max-width: 1200px) {
     .sidebar {

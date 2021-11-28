@@ -86,6 +86,18 @@
     padding: 0 0 0 5px;
 }
 
+.bx-comment-detail {
+    top: 17px;
+}
+
+.bx-book-reader {
+    top: 15px;
+}
+
+.bx-save {
+    top: 16px;
+}
+
 
 /* Change background color of buttons on hover */
 
@@ -113,6 +125,14 @@
 .tabcontent p {
     margin: 10px 0 10px 0;
     text-indent: 50px;
+}
+
+.example {
+    display: none;
+}
+
+.exampleBackEndCode {
+    display: none;
 }
 
 .example #choice {

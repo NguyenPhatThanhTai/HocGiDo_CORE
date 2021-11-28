@@ -7,8 +7,10 @@ using HocGiDo_CORE.ExcuteJson;
 using HocGiDo_CORE.ModelsJson;
 using HocGiDo_CORE.ViewModels.Admin;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace HocGiDo_CORE.Pages.Adm
 {
@@ -25,8 +27,24 @@ namespace HocGiDo_CORE.Pages.Adm
         public Course listCourse { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            listCourse = await new ExcuteJsonClass().getCourse();
-            return Page();
+            var logined = HttpContext.Session.GetString("AdminLogined");
+            if (logined != null)
+            {
+                UserInf userInf = JsonConvert.DeserializeObject<UserInf>(logined);
+                if (userInf.user.Quyen == true)
+                {
+                    listCourse = await new ExcuteJsonClass().getCourse();
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("/Adm/LoginAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToPage("/Adm/LoginAdmin");
+            }
         }
 
         [BindProperty]

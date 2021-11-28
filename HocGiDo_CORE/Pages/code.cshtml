@@ -19,9 +19,11 @@
     <script src="~/Resource/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="~/Resource/mode/xml/xml.js"></script>
     <script type="text/javascript" src="~/Resource/mode/css/css.js"></script>
+    <script type="text/javascript" src="~/Resource/mode/clike/clike.js"></script>
     <script src="https://unpkg.com/typeit@8.0.3/dist/index.umd.js"></script>
     <link rel="stylesheet" href="~/css/code.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 
@@ -46,20 +48,25 @@
                 </div>
             </div>
         </div>
-        <div class="code_side">
-            <p class="tittle">Html</p>
-            <textarea id="html" disabled></textarea>
-            <p class="tittle">Css</p>
-            <textarea id="css"></textarea>
+        <div class="frontend">
+            <div class="code_side">
+                <p class="tittle">Html</p>
+                <textarea id="html" disabled></textarea>
+                <p class="tittle">Css</p>
+                <textarea id="css"></textarea>
+            </div>
+            <div class="code_side">
+                <p class="tittle">Javascript</p>
+                <textarea id="javascript"></textarea>
+                <p class="tittle">Ghi chú</p>
+                <textarea id="text"></textarea>
+            </div>
+            <div class="result">
+                <iframe class="out" id="out"></iframe>
+            </div>
         </div>
-        <div class="code_side">
-            <p class="tittle">Javascript</p>
-            <textarea id="javascript"></textarea>
-            <p class="tittle">Ghi chú</p>
-            <textarea id="text"></textarea>
-        </div>
-        <div class="result">
-            <iframe class="out" id="out"></iframe>
+        <div class="backend">
+            <textarea id="backendCode"></textarea>
         </div>
     </div>
 </body>

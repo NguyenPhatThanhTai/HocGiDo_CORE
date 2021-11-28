@@ -2,6 +2,7 @@ var html = document.getElementById("html");
 var css = document.getElementById("css");
 var js = document.getElementById("javascript");
 var text = document.getElementById("text");
+var backend = document.getElementById("backendCode");
 
 var myCodeMirrorHtml = CodeMirror.fromTextArea(html, {
     tabSize: 4,
@@ -21,6 +22,8 @@ var myCodeMirrorCss = CodeMirror.fromTextArea(css, {
     mode: "css",
     theme: 'dracula',
     lineNumbers: true,
+    gutter: true,
+    lineWrapping: true,
     styleActiveSelected: true,
     styleActiveLine: true,
     indentWithTabs: true,
@@ -33,6 +36,8 @@ var myCodeMirrorJs = CodeMirror.fromTextArea(js, {
     mode: "javascript",
     theme: 'dracula',
     lineNumbers: true,
+    gutter: true,
+    lineWrapping: true,
     styleActiveSelected: true,
     styleActiveLine: true,
     indentWithTabs: true,
@@ -45,6 +50,22 @@ var myCodeMirrorText = CodeMirror.fromTextArea(text, {
     mode: "text",
     theme: 'dracula',
     lineNumbers: true,
+    gutter: true,
+    lineWrapping: true,
+    styleActiveSelected: true,
+    styleActiveLine: true,
+    indentWithTabs: true,
+    matchBrackets: true,
+    highlightMatches: true,
+});
+
+var myCodeMirrorBackend = CodeMirror.fromTextArea(backend, {
+    tabSize: 4,
+    mode: "text/x-java",
+    theme: 'dracula',
+    lineNumbers: true,
+    gutter: true,
+    lineWrapping: true,
     styleActiveSelected: true,
     styleActiveLine: true,
     indentWithTabs: true,
@@ -59,14 +80,26 @@ function addCodeExample(expCode, key) {
     console.log("Sau khi encrypt: " + decrypted);
     decrypted = JSON.parse(decrypted);
 
-    var htmlSet = decrypted[0].join(" ");
-    myCodeMirrorHtml.getDoc().setValue(htmlSet);
+    if (decrypted[1] != null && decrypted[2] != null) {
+        $('.frontend').css({ display: "block" });
+        $('.backend').css({ display: "none" });
 
-    var cssSet = decrypted[1].join(" ");
-    myCodeMirrorCss.getDoc().setValue(cssSet);
+        var htmlSet = decrypted[0].join(" ");
+        myCodeMirrorHtml.getDoc().setValue(htmlSet);
 
-    var jsSet = decrypted[2].join(" ");
-    myCodeMirrorJs.getDoc().setValue(jsSet);
+        var cssSet = decrypted[1].join(" ");
+        myCodeMirrorCss.getDoc().setValue(cssSet);
+
+        var jsSet = decrypted[2].join(" ");
+        myCodeMirrorJs.getDoc().setValue(jsSet);
+    }
+    else {
+        $('.backend').css({ display: "block" });
+        $('.frontend').css({ display: "none" });
+
+        var backendCode = decrypted[0].join(" ");
+        myCodeMirrorBackend.getDoc().setValue(backendCode);
+    }
 }
 // var Css = document.querySelector(".Css ");
 var outPut = document.querySelector(".out");

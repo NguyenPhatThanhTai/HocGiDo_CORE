@@ -100,6 +100,12 @@ namespace HocGiDo_CORE.ExcuteJson
                 case "listUser":
                     api = "api/tatcanguoidung";
                     break;
+                case "deleteUser":
+                    api = "api/xoanguoidung";
+                    break;
+                case "upToAdmin":
+                    api = "api/lencap";
+                    break;
                 default:
                     return null;
             }
