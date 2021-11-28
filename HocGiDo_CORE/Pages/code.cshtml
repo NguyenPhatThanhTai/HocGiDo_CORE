@@ -48,6 +48,10 @@
                 </div>
             </div>
         </div>
+        <select class="selectCodeType">
+            <option selected value="front">Front-end</option>
+            <option value="back">Back-end(Java)</option>
+        </select>
         <div class="frontend">
             <div class="code_side">
                 <p class="tittle">Html</p>
@@ -67,6 +71,7 @@
         </div>
         <div class="backend">
             <textarea id="backendCode"></textarea>
+            <textarea disabled id="resultBackendCode" rows="20"></textarea>
         </div>
     </div>
 </body>
@@ -77,7 +82,24 @@
 
 @if (Model.lesson != null)
 {
-<script>
-    addCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaKH)");
-</script>
+    <script>
+        addCodeExample("@Html.Raw(@Model.lesson.CodeMau)", "@Html.Raw(@Model.lesson.MaKH)");
+    </script>
+}
+else
+{
+    <script>
+        $('.frontend').css({ display: "block" });
+        $('.backend').css({ display: "none" });
+        $('.selectCodeType').on('change', function(){
+            if(this.value == 'front'){
+                $('.frontend').css({ display: "block" });
+                $('.backend').css({ display: "none" });
+            }
+            else{
+                $('.backend').css({ display: "block" });
+                $('.frontend').css({ display: "none" });
+            }
+        })
+    </script>
 }

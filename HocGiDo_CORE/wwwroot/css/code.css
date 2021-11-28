@@ -127,6 +127,26 @@
     .backend {
         display: none;
     }
+
+    .backend #resultBackendCode {
+        width: 100%;
+        background-color: black;
+        color: #fff;
+        border-radius: 10px;
+        resize: none;
+    }
+
+    .selectCodeType {
+        padding: 10px;
+        margin: 10px 0 10px 0;
+        border-radius: 8px;
+        border: none;
+        width: fit-content;
+    }
+
+    .selectCodeType:focus {
+        outline: none;
+    }
     
     @media screen and (max-width: 600px) {
         .left {

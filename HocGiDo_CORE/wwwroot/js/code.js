@@ -80,9 +80,12 @@ function addCodeExample(expCode, key) {
     console.log("Sau khi encrypt: " + decrypted);
     decrypted = JSON.parse(decrypted);
 
+    $('.selectCodeType').prop('disabled', true);
+
     if (decrypted[1] != null && decrypted[2] != null) {
         $('.frontend').css({ display: "block" });
         $('.backend').css({ display: "none" });
+        $('.selectCodeType option[value=front]').attr('selected', 'selected');
 
         var htmlSet = decrypted[0].join(" ");
         myCodeMirrorHtml.getDoc().setValue(htmlSet);
@@ -96,6 +99,7 @@ function addCodeExample(expCode, key) {
     else {
         $('.backend').css({ display: "block" });
         $('.frontend').css({ display: "none" });
+        $('.selectCodeType option[value=back]').attr('selected', 'selected');
 
         var backendCode = decrypted[0].join(" ");
         myCodeMirrorBackend.getDoc().setValue(backendCode);
@@ -105,47 +109,73 @@ function addCodeExample(expCode, key) {
 var outPut = document.querySelector(".out");
 
 function sendCode() {
-    var style = document.createElement("style");
-    var script = document.createElement("script");
-    var doc = outPut.contentDocument;
+    if ($('.selectCodeType').val() == "front") {
+        var style = document.createElement("style");
+        var script = document.createElement("script");
+        var doc = outPut.contentDocument;
 
-    //add dữ liệu vô
-    doc.body.innerHTML = myCodeMirrorHtml.getValue();
-    //
-    var htmlArray = myCodeMirrorHtml.getValue().split(" ");
-    var jsArray = myCodeMirrorJs.getValue().split(" ");
-    var cssArray = myCodeMirrorCss.getValue().split(" ");
+        //add dữ liệu vô
+        doc.body.innerHTML = myCodeMirrorHtml.getValue();
+        //
+        var htmlArray = myCodeMirrorHtml.getValue().split(" ");
+        var jsArray = myCodeMirrorJs.getValue().split(" ");
+        var cssArray = myCodeMirrorCss.getValue().split(" ");
 
-    var totalArray = [
-        htmlArray, cssArray, jsArray
-    ]
+        var totalArray = [
+            htmlArray, cssArray, jsArray
+        ]
 
-    console.log(totalArray)
-    //document.getElementById("testhere").value = JSON.stringify(totalArray);
-    //var type = document.getElementById("testhere").value.toString().replaceAll(",", " ");
-    // myCodeMirrorHtml.getDoc().setValue(type);
+        console.log(totalArray)
+        //document.getElementById("testhere").value = JSON.stringify(totalArray);
+        //var type = document.getElementById("testhere").value.toString().replaceAll(",", " ");
+        // myCodeMirrorHtml.getDoc().setValue(type);
 
-    style.innerHTML = myCodeMirrorCss.getValue();
-    doc.body.appendChild(style);
+        style.innerHTML = myCodeMirrorCss.getValue();
+        doc.body.appendChild(style);
 
-    script.innerHTML = myCodeMirrorJs.getValue();
-    script.type = 'text/javascript';
-    doc.head.appendChild(script);
+        script.innerHTML = myCodeMirrorJs.getValue();
+        script.type = 'text/javascript';
+        doc.head.appendChild(script);
 
-    //libary
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
-    doc.head.appendChild(link);
-    var ajax = document.createElement("script");
-    ajax.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
-    doc.head.appendChild(ajax);
-    var bootstrap = document.createElement("script");
-    bootstrap.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
-    doc.head.appendChild(bootstrap);
+        //libary
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
+        doc.head.appendChild(link);
+        var ajax = document.createElement("script");
+        ajax.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+        doc.head.appendChild(ajax);
+        var bootstrap = document.createElement("script");
+        bootstrap.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+        doc.head.appendChild(bootstrap);
 
-    //sau khi add xong
-    document.getElementById("out").scrollIntoView();
+        //sau khi add xong
+        document.getElementById("out").scrollIntoView();
+    }
+    else {
+        var code = myCodeMirrorBackend.getValue();
+        var dict = {
+            "test": "val1",
+            "code": code
+        };
+
+        $.ajax({
+            url: "https://dht-tracuu.herokuapp.com/compiler",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(dict),
+            dataType: "json",
+            success: function (response) {
+                document.getElementById("resultBackendCode").value = response.result;
+
+                //sau khi add xong
+                document.getElementById("resultBackendCode").scrollIntoView();
+            },
+            error: function (xhr, status) {
+                alert("error");
+            }
+        });
+    }
 }
 
 function back() {
