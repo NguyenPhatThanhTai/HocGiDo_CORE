@@ -138,89 +138,99 @@ else
     $('#updateTestCase').submit(function (e) {
         e.preventDefault();
 
-        var value = [];
-        $('.detailTestCase').each(function () {
-            var testCase = {
-                array: $(this).find("input[name='testCaseArray']").val(),
-                result: $(this).find("input[name='testCaseResult']").val(),
-            }
-
-            var encryptCauHoi = CryptoJS.AES.encrypt(JSON.stringify(testCase), '@Model.MaBH');
-
-            var answer = {
-                MaDA: $(this).find("input[name='testCaseId']").val(),
-                TenDapAn: encryptCauHoi.toString()
-            };
-
-            value.push(answer);
-        })
-
-        console.log(value);
-
-        $.ajax({
-            type: "POST",
-            url: "/Adm/suacauhoiCon?handler=UpdateExam",
-            data: {
-                MaCH: '@Model.MaCH',
-                questName: $('#questNameTestCase').val(),
-                listAnswer: value,
-                trueAnswer: "false",
-                type: "tuluan"
-            },
-            dataType: "json",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("XSRF-TOKEN",
-                    $('input:hidden[name="__RequestVerificationToken"]').val());
-            },
-
-            success: function (response) {
-                if (response == 'Success') {
-                    alert("Sửa thành công!");
-                    $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+        if($('#questNameTestCase').val() != ''){
+            var value = [];
+            $('.detailTestCase').each(function () {
+                var testCase = {
+                    array: $(this).find("input[name='testCaseArray']").val(),
+                    result: $(this).find("input[name='testCaseResult']").val(),
                 }
-                else {
-                    alert("Sửa thất bại!");
+
+                var encryptCauHoi = CryptoJS.AES.encrypt(JSON.stringify(testCase), '@Model.MaBH');
+
+                var answer = {
+                    MaDA: $(this).find("input[name='testCaseId']").val(),
+                    TenDapAn: encryptCauHoi.toString()
+                };
+
+                value.push(answer);
+            })
+
+            console.log(value);
+
+            $.ajax({
+                type: "POST",
+                url: "/Adm/suacauhoiCon?handler=UpdateExam",
+                data: {
+                    MaCH: '@Model.MaCH',
+                    questName: $('#questNameTestCase').val(),
+                    listAnswer: value,
+                    trueAnswer: "false",
+                    type: "tuluan"
+                },
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: function (response) {
+                    if (response == 'Success') {
+                        alert("Sửa thành công!");
+                        $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+                    }
+                    else {
+                        alert("Sửa thất bại!");
+                    }
                 }
-            }
-        })
+            })
+        }
+        else{
+            alert("Không được để trống!");
+        }
     })
 
     $('#updateExam').submit(function (e) {
         e.preventDefault();
-        var value = [];
-        $('.detailAnswer').each(function () {
-            var answer = {
-                MaDA: $(this).find("input[name='answerId']").val(),
-                TenDapAn: $(this).find("input[name='answerContent']").val()
-            };
-            value.push(answer);
-        })
-        console.log($(this).find('input[name=trueAnswer]:checked', this).val());
-        $.ajax({
-            type: "POST",
-            url: "/Adm/suacauhoiCon?handler=UpdateExam",
-            data: {
-                MaCH: $("#MaCH").val(),
-                questName: $('#questName').val(),
-                listAnswer: value,
-                trueAnswer: $(this).find('input[name=trueAnswer]:checked', this).val(),
-                type: "tracnghiem"
-            },
-            dataType: "json",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("XSRF-TOKEN",
-                    $('input:hidden[name="__RequestVerificationToken"]').val());
-            },
-            success: function (response) {
-                if (response == 'Success') {
-                    alert("Sửa thành công!");
-                    $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+        if($("#MaCH").val() != '' && $('#questName').val() != ''){
+            var value = [];
+            $('.detailAnswer').each(function () {
+                var answer = {
+                    MaDA: $(this).find("input[name='answerId']").val(),
+                    TenDapAn: $(this).find("input[name='answerContent']").val()
+                };
+                value.push(answer);
+            })
+            console.log($(this).find('input[name=trueAnswer]:checked', this).val());
+            $.ajax({
+                type: "POST",
+                url: "/Adm/suacauhoiCon?handler=UpdateExam",
+                data: {
+                    MaCH: $("#MaCH").val(),
+                    questName: $('#questName').val(),
+                    listAnswer: value,
+                    trueAnswer: $(this).find('input[name=trueAnswer]:checked', this).val(),
+                    type: "tracnghiem"
+                },
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function (response) {
+                    if (response == 'Success') {
+                        alert("Sửa thành công!");
+                        $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
+                    }
+                    else {
+                        alert("Sửa thất bại!");
+                    }
                 }
-                else {
-                    alert("Sửa thất bại!");
-                }
-            }
-        })
+            })
+        }
+        else{
+            alert('Không được để trống!');
+        }
     })
 
     $('#questNameTestCase').submit(function (e) {

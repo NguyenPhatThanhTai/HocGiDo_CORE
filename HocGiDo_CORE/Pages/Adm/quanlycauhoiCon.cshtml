@@ -6,8 +6,8 @@
 
 <div class="leftInput">
     <form method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="exam.MaBH" value="@Model.lessonId" />
-        <input asp-for="exam.TenCauHoi" type="text" placeholder="Câu hỏi">
+        <input type="hidden" asp-for="exam.MaBH" value="@Model.lessonId" required/>
+        <input asp-for="exam.TenCauHoi" type="text" placeholder="Câu hỏi" required>
         <input type="radio" asp-for="exam.TheLoai" value="tracnghiem" checked><span>Trắc nghiệm</span>
         <input type="radio" asp-for="exam.TheLoai" value="tuluan"><span>Tự luận</span>
         <input asp-page-handler="AddExam" id="submit" type="submit" value="Thêm câu hỏi">

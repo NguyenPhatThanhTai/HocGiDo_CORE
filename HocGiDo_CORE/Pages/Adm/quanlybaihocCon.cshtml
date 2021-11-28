@@ -166,53 +166,56 @@
 
         $('#addLessonForm').on('submit', function (e) {
             e.preventDefault();
-            console.log("vao lesson");
+            if($(this).find('input[name="MaKH"]').val() != '' && $(this).find('input[name="TenBaiHoc"]').val() != '' && $(this).find('input[name="Video"]').val() != '' && $(this).find('input[name="GioiThieu"]').val() != ''){
+                var htmlArray = myCodeMirrorHtml.getValue().split(" ");
+                var cssArray = myCodeMirrorCss.getValue().split(" ");
+                var jsArray = myCodeMirrorJs.getValue().split(" ");
 
-            var htmlArray = myCodeMirrorHtml.getValue().split(" ");
-            var cssArray = myCodeMirrorCss.getValue().split(" ");
-            var jsArray = myCodeMirrorJs.getValue().split(" ");
+                var totalArray = [];
 
-            var totalArray = [];
+                if($('.selectCodeSide').val() == 'back'){
+                    var javaArray = myCodeMirrorJava.getValue().split(" ");
+                    totalArray.push(javaArray)
+                }
+                else{
+                    totalArray.push(htmlArray);
+                    totalArray.push(cssArray);
+                    totalArray.push(jsArray);
+                }
 
-            if($('.selectCodeSide').val() == 'back'){
-                var javaArray = myCodeMirrorJava.getValue().split(" ");
-                totalArray.push(javaArray)
+                console.log(totalArray);
+
+                var encryptLyThuyet = CryptoJS.AES.encrypt(CKEDITOR.instances.editor.getData(), $(this).find('input[name="MaKH"]').val().toString());
+                var encryptCodeMau = CryptoJS.AES.encrypt(JSON.stringify(totalArray), $(this).find('input[name="MaKH"]').val().toString());
+
+                var content = {
+                    'MaKH': $(this).find('input[name="MaKH"]').val(),
+                    'TenBaiHoc': $(this).find('input[name="TenBaiHoc"]').val(),
+                    'Video': $(this).find('input[name="Video"]').val(),
+                    'GioiThieu': $(this).find('input[name="GioiThieu"]').val(),
+                    'LyThuyet': encryptLyThuyet.toString(),
+                    'CodeMau': encryptCodeMau.toString()
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Adm/quanlybaihocCon?handler=AddLesson",
+                    data: JSON.stringify(content),
+                    dataType: "json",
+                    contentType: "application/json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+
+                    success: function (response) {
+                        window.location.reload(true);
+                    }
+                })
             }
             else{
-                totalArray.push(htmlArray);
-                totalArray.push(cssArray);
-                totalArray.push(jsArray);
+                alert('vui lòng điền đầy đủ thông tin!');
             }
-
-            console.log(totalArray);
-
-            var encryptLyThuyet = CryptoJS.AES.encrypt(CKEDITOR.instances.editor.getData(), $(this).find('input[name="MaKH"]').val().toString());
-            var encryptCodeMau = CryptoJS.AES.encrypt(JSON.stringify(totalArray), $(this).find('input[name="MaKH"]').val().toString());
-
-            var content = {
-                'MaKH': $(this).find('input[name="MaKH"]').val(),
-                'TenBaiHoc': $(this).find('input[name="TenBaiHoc"]').val(),
-                'Video': $(this).find('input[name="Video"]').val(),
-                'GioiThieu': $(this).find('input[name="GioiThieu"]').val(),
-                'LyThuyet': encryptLyThuyet.toString(),
-                'CodeMau': encryptCodeMau.toString()
-            }
-
-            $.ajax({
-                type: "POST",
-                url: "/Adm/quanlybaihocCon?handler=AddLesson",
-                data: JSON.stringify(content),
-                dataType: "json",
-                contentType: "application/json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("XSRF-TOKEN",
-                        $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-
-                success: function (response) {
-                    window.location.reload(true);
-                }
-            })
         })
 
         $(document).on('click', '#deleteLesson', function () {
