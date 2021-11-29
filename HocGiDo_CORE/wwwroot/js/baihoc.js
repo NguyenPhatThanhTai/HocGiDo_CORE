@@ -53,10 +53,8 @@ var myCodeMirrorJava = CodeMirror.fromTextArea(backendCode, {
 });
 
 function setCodeExample(examPCode, key) {
-    console.log("truoc khi encrypt: " + examPCode)
     var decrypted = CryptoJS.AES.decrypt(examPCode, key).toString(CryptoJS.enc.Utf8);
 
-    console.log("Sau khi encrypt: " + decrypted);
     decrypted = JSON.parse(decrypted);
 
     if (decrypted[1] != null && decrypted[2] != null) {
@@ -83,7 +81,6 @@ function setCodeExample(examPCode, key) {
 
 function setDescripsion(descripsion, key) {
     var decrypted = CryptoJS.AES.decrypt(descripsion, key).toString(CryptoJS.enc.Utf8);
-    console.log("=== Descripsion ===" + decrypted);
 
     document.getElementById("descripsion").innerHTML = decrypted;
 }
