@@ -35,8 +35,8 @@
                 }
             }
             <div id="newQuestion">
-                <input id="answerName" type="text" placeholder="Câu hỏi mới">
-                <input id="addQuestion" type="button" value="Thêm câu hỏi">
+                <input id="answerName" type="text" placeholder="Câu đáp án mới">
+                <input id="addQuestion" type="button" value="Thêm đáp án">
             </div>
             <input type="submit" value="Cập nhật">
         </form>
@@ -305,7 +305,7 @@ else
             e.preventDefault();
 
         var content = {
-            'TenDapAn': JSON.stringify($('#answerName').val()),
+            'TenDapAn': $('#answerName').val().replace(/\"|\"/gi, "''"),
             'MaCH': $('#MaCH').val(),
         }
 
@@ -332,20 +332,3 @@ else
         })
     })
 </script>
-
-@*     var test_case_array = [{
-        "array": [1, 2, 3, 4, 5],
-        "result": "15"
-    }, {
-        "array": [11, 22, 33, 44, 55],
-        "result": "165"
-    }, {
-        "array": [11, 23, 32, 43, 51],
-        "result": "160"
-    }, {
-        "array": [12, 23, 33, 42, 51],
-        "result": "161"
-    }, {
-        "array": [13, 23, 31, 43, 52],
-        "result": "162"
-    }, ] *@
