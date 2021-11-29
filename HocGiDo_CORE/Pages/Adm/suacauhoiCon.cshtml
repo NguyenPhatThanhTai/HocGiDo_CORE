@@ -197,7 +197,7 @@ else
             $('.detailAnswer').each(function () {
                 var answer = {
                     MaDA: $(this).find("input[name='answerId']").val(),
-                    TenDapAn: $(this).find("input[name='answerContent']").val()
+                    TenDapAn: $(this).find("input[name='answerContent']").val().replace(/\"|\"/gi, "''")
                 };
                 value.push(answer);
             })
@@ -304,8 +304,8 @@ else
     $('#addQuestion').on('click', function (e) {
             e.preventDefault();
 
-            var content = {
-            'TenDapAn': $('#answerName').val(),
+        var content = {
+            'TenDapAn': JSON.stringify($('#answerName').val()),
             'MaCH': $('#MaCH').val(),
         }
 
@@ -322,11 +322,11 @@ else
 
             success: function (response) {
                 if (response == 'Success') {
-                    alert("Thêm câu hỏi thành công!");
+                    alert("Thêm đáp án thành công!");
                     $('#loadUpdate').load('/Adm/suacauhoiCon?bh=' + '@Model.MaBH' + '&questId=' + '@Model.MaCH');
                 }
                 else {
-                    alert("Thêm câu hỏi thất bại!");
+                    alert("Thêm đáp án thất bại!");
                 }
             }
         })
