@@ -68,7 +68,7 @@
             <div class="ds">
                 @foreach (var items in Model.listSavedLesson.DanhSachLuuBaiHoc)
                 {
-                    <a href="/hoc/@items.MaKH/@items.MaBaiHoc">
+                    <a href="/hoc/@items.MaKH/@items.MaBaiHoc" style="text-decoration: none; color: #fff">
                         <div class="baihoc">
                             <i class='bx bx-play-circle'></i>
                             <p id="name">@items.TenBaiHoc</p>
@@ -80,7 +80,7 @@
         </div>
         <div class="courseList view">
             <div class="content">
-                @*@foreach (var items in Model.listCourseRegisted.DanhSachKhoaHocDangKi)
+                @foreach (var items in Model.listCourseRegisted.DanhSachKhoaHocDangKi)
                 {
                     <a href="/baihoc/@items.MaKH" class="clickCourse">
                         <div class="course">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </a>
-                }*@
+                }
             </div>
         </div>
     </div>
