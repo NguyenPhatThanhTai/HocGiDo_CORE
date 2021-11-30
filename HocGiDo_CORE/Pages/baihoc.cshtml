@@ -11,8 +11,7 @@
 }
 
 <div class="tittle">
-    <h3>Khóa học Html cơ bản</h3>
-    <p>Trong khóa này chúng ta sẽ cùng nhau xây dựng giao diện html đơn giản!</p>
+    <h3 style="background-color:@Model.course.MauSac">Khóa học @Model.course.TenKH cơ bản</h3>
 </div>
 <div class="contain">
     <h2>Bạn sẽ học được gì</h2>
@@ -84,8 +83,7 @@
     <div class="ds_hoc">
         <h2>Nội dung khóa học</h2>
         <div class="total">
-            <p>13 phần</p>
-            <p>113 bài học</p>
+            <p>@Model.listLesson.BaiHoc.Count bài học</p>
         </div>
         <div class="ds">
             @if (Model.checkRegisterCourse)
@@ -94,7 +92,7 @@
                 {
                     <a href="/hoc/@Model.courseID/@items.MaBaiHoc">
                         <div class="baihoc">
-                            <i class='bx bx-play-circle'></i>
+                            <i style="color:@Model.course.MauSac" class='bx bx-play-circle'></i>
                             <p id="name">@items.TenBaiHoc</p>
                             <i id="number" class='bx bx-lock-open'></i>
                         </div>
@@ -106,9 +104,9 @@
                 @foreach (var items in Model.listLesson.BaiHoc)
                 {
                     <div class="baihoc">
-                        <i class='bx bx-play-circle'></i>
+                        <i style="color:@Model.course.MauSac" class='bx bx-play-circle'></i>
                         <p id="name">@items.TenBaiHoc</p>
-                        <i id="number" class='bx bx-lock'></i>
+                        <i style="color:@Model.course.MauSac" id="number" class='bx bx-lock'></i>
                     </div>
                 }
             }

@@ -40,9 +40,8 @@ namespace HocGiDo_CORE.Pages
         {
             if (updateCourse.MauSacUpdate == null || updateCourse.MoTaKHUpdate == null || updateCourse.TenKHUpdate == null || updateCourse.CourseImageUpdate == null || updateCourse.MaKHUpdate == null)
             {
-                ViewData["AdminResult"] = "Vui lòng điền đầy đủ thông tin cập nhật!";
+                TempData["AdminResult"] = "Vui lòng điền đầy đủ thông tin cập nhật (Có thể thiếu ảnh)!";
                 listCourse = await new ExcuteJsonClass().getCourse();
-                System.Diagnostics.Debug.WriteLine("Null o day" + updateCourse.MauSacUpdate + "/" + updateCourse.MoTaKHUpdate + "/" + updateCourse.TenKHUpdate + "/" + updateCourse.MaKHUpdate + "/" + updateCourse.CourseImageUpdate.FileName);
                 return RedirectToPage("/Adm/quanlykhoahoc");
             }
             try

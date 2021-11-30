@@ -14,6 +14,8 @@ namespace HocGiDo_CORE.Pages
     public class baihocModel : PageModel
     {
         public ListLesson listLesson { get; set; }
+        public ListCourse course { get; set; } 
+
         public string courseID;
         public bool checkRegisterCourse = false;
         public bool checkLogined = false;
@@ -21,10 +23,12 @@ namespace HocGiDo_CORE.Pages
         {
             if(MaKH == null)
             {
-                return RedirectToPage("/Index", new { id = 3 }); // truyền parameter qua
+                return RedirectToPage("/Index"); // truyền parameter qua
             }
             else
             {
+                Course courses = await new ExcuteJsonClass().getCourse();
+                course = courses.KhoaHoc.FirstOrDefault(p => p.MaKH.Equals(MaKH));
                 await check(MaKH);
                 return Page();
             }
