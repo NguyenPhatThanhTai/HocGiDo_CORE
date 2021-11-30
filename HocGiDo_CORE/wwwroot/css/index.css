@@ -569,11 +569,67 @@
     color: white;
     margin: 10px;
     border-radius: 12px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: fit-content;
 }
+
+    .footer #footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .footer img {
+        width: 40%;
+        margin-top: -20px;
+    }
+
+    .footer #logo {
+        display: block;
+        width: 50%;
+        text-align: center;
+        padding: 10px;
+    }
+
+        .footer #logo b {
+            display: block;
+            text-align: center;
+            margin-top: -30px;
+        }
+
+    .footer #about {
+        text-align: center;
+        padding: 30px;
+        width: 40%;
+    }
+
+        .footer #about ul {
+            margin: 10px 10px 10px 30px;
+        }
+
+    .footer #listCourse {
+        margin: 10px;
+    }
+
+        .footer #listCourse img {
+            width: 60px;
+            margin: 10px;
+        }
+
+    .footer #descripsion {
+        text-align: center;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .footer #listCourse {
+        text-align: center;
+    }
+
+    .footer #descripsion p {
+        text-align: center;
+        font-size: 13px;
+    }
 
 @media screen and (max-width: 600px) {
     .ava #img {
@@ -619,6 +675,37 @@
 
     .navigation #openSide {
         display: block;
+    }
+    .footer #footer-content {
+        display: block;
+        text-align: center;
+    }
+
+    .footer img {
+        width: 70%;
+    }
+
+    .footer #logo {
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer #about {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .footer #about h3 {
+        text-align: center;
+    }
+
+    .footer #about ul {
+        list-style-type: none;
+    }
+
+    .footer #about ul li p {
+        text-align: center;
     }
 }
 

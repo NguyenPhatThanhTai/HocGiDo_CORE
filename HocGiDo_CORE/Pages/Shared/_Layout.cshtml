@@ -139,7 +139,7 @@
             @{
                 var cookieRemember = Context.Request.Cookies["Remember"];
                 UserInf userInf;
-                if(cookieRemember != null)
+                if (cookieRemember != null)
                 {
                     Context.Session.SetString("Logined", cookieRemember);
                 }
@@ -169,7 +169,45 @@
         </div>
         @RenderBody()
         <div class="loadHere"></div>
-        <div class="footer">Footer thôi</div>
+        <div class="footer">
+            <div id="footer-content">
+                <div id="logo">
+                    <img src="~/Img/logo.png">
+                    <b><i><span style="color: #5271ff;">@@All Rights</span><span style="color: #f8d24e;"> Reserved</span></i></b>
+                </div>
+                <div id="about">
+                    <h3>-Thành viên thực hiện</h3>
+                    <ul>
+                        <li>
+                            <p>Diệp Quang Đức</p>
+                        </li>
+                        <li>
+                            <p>Nguyễn Thanh Hào</p>
+                        </li>
+                        <li>
+                            <p>Nguyễn Phát Thành Tài</p>
+                        </li>
+                    </ul>
+                </div>
+                <div id="listCourse">
+                    <img src="~/Img/html.jpg">
+                    <img src="~/Img/css.jpg">
+                    <img src="~/Img/js.jpg">
+                    <img src="~/Img/java.jpg">
+                    <img src="~/Img/c.jpg">
+                    <img src="~/Img/php.jpg">
+                    <img src="~/Img/python.jpg">
+                    <img src="~/Img/sql.jpg">
+                </div>
+            </div>
+            <div id="descripsion">
+                <p>
+                    <b style="color: #f8d24e;">HOCGIDO</b> được tối ưu hóa cho việc học, kiểm tra và đào tạo. Các ví dụ có thể được đơn giản hóa để cải thiện khả năng đọc và hiểu cơ bản. Các hướng dẫn, tài liệu tham khảo và ví dụ được xem xét liên tục để
+                    tránh sai sót, nhưng chúng tôi không thể đảm bảo tính đúng đắn hoàn toàn của tất cả nội dung. Trong khi sử dụng trang web này, bạn đồng ý đã đọc và chấp nhận các điều khoản sử dụng, cookie và chính sách bảo mật của chúng tôi. Copyright
+                    1999-2021 by Refsnes Data. All Rights Reserved.
+                </p>
+            </div>
+        </div>
     </div>
 
 </body>
