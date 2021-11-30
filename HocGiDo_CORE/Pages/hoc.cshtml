@@ -61,9 +61,6 @@
                 <div class="tryIt">
                     <a href="/code/@Model.courseID/@Model.lesson.MaBaiHoc">Thử code nào!</a>
                 </div>
-                <script>
-                    var test_case_array = [];
-                </script>
                 @{ var i = 1; var j = 1; bool isEssay = true;}
                 @foreach (var items in Model.listQuestion.CauHoi)
                 {
@@ -90,9 +87,9 @@
                     {
                         <div class="exam_essay">
                             <h4>@items.NoiDungCauHoi</h4>
-                            <textarea id="essayCode" name="codeEssay" placeholder="Code trực tiếp ở đây"></textarea>
-                            <button id="runTestCase">Chạy test case!</button>
-                            <div id="testCaseList">
+                            <textarea id="@items.MaCauHoi" name="codeEssay" placeholder="Code trực tiếp ở đây"></textarea>
+                            <button class="runTestCase" id="runTestCase" data-id="@items.MaCauHoi">Chạy test case!</button>
+                            <div id="testCaseList" class="@items.MaCauHoi">
 
                             </div>
                         </div>
@@ -100,7 +97,7 @@
                         @if (items.DapAn != null)
                         {
                             <script>
-                                var myCodeMirrorEssay = CodeMirror.fromTextArea(essayCode, {
+                                var essay_@items.MaCauHoi = CodeMirror.fromTextArea(@items.MaCauHoi, {
                                     tabSize: 4,
                                     mode: "javascript",
                                     theme: 'dracula',
@@ -124,9 +121,13 @@
                                         "MaDA": '@item.MaDapAn'
                                     }
 
-                                    test_case_array.push(array);
-                                    $('#testCaseList').append('<input class="testCaseDetail" id="@item.MaDapAn" type="text" disabled value="Test case: ' + check + ' - ' + descrypted.array + '">');
 
+                                     if (typeof window["testCase_" + '@items.MaCauHoi'] == 'undefined') {
+                                         var testCase_@items.MaCauHoi = [];
+                                     }
+
+                                    window["testCase_" + '@items.MaCauHoi'].push(array);
+                                    $('.' + '@items.MaCauHoi').append('<input class="testCaseDetail" id="@item.MaDapAn" type="text" disabled value="' + descrypted.array + '">');
                                 </script>
 
                                 hidden++;
@@ -173,12 +174,14 @@
     }*@
 <script>
 
-    $("#runTestCase").click(function (e) {
+    $(".runTestCase").click(function (e) {
         e.preventDefault();
 
-        var code_to = myCodeMirrorEssay.getValue();
+        var idCodeMirror = 'essay_' + $(this).data('id');
+        var idTestCase = 'testCase_' + $(this).data('id');
+        var code_to = window[idCodeMirror].getValue();
         try {
-            test_case_array.forEach(function (items, index) {
+            window[idTestCase].forEach(function (items, index) {
                 var Array_test = items.array;
                 var result_code = new Function('Array_test', code_to)(Array_test)
                 if (result_code == items.result) {
