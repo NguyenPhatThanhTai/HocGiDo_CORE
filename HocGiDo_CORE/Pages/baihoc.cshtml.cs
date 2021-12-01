@@ -36,6 +36,8 @@ namespace HocGiDo_CORE.Pages
 
         public async Task<IActionResult> OnGetRegisterCourse(string MaKH)
         {
+            Course courses = await new ExcuteJsonClass().getCourse();
+            course = courses.KhoaHoc.FirstOrDefault(p => p.MaKH.Equals(MaKH));
             var logined = HttpContext.Session.GetString("Logined");
             if(logined != null)
             {
