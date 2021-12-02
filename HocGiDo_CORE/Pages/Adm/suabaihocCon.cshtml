@@ -20,7 +20,7 @@
             <option value="front">Phía Front-End</option>
             <option value="back">Phía Back-End</option>
         </select>
-        <div class="example">
+        <div class="example exampleUpdate">
             <div id="choice">
                 <button type="button" class="btnChoiceInUpdate">HTML</button>
                 <button type="button" class="btnChoiceInUpdate">CSS</button>
@@ -36,7 +36,7 @@
                 <textarea rows="5" placeholder="JS" id="jsUpdate"></textarea>
             </div>
         </div>
-        <div class="exampleBackEndCode">
+        <div class="exampleBackEndCode exampleBackendUpdate">
              <textarea rows="5" placeholder="Backend Code" id="backendUpdate"></textarea>
         </div>
     </div>
@@ -82,8 +82,8 @@
 
                 var totalArray = [];
 
-                if($('.selectCodeSide').val() == 'back'){
-                    var javaArray = myCodeMirrorJava.getValue().split(" ");
+                if ($('.selectCodeSideUpdate').val() == 'back'){
+                    var javaArray = myCodeMirrorJavaUpdate.getValue().split(" ");
                     totalArray.push(javaArray)
                 }
                 else{
@@ -211,8 +211,8 @@
         console.log("=== Code ===" + decrypted);
 
         if(decrypted[1] != null && decrypted[2] != null){
-            $('.example').css({ display: "block" });
-            $('.exampleBackEndCode').css({ display: "none" });
+            $('.exampleUpdate').css({ display: "block" });
+            $('.exampleBackendUpdate').css({ display: "none" });
             $('.selectCodeSideUpdate option[value=front]').attr('selected','selected');
 
             var htmlSet = decrypted[0].join(" ");
@@ -225,8 +225,8 @@
             myCodeMirrorJsUpdate.getDoc().setValue(jsSet);
         }
         else{
-           $('.example').css({ display: "none" });
-           $('.exampleBackEndCode').css({ display: "block" });
+           $('.exampleUpdate').css({ display: "none" });
+           $('.exampleBackendUpdate').css({ display: "block" });
            $('.selectCodeSideUpdate option[value=back]').attr('selected','selected');
 
             var backendSet = decrypted[0].join(" ");
