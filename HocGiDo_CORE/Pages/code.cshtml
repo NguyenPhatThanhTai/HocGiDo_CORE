@@ -4,6 +4,14 @@
     ViewData["Title"] = "Đăng nhập";
     Layout = null;
 }
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+}
+@Html.AntiForgeryToken()
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +58,7 @@
         </div>
         <select class="selectCodeType">
             <option selected value="front">Front-end</option>
-            <option value="back">Back-end(Java)</option>
+            <option value="back">Back-end(Java, C#)</option>
         </select>
         <div class="frontend">
             <div class="code_side">
@@ -70,6 +78,10 @@
             </div>
         </div>
         <div class="backend">
+            <select class="selectCodeType selectLanguageComplier">
+                <option selected value="Java">Java</option>
+                <option value="CSharp">C#</option>
+            </select>
             <textarea id="backendCode"></textarea>
             <textarea disabled id="resultBackendCode" rows="20"></textarea>
         </div>
@@ -91,12 +103,12 @@ else
     <script>
         $('.frontend').css({ display: "block" });
         $('.backend').css({ display: "none" });
-        $('.selectCodeType').on('change', function(){
-            if(this.value == 'front'){
+        $('.selectCodeType').on('change', function () {
+            if (this.value == 'front') {
                 $('.frontend').css({ display: "block" });
                 $('.backend').css({ display: "none" });
             }
-            else{
+            else {
                 $('.backend').css({ display: "block" });
                 $('.frontend').css({ display: "none" });
             }

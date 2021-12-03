@@ -153,31 +153,58 @@ function sendCode() {
         document.getElementById("out").scrollIntoView();
     }
     else {
-        var code = myCodeMirrorBackend.getValue();
-        var dict = {
-            "test": "val1",
-            "code": code
-        };
+        var codeNeedComplier = myCodeMirrorBackend.getValue();
+        if ($('.selectLanguageComplier').val() == "Java") {
+            var dict = {
+                "test": "val1",
+                "code": codeNeedComplier
+            };
 
-        $.ajax({
-            url: "https://dht-tracuu.herokuapp.com/compiler",
-            type: "POST",
-            crossDomain: true,
-            data: JSON.stringify(dict),
-            dataType: "json",
-            success: function (response) {
-                document.getElementById("resultBackendCode").value = response.result;
+            console.log(dict);
 
-                //sau khi add xong
-                document.getElementById("resultBackendCode").scrollIntoView();
-            },
-            error: function (xhr, status) {
-                alert("error");
-            }
-        });
+            $.ajax({
+                url: "https://dht-tracuu.herokuapp.com/compiler",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(dict),
+                dataType: "json",
+                success: function (response) {
+                    document.getElementById("resultBackendCode").value = response.result;
+
+                    //sau khi add xong
+                    document.getElementById("resultBackendCode").scrollIntoView();
+                },
+                error: function (xhr, status) {
+                    alert("error");
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/code",
+                type: "post",
+                data: {
+                    CSharpCode: codeNeedComplier
+                },
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function (response) {
+                    document.getElementById("resultBackendCode").value = response.result;
+
+                    //sau khi add xong
+                    document.getElementById("resultBackendCode").scrollIntoView();
+                },
+                error: function (xhr, status) {
+                    alert("error");
+                }
+            });
+        }
     }
 }
 
 function back() {
-    window.location = "../../View/index.html"
+    window.location = "/"
 }
