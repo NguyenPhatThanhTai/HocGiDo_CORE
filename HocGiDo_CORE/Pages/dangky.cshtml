@@ -28,48 +28,32 @@
             </div>
         </div>
     }
-    <div class="contain">
-        <div class="login">
-            <div class="left">
-                <a href="/"> <img src="~/Img/logo.png" /> </a>
+    <div class="container">
+        <form class="form-login" method="post">
+            <h1>Đăng Ký</h1>
+            <div class="form-text">
+                <input type="text" placeholder="Tài khoản" asp-for="resgister.User" required>
             </div>
-            <div class="form">
-                <form method="post">
-                    <div>
-                        <i class='bx bx-user-pin'></i>
-                        <input type="text" placeholder="Tên tài khoản" asp-for="resgister.User">
-                    </div>
-                    <div>
-                        <i class='bx bx-lock-alt'></i>
-                        <input type="text" placeholder="Mật khẩu" asp-for="resgister.Passworld">
-                    </div>
-                    <div>
-                        <i class='bx bx-user-circle'></i>
-                        <input type="text" placeholder="Họ và tên" asp-for="resgister.UserName">
-                    </div>
-                    <div>
-                        <i class='bx bx-calendar'></i>
-                        <input type="date" asp-for="resgister.Birth">
-                    </div>
-                    <div>
-                        <i class='bx bx-phone'></i>
-                        <input type="text" placeholder="Số điện thoại" asp-for="resgister.PhoneNum">
-                    </div>
-                    <div>
-                        <i class='bx bx-home-heart'></i>
-                        <input type="text" placeholder="Địa chỉ" asp-for="resgister.Address">
-                    </div>
-                    <div>
-                        <i class='bx bx-mail-send'></i>
-                        <input type="text" placeholder="Email" asp-for="resgister.Email">
-                    </div>
-                    <div class="login_area">
-                        <input type="button" onclick="location.href='/dangnhap';" id="submit" value="Đăng nhập">
-                        <input type="submit" id="register" value="Đăng kí">
-                    </div>
-                </form>
+            <div class="form-text">
+                <input type="password" placeholder="Mật khẩu" asp-for="resgister.Passworld" required>
             </div>
-        </div>
+            <div class="form-text">
+                <input type="text" placeholder="Họ và tên" asp-for="resgister.UserName" required>
+            </div>
+            <div class="form-text">
+                <input type="date" placeholder="Mật khẩu Admin" asp-for="resgister.Birth" required>
+            </div>
+            <div class="form-text">
+                <input type="number" placeholder="Số điện thoại" asp-for="resgister.PhoneNum" required>
+            </div>
+            <div class="form-text">
+                <input type="text" placeholder="Địa chỉ" asp-for="resgister.Address" required>
+            </div>
+            <div class="form-text">
+                <input type="email" placeholder="email" asp-for="resgister.Email" required>
+            </div>
+            <input type="submit" value="Đăng ký">
+        </form>
     </div>
 </body>
 

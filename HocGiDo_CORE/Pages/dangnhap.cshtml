@@ -5,9 +5,6 @@
     Layout = null;
 }
 
-    <!DOCTYPE html>
-    <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +14,7 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <title>Đăng nhập</title>
     </head>
+
     <body>
         @if (ViewData["LoginResult"] != null)
         {
@@ -27,45 +25,22 @@
                 </div>
             </div>
         }
-        <div class="contain">
-            <div class="box">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-                <img src="~/Img/logo.png">
-            </div>
-            <div class="login">
-                <div class="left"></div>
-                <div class="form">
-                    <form method="post">
-                        <a href="/"> <img src="~/Img/logo.png"/> </a>
-                        <div>
-                            <i class='bx bx-user-circle'></i>
-                            <input class="type" type="text" placeholder="Tài khoản của bạn" asp-for="login.UserName">
-                        </div>
-                        <div>
-                            <i class='bx bx-lock showP' id="show"></i>
-                            <i class='bx bx-lock-open showP' id="close"></i>
-                            <input class="type" id="pass" type="password" placeholder="Mật khẩu của bạn" asp-for="login.Passworld">
-                            <div class="remember">
-                                <input type="checkbox" value="true" asp-for="login.Keeplogin">Nhớ mật khẩu của tôi!
-                                <input type="hidden" value="false" asp-for="login.Keeplogin">
-                            </div>
-                        </div>
-                        <div class="login_area">
-                            <input class="type" type="submit" id="submit" value="Đăng nhập">
-                            <input class="type" type="button" onclick="location.href='/dangky';" id="register" value="Đăng kí">
-                        </div>
-                    </form>
+        <div class="container">
+            <form class="form-login" method="post">
+                <h1>Đăng Nhập</h1>
+                <div class="form-text">
+                    <input type="text" placeholder="Tài khoản" asp-for="login.UserName">
                 </div>
-            </div>
+                <div class="form-text">
+                    <input type="password" placeholder="Mật khẩu" asp-for="login.Passworld">
+                </div>
+                <input id="remember" type="checkbox" value="true" asp-for="login.Keeplogin"><label id="rememberLabel" for="remember">Nhớ đăng nhập</label>
+                <input type="hidden" value="false" asp-for="login.Keeplogin">
+                <input type="submit" value="Đăng nhập">
+                <a href="/dangky">Chưa có tài khoản? Đăng ký ngay</a>
+            </form>
         </div>
+
     </body>
 
-    <script type="text/javascript" src="~/js/dangnhap.js"></script>
+    </html>

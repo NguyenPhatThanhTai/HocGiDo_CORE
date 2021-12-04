@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using HocGiDo_CORE.ExcuteJson;
@@ -27,20 +28,42 @@ namespace HocGiDo_CORE.Pages
                 return Page();
             }
 
-            ResultReturn result = await new ExcuteJsonClass().Register(resgister);
-            if (result.message.Equals("duplicate"))
+            if (IsDateBeforeOrToday(resgister.Birth.ToString("MM/dd/yyyy")))
             {
-                ViewData["RegisterResult"] = "Tài khoản đã tồn tại trên hệ thống!";
-                return Page();
-            }
-            if (result.message.Equals("error") || result == null)
-            {
-                ViewData["RegisterResult"] = "Có lỗi xảy ra rồi!";
-                return Page();
+                ResultReturn result = await new ExcuteJsonClass().Register(resgister);
+                if (result.message.Equals("duplicate"))
+                {
+                    ViewData["RegisterResult"] = "Tài khoản đã tồn tại trên hệ thống!";
+                    return Page();
+                }
+                if (result.message.Equals("error") || result == null)
+                {
+                    ViewData["RegisterResult"] = "Có lỗi xảy ra rồi!";
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("/dangnhap");
+                }
             }
             else
             {
-                return RedirectToPage("/dangnhap");
+                ViewData["RegisterResult"] = "Ngày sinh không hợp lệ!";
+                return Page();
+            }
+        }
+        public static bool IsDateBeforeOrToday(string date)
+        {
+            var parameterDate = DateTime.ParseExact(date, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var todaysDate = DateTime.Today;
+
+            if (parameterDate < todaysDate)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
