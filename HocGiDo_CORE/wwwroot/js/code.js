@@ -168,13 +168,18 @@ function sendCode() {
                 crossDomain: true,
                 data: JSON.stringify(dict),
                 dataType: "json",
+                beforeSend: function () {
+                    $("#load").css({ "display": "block" });
+                },
                 success: function (response) {
                     document.getElementById("resultBackendCode").value = response.result;
+                    $("#load").css({ "display": "none" });
 
                     //sau khi add xong
                     document.getElementById("resultBackendCode").scrollIntoView();
                 },
                 error: function (xhr, status) {
+                    $("#load").css({ "display": "none" });
                     alert("error");
                 }
             });
@@ -188,16 +193,19 @@ function sendCode() {
                 },
                 dataType: "json",
                 beforeSend: function (xhr) {
+                    $("#load").css({ "display": "block" });
                     xhr.setRequestHeader("XSRF-TOKEN",
                         $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
                 success: function (response) {
+                    $("#load").css({ "display": "none" });
                     document.getElementById("resultBackendCode").value = response.result;
 
                     //sau khi add xong
                     document.getElementById("resultBackendCode").scrollIntoView();
                 },
                 error: function (xhr, status) {
+                    $("#load").css({ "display": "none" });
                     alert("error");
                 }
             });
