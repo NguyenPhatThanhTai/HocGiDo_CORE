@@ -1,0 +1,53 @@
+﻿@page
+@model HocGiDo_CORE.Pages.ErrorHandleModel
+@{
+    ViewData["Title"] = "Lỗi !!!";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        .contain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-flow: column;
+        }
+
+            .contain img {
+                width: 50%;
+            }
+
+        a {
+            padding: 10px;
+            margin: 10px;
+            background-color: coral;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            width: 30%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <img src="~/Img/error.gif">
+        <a href="/">Về trang chủ</a>
+    </div>
+</body>
+
+</html>
