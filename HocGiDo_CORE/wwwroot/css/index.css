@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
-
-
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -16,13 +15,13 @@
 
 ::-webkit-scrollbar-track {
     background: #ffffff;
-    margin: 5px;
+    margin: 10px;
 }
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
     background: coral;
-    border-radius: 12px;
+    border-radius: 5px;
 }
     /* Handle on hover */
 
@@ -56,19 +55,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 0 8px 0 #888888;
-    border-radius: 12px;
     margin: 10px;
-    background-color: #11101d;
+    background-color: #fff;
+    box-shadow: 0px 3px #ECECEC;
 }
 
     .navigation #logo {
         display: flex;
+        margin-left: 20px;
     }
 
         .navigation #logo img {
-            width: 100px;
-            height: auto;
+            width: 70px;
+            background-size: cover;
         }
 
         .navigation #logo p {
@@ -93,7 +92,7 @@
 
     .navigation #search i {
         position: absolute;
-        line-height: 45px;
+        line-height: 40px;
         margin: 0 0 0 10px;
         font-size: 20px;
         color: #888888;
@@ -102,44 +101,29 @@
     .navigation #login {
         margin: 0 10px 0 0;
         text-align: center;
-        text-decoration: none;
     }
 
-    .loginA{
-        text-decoration: none;
-    }
+        .navigation #login p {
+            white-space: nowrap;
+        }
 
-    .navigation #login p {
-        white-space: nowrap;
-    }
+        .navigation #login p {
+            cursor: pointer;
+            padding: 13px;
+            border-radius: 12px;
+            background-color: coral;
+            color: white;
+            font-weight: bold;
+        }
 
-    .navigation #login p {
-        cursor: pointer;
-        padding: 13px;
-        border-radius: 12px;
-        background-color: coral;
-        color: white;
-        font-weight: bold;
-    }
+            .navigation #login p:hover {
+                background-color: rgb(247, 86, 33);
+            }
 
-    .navigation #login p:hover {
-        background-color: rgb(247, 86, 33);
+    .navigation #User {
+        float: right;
+        width: 5%;
     }
-
-    .logoutA {
-        text-decoration: none;
-        color: indianred;
-    }
-
-    .inf {
-        text-decoration: none;
-        color: #fff;
-    }
-
-.navigation #User {
-    float: right;
-    width: 5%;
-}
 
         .navigation #User img {
             width: 40px;
@@ -162,7 +146,7 @@
     position: absolute;
     background-color: #11101d;
     right: 10px;
-    top: 90px;
+    top: 80px;
     border-radius: 12px;
     box-shadow: 2px 5px 10px black;
     opacity: 0;
@@ -204,11 +188,11 @@
 
 .sideBar {
     position: fixed;
-    top: 0;
+    top: 15px;
     left: 0;
     height: 100%;
     width: 85px;
-    background: #11101d;
+    background: #fff;
     padding: 6px 15px;
     transition: all 0.5s ease;
     z-index: 99;
@@ -224,10 +208,12 @@
         opacity: 0;
         height: 100%;
         width: 100%;
+        text-align: center;
     }
 
         .sideBar .logo_content .logo img {
-            max-height: 120px;
+            width: 150px;
+            text-align: center;
         }
 
     .sideBar.active .logo {
@@ -237,10 +223,9 @@
     .sideBar #btn {
         position: absolute;
         top: 6px;
-        left: 50%;
+        left: 60%;
         margin-right: 10px;
-        color: #fff;
-        font-size: 20px;
+        font-size: 30px;
         height: 50px;
         width: 50px;
         text-align: center;
@@ -248,6 +233,7 @@
         transform: translateX(-50%);
         transition: all 0.5s ease;
         cursor: pointer;
+        font-weight: bold;
     }
 
     .sideBar.active #btn {
@@ -270,7 +256,6 @@
 
             .sideBar ul li .tooltip {
                 position: absolute;
-                color: #fff;
                 background-color: #11101d;
                 padding: 6px;
                 border-radius: 6px;
@@ -286,15 +271,10 @@
                 opacity: 0;
             }
 
-/*            .sideBar ul li:hover .tooltip {
-                top: 50%;
-                opacity: 1;
-            }
-
     .sideBar.active ul li:hover .tooltip {
         top: 50%;
         opacity: 0;
-    }*/
+    }
 
     .sideBar ul li input {
         position: absolute;
@@ -302,11 +282,10 @@
         height: 100%;
         border-radius: 12px;
         outline: none;
-        border: none;
-        background: #1d1b32;
+        background: #fff;
         padding-left: 50px;
         font-size: 18px;
-        color: #fff;
+        color: #11101d;
         transition: all 0.5s ease;
     }
 
@@ -314,25 +293,13 @@
         width: 100%;
     }
 
-    .sideBar ul li .bx-search:hover {
-        background: #fff;
-        color: black;
-    }
-
-    .sideBar.active ul li .bx-search:hover {
-        background: none;
-        color: #fff;
-    }
-
     .sideBar ul li .bx-search {
         position: absolute;
         z-index: 99;
-        color: #fff;
         font-size: 22px;
     }
 
     .sideBar ul li a {
-        color: #fff;
         display: flex;
         align-items: center;
         text-decoration: none;
@@ -340,6 +307,8 @@
         border-radius: 12px;
         white-space: nowrap;
         width: 100%;
+        color: #11101d;
+        font-weight: bold;
     }
 
         .sideBar ul li a:hover {
@@ -353,11 +322,14 @@
         border-radius: 12px;
         line-height: 50px;
         text-align: center;
+        color: #11101d;
+        font-weight: bold;
+        font-size: 20px;
     }
 
     .sideBar .links_name {
         opacity: 0;
-        pointer-events: none;
+        cursor: none;
     }
 
     .sideBar.active .links_name {
@@ -454,7 +426,6 @@
 .sideBar.active ~ .home_content {
     left: 240px;
     width: calc(100% - 240px);
-    text-align: center;
 }
 
 .list_customer {
@@ -520,9 +491,9 @@
 
 .navigation #openSide {
     font-size: 30px;
-    color: white;
     margin: 5px;
     display: none;
+    font-weight: bold;
 }
 
 .Side.active {
@@ -565,11 +536,11 @@
         }
 
 .footer {
-    background-color: #11101d;
-    color: white;
-    margin: 10px;
+    background-color: #fff;
+    margin: 50px 10px 10px 10px;
     border-radius: 12px;
     height: fit-content;
+    border: 3px solid #CECECE;
 }
 
     .footer #footer-content {
@@ -676,6 +647,7 @@
     .navigation #openSide {
         display: block;
     }
+
     .footer #footer-content {
         display: block;
         text-align: center;
@@ -696,17 +668,17 @@
         text-align: center;
     }
 
-    .footer #about h3 {
-        text-align: center;
-    }
+        .footer #about h3 {
+            text-align: center;
+        }
 
-    .footer #about ul {
-        list-style-type: none;
-    }
+        .footer #about ul {
+            list-style-type: none;
+        }
 
-    .footer #about ul li p {
-        text-align: center;
-    }
+            .footer #about ul li p {
+                text-align: center;
+            }
 }
 
 @media screen and (max-width: 1024px) {
